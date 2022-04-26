@@ -22,7 +22,7 @@ token=`cat ~/github.token | head -n 1`
 echo $ver
 echo $vers
 
-curl -s -X POST -H "Authorization: token $token" -d "{\"tag_name\":\"v$ver\", \"name\":\"Dafny $vers\", \"draft\":true, \"body\":\"Publishing release $ver\"}" "https://api.github.com/repos/dafny-lang/dafny/releases" > /tmp/post
+curl -s -X POST -H "Authorization: token $token" -d "{\"tag_name\":\"v$ver\", \"name\":\"Dafny $vers\", \"draft\":true, \"body\":\"Publishing release $ver\"}" "https://api.github.com/repos/jakenater99/dafny-proof/releases" > /tmp/post
 
 upload_url=`jq -r '.upload_url' < /tmp/post`
 upload_url="${upload_url%\{*}"
