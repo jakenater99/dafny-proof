@@ -199,8 +199,8 @@ class Release:
                     archive.writestr(fileinfo, contents)
                 else:
                     missing.append(fname)
-        for fpath in OTHER_UPLOADS:
-            shutil.copy(fpath, DESTINATION_DIRECTORY)
+        #for fpath in OTHER_UPLOADS:
+        #    shutil.copy(fpath, DESTINATION_DIRECTORY)
         flush("done! (imported {} files from z3's sources)".format(z3_files_count))
         if missing:
             flush("      WARNING: Not all files were found: {} were missing".format(", ".join(missing)))
