@@ -249,7 +249,7 @@ def pack(args, releases):
         release.build()
         release.pack()
     if not args.skip_manual:
-        run(["make", "--quiet", "refman-release"])
+        run(["make", "--quiet"])
 
 def check_version_cs(args):
     # Checking version.cs
