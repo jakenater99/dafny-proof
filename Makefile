@@ -12,11 +12,11 @@ boogie: ${DIR}/boogie/Binaries/Boogie.exe
 ${DIR}/boogie/Binaries/Boogie.exe:
 	(cd ${DIR}/boogie ; dotnet build -c Release Source/Boogie.sln )
 
-refman:
-	make -C ${DIR}/docs/DafnyRef
+#refman:
+#	make -C ${DIR}/docs/DafnyRef
 
-refman-release:
-	make -C ${DIR}/docs/DafnyRef release
+#refman-release:
+#	make -C ${DIR}/docs/DafnyRef release
 
 z3-mac:
 	wget https://github.com/Z3Prover/z3/releases/download/Z3-4.8.5/z3-4.8.5-x64-osx-10.14.2.zip
