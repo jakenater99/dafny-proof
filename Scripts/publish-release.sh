@@ -21,6 +21,7 @@ token=`cat ~/github.token | head -n 1`
 
 echo $ver
 echo $vers
+#echo $DAFNY_ROOT
 
 curl -s -X POST -H "Authorization: token $token" -d "{\"tag_name\":\"v$ver\", \"name\":\"Dafny $vers\", \"draft\":true, \"body\":\"Publishing release $ver\"}" "https://api.github.com/repos/jakenater99/dafny-proof/releases" > /tmp/post
 
@@ -31,19 +32,19 @@ id=`jq -r '.id' < /tmp/post`
 cd $DAFNY_ROOT/Package
 files=`ls dafny-${ver}*`
 
-echo Uploading DafnyRef.pdf
-curl -s -X POST -H "Authorization: token $token"  \
-        -H "Content-Type: application/pdf" \
-        --data-binary @DafnyRef.pdf  \
-        "$upload_url?name=DafnyRef.pdf&label=DafnyRef.pdf" > /tmp/upload
-if [ $? -ne 0 ]; then echo Upload failed; fi
+#echo Uploading DafnyRef.pdf
+#curl -s -X POST -H "Authorization: token $token"  \
+#        -H "Content-Type: application/pdf" \
+#        --data-binary @DafnyRef.pdf  \
+#        "$upload_url?name=DafnyRef.pdf&label=DafnyRef.pdf" > /tmp/upload
+#if [ $? -ne 0 ]; then echo Upload failed pdf; fi
 for f in $files; do
 echo Uploading file $f
 curl -s -X POST -H "Authorization: token $token"  \
         -H "Content-Type: application/zip" \
         --data-binary @$f  \
         "$upload_url?name=$f&label=$f" > /tmp/upload
-if [ $? -ne 0 ]; then echo Upload failed; fi
+if [ $? -ne 0 ]; then echo Upload failed zip; fi
 done
 
 echo "Manually paste the release notes into the release page on github, and then push the publish button"
