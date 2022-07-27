@@ -4,7 +4,7 @@ dafny-proof
 or
 >wsl --install -d Ubuntu
 1. Update Permissions to executable
-$chmod +x Scripts/Package.py
+$chmod +x Scripts/package.py
 $chmod +x Scripts/publish-release.sh
 $chmod +x Source/DafnyRuntime/DafnyRuntimeJava/gradlew
 2. Install make
