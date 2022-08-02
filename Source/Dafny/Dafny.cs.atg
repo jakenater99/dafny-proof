@@ -3236,7 +3236,7 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
      IToken proofStart, proofEnd;
      IToken lbl = null;
   .)
-  "assert"                                     (. x = t; .)
+  "{:"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( [ IF(IsLabel(!inExprContext))
       LabelName<out lbl> ":"
@@ -3249,6 +3249,7 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
   | ellipsis                                   (. dotdotdot = t; .)
     ";"
   )
+  ":}"   
   (. if (dotdotdot != null) {
        s = new SkeletonStatement(new AssertStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
