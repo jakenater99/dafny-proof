@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------
-// 
+//
 // Copyright (C) Microsoft Corporation.  All Rights Reserved.
 // Copyright by the contributors to the Dafny Project
 // SPDX-License-Identifier: MIT
@@ -2585,6 +2585,7 @@ OneStmt<out Statement/*!*/ s>
   | RevealStmt<out s>
   | SkeletonStmt<out s>
   | YieldStmt<out s>
+  | ProofStmt<out s, false>
   )
   .
 
@@ -3252,6 +3253,37 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
        s = new SkeletonStatement(new AssertStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
        s = new AssertStmt(x, t, e, proof, lbl == null ? null : new AssertLabel(lbl, lbl.val), attrs);
+     }
+  .)
+  .
+
+/*------------------------------------------------------------------------*/
+ProofStmt<out Statement/*!*/ s, bool inExprContext>
+= (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
+     Expression e = dummyExpr; Attributes attrs = null;
+     IToken dotdotdot = null;
+     BlockStmt proof = null;
+     IToken proofStart, proofEnd;
+     IToken lbl = null;
+  .)
+  "{"                                     (. x = t; .)
+  { Attribute<ref attrs> }
+  ( [ IF(IsLabel(!inExprContext))
+      LabelName<out lbl> ":"
+    ]
+    Expression<out e, false, true>
+    ( "by"
+      BlockStmt<out proof, out proofStart, out proofEnd>
+    | ";"
+    )
+  | ellipsis                                   (. dotdotdot = t; .)
+    ";"
+  )
+  "}"
+  (. if (dotdotdot != null) {
+       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
+     } else {
+       s = new ProofStmt(x, t, e, proof, lbl == null ? null : new AssertLabel(lbl, lbl.val), attrs);
      }
   .)
   .
@@ -4212,6 +4244,7 @@ StmtInExpr<out Statement s>
   | AssumeStmt<out s>
   | RevealStmt<out s>
   | CalcStmt<out s>
+  | ProofStmt<out s, true>
   )
   .
 
