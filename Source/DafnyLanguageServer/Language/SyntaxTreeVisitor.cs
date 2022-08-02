@@ -184,9 +184,6 @@
         case AssertStmt assertStatement:
           Visit(assertStatement);
           break;
-        case ProofStmt ProofStatement:
-          Visit(ProofStatement);
-          break;
         case ReturnStmt returnStatement:
           Visit(returnStatement);
           break;
@@ -344,12 +341,6 @@
       VisitNullableAttributes(assertStatement.Attributes);
       Visit(assertStatement.Expr);
       VisitNullableStatement(assertStatement.Proof);
-    }
-
-    public virtual void Visit(ProofStmt ProofStatement) {
-      VisitNullableAttributes(ProofStatement.Attributes);
-      Visit(ProofStatement.Expr);
-      VisitNullableStatement(ProofStatement.Proof);
     }
 
     public virtual void Visit(ReturnStmt returnStatement) {
