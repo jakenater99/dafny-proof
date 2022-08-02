@@ -273,6 +273,24 @@ public class AssertStatement : ProofObligationDescription {
   }
 }
 
+public class ProofStatement : ProofObligationDescription {
+  public override string SuccessDescription =>
+    customErrMsg is null
+      ? "proof always holds"
+      : $"error is impossible: {customErrMsg}";
+
+  public override string FailureDescription =>
+    customErrMsg ?? "proof might not hold";
+
+  public override string ShortDescription => "proof statement";
+
+  private readonly string customErrMsg;
+
+  public ProofStatement([CanBeNull] string customErrMsg) {
+    this.customErrMsg = customErrMsg;
+  }
+}
+
 public class LoopInvariant : ProofObligationDescription {
   public override string SuccessDescription =>
     customErrMsg is null

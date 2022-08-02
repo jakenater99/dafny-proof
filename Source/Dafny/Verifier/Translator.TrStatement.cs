@@ -613,6 +613,10 @@ namespace Microsoft.Dafny {
           builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(stmt.Expr)));
           stmtContext = StmtType.NONE;
         }
+      } else if (stmt is ProofStmt) {
+        stmtContext = StmtType.ASSERT;
+        // Add ProofStmt
+        stmtContext = StmtType.NONE; // done with translating proof stmt.
       } else if (stmt is ExpectStmt) {
         AddComment(builder, stmt, "expect statement");
         var s = (ExpectStmt)stmt;

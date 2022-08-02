@@ -1159,6 +1159,7 @@ namespace Microsoft.Dafny {
         Expression expr = ((PredicateStmt)stmt).Expr;
         var assertStmt = stmt as AssertStmt;
         var expectStmt = stmt as ExpectStmt;
+        var ProofStmt = stmt as ProofStmt;
         wr.Write(assertStmt != null ? "assert" :
                  expectStmt != null ? "expect" :
                  "assume");
@@ -1552,6 +1553,9 @@ namespace Microsoft.Dafny {
         } else if (s.S is AssertStmt) {
           Contract.Assert(s.ConditionOmitted);
           wr.Write("assert ...;");
+        } else if (s.S is ProofStmt) {
+          Contract.Assert(s.ConditionOmitted);
+          wr.Write("proof ...;");
         } else if (s.S is ExpectStmt) {
           Contract.Assert(s.ConditionOmitted);
           wr.Write("expect ...;");
@@ -2701,7 +2705,7 @@ namespace Microsoft.Dafny {
       } else if (expr is StmtExpr) {
         var e = (StmtExpr)expr;
         bool parensNeeded;
-        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is CalcStmt) {
+        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is CalcStmt || e.S is ProofStmt) {
           parensNeeded = !isRightmost;
         } else {
           parensNeeded = !isRightmost || isFollowedBySemicolon;
