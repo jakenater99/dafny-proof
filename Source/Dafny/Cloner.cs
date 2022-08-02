@@ -559,10 +559,6 @@ namespace Microsoft.Dafny {
         var s = (AssertStmt)stmt;
         r = new AssertStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), CloneBlockStmt(s.Proof), s.Label == null ? null : new AssertLabel(Tok(s.Label.Tok), s.Label.Name), null);
 
-      } else if (stmt is ProofStmt) {
-        var s = (ProofStmt)stmt;
-        r = new ProofStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), CloneBlockStmt(s.Proof), s.Label == null ? null : new AssertLabel(Tok(s.Label.Tok), s.Label.Name), null);
-
       } else if (stmt is ExpectStmt) {
         var s = (ExpectStmt)stmt;
         r = new ExpectStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), CloneExpr(s.Message), CloneAttributes(s.Attributes));

@@ -1086,9 +1086,6 @@ namespace Microsoft.Dafny {
                 Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, "assume->assert: " + Printer.ExprToString(e));
                 i++; j++;
               }
-
-            } else if (S is ProofStmt) {
-              // Add ProofStmt
             } else if (S is ExpectStmt) {
               var skel = (ExpectStmt)S;
               Contract.Assert(c.ConditionOmitted);
@@ -1197,8 +1194,6 @@ namespace Microsoft.Dafny {
             MergeAddStatement(cur, body);
             i++;
 
-          } else if (cur is ProofStmt) {
-            // Add ProofStmt
           } else if (cur is VarDeclStmt) {
             var cNew = (VarDeclStmt)cur;
             bool doMerge = false;
@@ -1400,8 +1395,6 @@ namespace Microsoft.Dafny {
       } else if (nxt is SkeletonStatement) {
         var S = ((SkeletonStatement)nxt).S;
         if (S is AssertStmt) {
-          return other is PredicateStmt;
-        }  else if (S is ProofStmt) {
           return other is PredicateStmt;
         } else if (S is ExpectStmt) {
           return other is ExpectStmt;
