@@ -3257,37 +3257,6 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
   .
 
 /*------------------------------------------------------------------------*/
-ProofStmt<out Statement/*!*/ s, bool inExprContext>
-= (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
-     Expression e = dummyExpr; Attributes attrs = null;
-     IToken dotdotdot = null;
-     BlockStmt proof = null;
-     IToken proofStart, proofEnd;
-     IToken lbl = null;
-  .)
-  "{"                                     (. x = t; .)
-  { Attribute<ref attrs> }
-  ( [ IF(IsLabel(!inExprContext))
-      LabelName<out lbl> ":"
-    ]
-    Expression<out e, false, true>
-    ( "by"
-      BlockStmt<out proof, out proofStart, out proofEnd>
-    | ";"
-    )
-  | ellipsis                                   (. dotdotdot = t; .)
-    ";"
-  )
-  "}"
-  (. if (dotdotdot != null) {
-       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
-     } else {
-       s = new ProofStmt(x, t, e, proof, lbl == null ? null : new AssertLabel(lbl, lbl.val), attrs);
-     }
-  .)
-  .
-
-/*------------------------------------------------------------------------*/
 ExpectStmt<out Statement/*!*/ s>
 = (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
      Expression e = dummyExpr; Expression m = null; Attributes attrs = null;
