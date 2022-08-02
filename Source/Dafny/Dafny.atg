@@ -2585,6 +2585,7 @@ OneStmt<out Statement/*!*/ s>
   | RevealStmt<out s>
   | SkeletonStmt<out s>
   | YieldStmt<out s>
+  | ProofStmt<out s, false>
   )
   .
 
@@ -4243,7 +4244,6 @@ StmtInExpr<out Statement s>
   | AssumeStmt<out s>
   | RevealStmt<out s>
   | CalcStmt<out s>
-  | ProofStmt<out s, true>
   )
   .
 
