@@ -3263,7 +3263,7 @@ ProofStmt<out Statement/*!*/ s>
      Expression e = dummyExpr; Expression m = null; Attributes attrs = null;
      IToken dotdotdot = null;
   .)
-  "$"                                     
+  "$"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( Expression<out e, false, true>
   | ellipsis                                   (. dotdotdot = t; .)
