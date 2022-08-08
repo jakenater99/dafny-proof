@@ -3236,7 +3236,7 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
      IToken proofStart, proofEnd;
      IToken lbl = null;
   .)
-  "{:"                                     (. x = t; .)
+  "assert"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( [ IF(IsLabel(!inExprContext))
       LabelName<out lbl> ":"
