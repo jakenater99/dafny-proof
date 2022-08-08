@@ -3267,19 +3267,11 @@ ProofStmt<out Statement/*!*/ s, bool inExprContext>
      IToken proofStart, proofEnd;
      IToken lbl = null;
   .)
-  "wpp"                                     (. x = t; .)
-  { Attribute<ref attrs> }
-  ( [ IF(IsLabel(!inExprContext))
-      LabelName<out lbl> ":"
-    ]
+  "$"                                     (. x = t; .)
+  ( 
     Expression<out e, false, true>
-    ( "by"
-      BlockStmt<out proof, out proofStart, out proofEnd>
-    | ";"
-    )
-  | ellipsis                                   (. dotdotdot = t; .)
-    ";"
   )
+  "$"
   (. if (dotdotdot != null) {
        s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
