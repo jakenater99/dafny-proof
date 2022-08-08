@@ -3267,7 +3267,7 @@ ProofStmt<out Statement/*!*/ s, bool inExprContext>
      IToken proofStart, proofEnd;
      IToken lbl = null;
   .)
-  "$"                                     (. x = t; .)
+  "{:"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( [ IF(IsLabel(!inExprContext))
       LabelName<out lbl> ":"
@@ -3280,7 +3280,7 @@ ProofStmt<out Statement/*!*/ s, bool inExprContext>
   | ellipsis                                   (. dotdotdot = t; .)
     ";"
   )
-  "$"
+  ":}"
   (. if (dotdotdot != null) {
        s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
