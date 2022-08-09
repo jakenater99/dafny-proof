@@ -64,9 +64,9 @@ OTHERS = ( [ "Scripts/quicktest.sh" , "Scripts/quicktest.out", "Scripts/allow_on
 OTHER_UPLOADS = ( ["docs/DafnyRef/out/DafnyRef.pdf"] )
 
 z3ToDotNetOSMapping = {
-    "ubuntu": "linux",
-    "debian": "linux",
-    "osx": "osx",
+#    "ubuntu": "linux",
+#    "debian": "linux",
+#    "osx": "osx",
     "win": "win"
 }
 
