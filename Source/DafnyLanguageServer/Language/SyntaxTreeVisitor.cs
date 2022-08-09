@@ -184,6 +184,9 @@
         case AssertStmt assertStatement:
           Visit(assertStatement);
           break;
+        case ProofStmt proofStatement:
+          Visit(proofStatement);
+          break;
         case ReturnStmt returnStatement:
           Visit(returnStatement);
           break;

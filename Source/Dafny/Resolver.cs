@@ -13280,7 +13280,7 @@ namespace Microsoft.Dafny {
           ss = new ExpectStmt(s.Tok, s.Tok, notFailureExpr, new IdentifierExpr(s.Tok, temp), null);
         } else if (s.KeywordToken.val == "assume") {
           ss = new AssumeStmt(s.Tok, s.Tok, notFailureExpr, null);
-        } else if (s.KeywordToken.val == "wpp") {
+        } else if (s.KeywordToken.val == "$") {
           ss = new ProofStmt(s.Tok, s.Tok, notFailureExpr, null);
         } else if (s.KeywordToken.val == "assert") {
           ss = new AssertStmt(s.Tok, s.Tok, notFailureExpr, null, null, null);

@@ -640,13 +640,93 @@ namespace Microsoft.Dafny {
         TrStmt_CheckWellformed(s.Expr, builder, locals, etran, false);
         builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(s.Expr), etran.TrAttributes(stmt.Attributes, null)));
         stmtContext = StmtType.NONE; // done with translating assume stmt.
-      } else if (stmt is ProofStmt) {
-        AddComment(builder, stmt, "proof statement");
-        var s = (ProofStmt)stmt;
-        stmtContext = StmtType.ASSUME; //??
-        TrStmt_CheckWellformed(s.Expr, builder, locals, etran, false);
-        builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(s.Expr), etran.TrAttributes(stmt.Attributes, null)));
-        stmtContext = StmtType.NONE; // done with translating assume stmt.
+      } else if (stmt is AssertStmt || DafnyOptions.O.DisallowSoundnessCheating) {
+        stmtContext = StmtType.ASSERT;
+        AddComment(b, stmt, "assert statement");
+        TrStmt_CheckWellformed(stmt.Expr, b, locals, etran, false);
+        IToken enclosingToken = null;
+        if (Attributes.Contains(stmt.Attributes, "_prependAssertToken")) {
+          enclosingToken = stmt.Tok;
+        }
+        BoogieStmtListBuilder proofBuilder = null;
+        var proofStmt = stmt as ProofStmt;
+        if (proofStmt != null) {
+          if (proofStmt.Proof != null) {
+            proofBuilder = new BoogieStmtListBuilder(this);
+            AddComment(proofBuilder, stmt, "assert statement proof");
+            CurrentIdGenerator.Push();
+            TrStmt(((proofStmt)stmt).Proof, proofBuilder, locals, etran);
+            CurrentIdGenerator.Pop();
+          } else if (proofStmt.Label != null) {
+            proofBuilder = new BoogieStmtListBuilder(this);
+            AddComment(proofBuilder, stmt, "assert statement proof");
+          }
+        }
+
+        bool splitHappened;
+        var ss = TrSplitExpr(stmt.Expr, etran, true, out splitHappened);
+        if (!splitHappened) {
+          var tok = enclosingToken == null ? GetToken(stmt.Expr) : new NestedToken(enclosingToken, GetToken(stmt.Expr));
+          var desc = new PODesc.AssertStatement(errorMessage);
+          (proofBuilder ?? b).Add(Assert(tok, etran.TrExpr(stmt.Expr), desc, stmt.Tok,
+            etran.TrAttributes(stmt.Attributes, null)));
+        } else {
+          foreach (var split in ss) {
+            if (split.IsChecked) {
+              var tok = enclosingToken == null ? split.E.tok : new NestedToken(enclosingToken, split.E.tok);
+              var desc = new PODesc.AssertStatement(errorMessage);
+              (proofBuilder ?? b).Add(AssertNS(tok, split.E, desc, stmt.Tok,
+                etran.TrAttributes(stmt.Attributes, null))); // attributes go on every split
+            }
+          }
+        }
+        if (proofBuilder != null) {
+          PathAsideBlock(stmt.Tok, proofBuilder, b);
+        }
+        stmtContext = StmtType.NONE; // done with translating assert stmt
+        if (splitHappened || proofBuilder != null) {
+          if (proofStmt != null && proofStmt.Label != null) {
+            // make copies of the variables used in the assertion
+            var name = "$Heap_at_" + proofStmt.Label.AssignUniqueId(CurrentIdGenerator);
+            var heapAt = new Bpl.LocalVariable(stmt.Tok, new Bpl.TypedIdent(stmt.Tok, name, predef.HeapType));
+            locals.Add(heapAt);
+            var h = new Bpl.IdentifierExpr(stmt.Tok, heapAt);
+            b.Add(Bpl.Cmd.SimpleAssign(stmt.Tok, h, etran.HeapExpr));
+            var substMap = new Dictionary<IVariable, Expression>();
+            foreach (var v in FreeVariablesUtil.ComputeFreeVariables(proofStmt.Expr)) {
+              if (v is LocalVariable) {
+                var vcopy = new LocalVariable(stmt.Tok, stmt.Tok, string.Format("##{0}#{1}", name, v.Name), v.Type, v.IsGhost);
+                vcopy.type = vcopy.OptionalType; // resolve local here
+                IdentifierExpr ie = new IdentifierExpr(vcopy.Tok, vcopy.AssignUniqueName(currentDeclaration.IdGenerator));
+                ie.Var = vcopy;
+                ie.Type = ie.Var.Type; // resolve ie here
+                substMap.Add(v, ie);
+                locals.Add(new Bpl.LocalVariable(vcopy.Tok,
+                  new Bpl.TypedIdent(vcopy.Tok, vcopy.AssignUniqueName(currentDeclaration.IdGenerator), TrType(vcopy.Type))));
+                b.Add(Bpl.Cmd.SimpleAssign(stmt.Tok, TrVar(stmt.Tok, vcopy), TrVar(stmt.Tok, v)));
+              }
+            }
+            var exprToBeRevealed = Substitute(proofStmt.Expr, null, substMap);
+            var etr = new ExpressionTranslator(etran, h);
+            proofStmt.Label.E = etr.TrExpr(exprToBeRevealed);
+          } else if (!defineFuel) {
+            // Adding the assume stmt, resetting the stmtContext
+            stmtContext = StmtType.ASSUME;
+            adjustFuelForExists = true;
+            b.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(stmt.Expr)));
+            stmtContext = StmtType.NONE;
+          }
+        }
+        if (defineFuel) {
+          var ifCmd = new Bpl.IfCmd(stmt.Tok, null, b.Collect(stmt.Tok), null,
+            null); // BUGBUG: shouldn't this first append "assume false" to "b"? (use PathAsideBlock to do this)  --KRML
+          builder.Add(ifCmd);
+          // Adding the assume stmt, resetting the stmtContext
+          stmtContext = StmtType.ASSUME;
+          adjustFuelForExists = true;
+          builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(stmt.Expr)));
+          stmtContext = StmtType.NONE;
+        }
       }
       this.fuelContext = FuelSetting.PopFuelContext();
     }

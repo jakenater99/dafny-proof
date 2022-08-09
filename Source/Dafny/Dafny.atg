@@ -2585,7 +2585,7 @@ OneStmt<out Statement/*!*/ s>
   | RevealStmt<out s>
   | SkeletonStmt<out s>
   | YieldStmt<out s>
-  | ProofStmt<out s>
+  | ProofStmt<out s, false>
   )
   .
 
@@ -3258,21 +3258,32 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
   .
 
 /*------------------------------------------------------------------------*/
-ProofStmt<out Statement/*!*/ s>
+ProofStmt<out Statement/*!*/ s, bool inExprContext>
 = (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
      Expression e = dummyExpr; Attributes attrs = null;
      IToken dotdotdot = null;
+     BlockStmt proof = null;
+     IToken proofStart, proofEnd;
+     IToken lbl = null;
   .)
   "$"                                     (. x = t; .)
   { Attribute<ref attrs> }
-  ( Expression<out e, false, true>
+  ( [ IF(IsLabel(!inExprContext))
+      LabelName<out lbl> ":"
+    ]
+    Expression<out e, false, true>
+    ( "by"
+      BlockStmt<out proof, out proofStart, out proofEnd>
+    | ";"
+    )
   | ellipsis                                   (. dotdotdot = t; .)
+    ";"
   )
-  "$"
+  "$"  
   (. if (dotdotdot != null) {
-       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), attrs), dotdotdot, null);
+       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
-       s = new ProofStmt(x, t, e, attrs);
+       s = new ProofStmt(x, t, e, proof, lbl == null ? null : new AssertLabel(lbl, lbl.val), attrs);
      }
   .)
   .
@@ -4233,7 +4244,7 @@ StmtInExpr<out Statement s>
   | AssumeStmt<out s>
   | RevealStmt<out s>
   | CalcStmt<out s>
-  | ProofStmt<out s>
+  | ProofStmt<out s, true>
   )
   .
 
