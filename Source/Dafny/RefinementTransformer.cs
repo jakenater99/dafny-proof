@@ -1126,8 +1126,7 @@ namespace Microsoft.Dafny {
                 i++;
               } else {
                 var e = refinementCloner.CloneExpr(oldProof.Expr);
-                var attrs = refinementCloner.MergeAttributes(oldProof.Attributes, skel.Attributes);
-                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e, attrs));
+                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e));
                 Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, Printer.ExprToString(e));
                 i++; j++;
               }            
