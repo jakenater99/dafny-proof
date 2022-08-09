@@ -3260,7 +3260,6 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
 /*------------------------------------------------------------------------*/
 ProofStmt<out Statement/*!*/ s>
 = (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
-= (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
      Expression e = dummyExpr; Attributes attrs = null;
      IToken dotdotdot = null;
   .)
