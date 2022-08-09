@@ -3260,20 +3260,19 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
 /*------------------------------------------------------------------------*/
 ProofStmt<out Statement/*!*/ s>
 = (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
-     Expression e = dummyExpr; Expression m = null; Attributes attrs = null;
+     Expression e = dummyExpr; Attributes attrs = null;
      IToken dotdotdot = null;
   .)
-  "$"                                     (. x = t; .)
+  "wpp"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( Expression<out e, false, true>
   | ellipsis                                   (. dotdotdot = t; .)
   )
-  [ "," Expression<out m, false, true> ]
-  "$"
+  ";"
   (. if (dotdotdot != null) {
-       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), m, attrs), dotdotdot, null);
+       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), attrs), dotdotdot, null);
      } else {
-       s = new ProofStmt(x, t, e, m, attrs);
+       s = new ProofStmt(x, t, e, attrs);
      }
   .)
   .

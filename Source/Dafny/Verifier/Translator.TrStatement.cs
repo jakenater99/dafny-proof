@@ -640,6 +640,13 @@ namespace Microsoft.Dafny {
         TrStmt_CheckWellformed(s.Expr, builder, locals, etran, false);
         builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(s.Expr), etran.TrAttributes(stmt.Attributes, null)));
         stmtContext = StmtType.NONE; // done with translating assume stmt.
+      } else if (stmt is ProofStmt) {
+        AddComment(builder, stmt, "proof statement");
+        var s = (ProofStmt)stmt;
+        stmtContext = StmtType.ASSUME; //??
+        TrStmt_CheckWellformed(s.Expr, builder, locals, etran, false);
+        builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(s.Expr), etran.TrAttributes(stmt.Attributes, null)));
+        stmtContext = StmtType.NONE; // done with translating assume stmt.
       }
       this.fuelContext = FuelSetting.PopFuelContext();
     }

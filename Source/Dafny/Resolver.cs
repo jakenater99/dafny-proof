@@ -8453,7 +8453,7 @@ namespace Microsoft.Dafny {
         Contract.Assume(!codeContext.IsGhost || mustBeErasable); // (this is really a precondition) codeContext.IsGhost ==> mustBeErasable
         Contract.Assume(mustBeErasable || proofContext == null); // (this is really a precondition) !mustBeErasable ==> proofContext == null 
 
-        if (stmt is AssertStmt || stmt is AssumeStmt) {
+        if (stmt is AssertStmt || stmt is AssumeStmt || stmt is ProofStmt) {
           stmt.IsGhost = true;
           var assertStmt = stmt as AssertStmt;
           if (assertStmt != null && assertStmt.Proof != null) {
@@ -13280,6 +13280,8 @@ namespace Microsoft.Dafny {
           ss = new ExpectStmt(s.Tok, s.Tok, notFailureExpr, new IdentifierExpr(s.Tok, temp), null);
         } else if (s.KeywordToken.val == "assume") {
           ss = new AssumeStmt(s.Tok, s.Tok, notFailureExpr, null);
+        } else if (s.KeywordToken.val == "wpp") {
+          ss = new ProofStmt(s.Tok, s.Tok, notFailureExpr, null);
         } else if (s.KeywordToken.val == "assert") {
           ss = new AssertStmt(s.Tok, s.Tok, notFailureExpr, null, null, null);
         } else {
