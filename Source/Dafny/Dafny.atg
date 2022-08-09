@@ -3317,10 +3317,11 @@ AssumeStmt<out Statement/*!*/ s>
   .)
   "assume"                                     (. x = t; .)
   { Attribute<ref attrs> }
+  "$"
   ( Expression<out e, false, true>
   | ellipsis                                   (. dotdotdot = t; .)
   )
-  ";"
+  "$"
   (. if (dotdotdot != null) {
        s = new SkeletonStatement(new AssumeStmt(x, t, new LiteralExpr(x, true), attrs), dotdotdot, null);
      } else {
