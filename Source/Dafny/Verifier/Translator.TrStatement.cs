@@ -655,7 +655,7 @@ namespace Microsoft.Dafny {
             proofBuilder = new BoogieStmtListBuilder(this);
             AddComment(proofBuilder, stmt, "assert statement proof");
             CurrentIdGenerator.Push();
-            TrStmt(((proofStmt)stmt).Proof, proofBuilder, locals, etran);
+            TrStmt(((ProofStmt)stmt).Proof, proofBuilder, locals, etran);
             CurrentIdGenerator.Pop();
           } else if (proofStmt.Label != null) {
             proofBuilder = new BoogieStmtListBuilder(this);
