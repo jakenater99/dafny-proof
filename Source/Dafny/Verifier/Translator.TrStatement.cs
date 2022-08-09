@@ -640,9 +640,9 @@ namespace Microsoft.Dafny {
         TrStmt_CheckWellformed(s.Expr, builder, locals, etran, false);
         builder.Add(TrAssumeCmd(stmt.Tok, etran.TrExpr(s.Expr), etran.TrAttributes(stmt.Attributes, null)));
         stmtContext = StmtType.NONE; // done with translating assume stmt.
-      } else if (stmt is AssertStmt || DafnyOptions.O.DisallowSoundnessCheating) {
+      } else if (stmt is ProofStmt || DafnyOptions.O.DisallowSoundnessCheating) {
         stmtContext = StmtType.ASSERT;
-        AddComment(b, stmt, "assert statement");
+        AddComment(b, stmt, "proof statement");
         TrStmt_CheckWellformed(stmt.Expr, b, locals, etran, false);
         IToken enclosingToken = null;
         if (Attributes.Contains(stmt.Attributes, "_prependAssertToken")) {
