@@ -569,7 +569,7 @@ namespace Microsoft.Dafny {
 
       } else if (stmt is ProofStmt) {
         var s = (ProofStmt)stmt;
-        r = new ProofStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), CloneBlockStmt(s.Proof), s.Label == null ? null : new AssertLabel(Tok(s.Label.Tok), s.Label.Name), null);
+        r = new ProofStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), null);
 
       } else if (stmt is PrintStmt) {
         var s = (PrintStmt)stmt;

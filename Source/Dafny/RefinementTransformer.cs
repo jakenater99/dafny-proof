@@ -1120,20 +1120,15 @@ namespace Microsoft.Dafny {
             } else if (S is ProofStmt) {
               var skel = (ProofStmt)S;
               Contract.Assert(c.ConditionOmitted);
-              var oldAssume = oldS as PredicateStmt;
+              var oldAssume = oldS as ProofStmt;
               if (oldAssume == null) {
-                Reporter.Error(MessageSource.RefinementTransformer, cur.Tok, "assert template does not match inherited statement");
+                Reporter.Error(MessageSource.RefinementTransformer, cur.Tok, "assume template does not match inherited statement");
                 i++;
               } else {
-                // Clone the expression, but among the new assert's attributes, indicate
-                // that this assertion is supposed to be translated into a check.  That is,
-                // it is not allowed to be just assumed in the translation, despite the fact
-                // that the condition is inherited.
                 var e = refinementCloner.CloneExpr(oldAssume.Expr);
                 var attrs = refinementCloner.MergeAttributes(oldAssume.Attributes, skel.Attributes);
-                body.Add(new ProofStmt(new Translator.ForceCheckToken(skel.Tok), new Translator.ForceCheckToken(skel.EndTok),
-                  e, skel.Proof, skel.Label, new Attributes("_prependAssertToken", new List<Expression>(), attrs)));
-                Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, "assume->assert: " + Printer.ExprToString(e));
+                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e, attrs));
+                Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, Printer.ExprToString(e));
                 i++; j++;
               }
 
