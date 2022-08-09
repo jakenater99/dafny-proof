@@ -1120,16 +1120,18 @@ namespace Microsoft.Dafny {
             } else if (S is ProofStmt) {
               var skel = (ProofStmt)S;
               Contract.Assert(c.ConditionOmitted);
-              var oldProof = oldS as ProofStmt;
-              if (oldProof == null) {
+              var oldAssume = oldS as AssumeStmt;
+              if (oldAssume == null) {
                 Reporter.Error(MessageSource.RefinementTransformer, cur.Tok, "proof template does not match inherited statement");
                 i++;
               } else {
-                var e = refinementCloner.CloneExpr(oldProof.Expr);
-                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e));
+                var e = refinementCloner.CloneExpr(oldAssume.Expr);
+                var attrs = refinementCloner.MergeAttributes(oldAssume.Attributes, skel.Attributes);
+                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e, attrs));
                 Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, Printer.ExprToString(e));
                 i++; j++;
-              }            
+              }
+          
 
             } else if (S is IfStmt) {
               var skel = (IfStmt)S;

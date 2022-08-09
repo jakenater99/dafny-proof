@@ -1558,9 +1558,6 @@ namespace Microsoft.Dafny {
         } else if (s.S is AssumeStmt) {
           Contract.Assert(s.ConditionOmitted);
           wr.Write("assume ...;");
-        } else if (s.S is ProofStmt) {
-          Contract.Assert(s.ConditionOmitted);
-          wr.Write("proof ...;");
         } else if (s.S is IfStmt) {
           PrintIfStatement(indent, (IfStmt)s.S, s.ConditionOmitted);
         } else if (s.S is WhileStmt) {

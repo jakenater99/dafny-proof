@@ -7083,8 +7083,8 @@ namespace Microsoft.Dafny {
   }
 
   public class ProofStmt : PredicateStmt {
-    public ProofStmt(IToken tok, IToken endTok, Expression expr)
-      : base(tok, endTok, expr) {
+    public ProofStmt(IToken tok, IToken endTok, Expression expr, Attributes attrs)
+      : base(tok, endTok, expr, attrs) {
       Contract.Requires(tok != null);
       Contract.Requires(endTok != null);
       Contract.Requires(expr != null);

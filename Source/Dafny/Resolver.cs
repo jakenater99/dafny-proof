@@ -8453,7 +8453,7 @@ namespace Microsoft.Dafny {
         Contract.Assume(!codeContext.IsGhost || mustBeErasable); // (this is really a precondition) codeContext.IsGhost ==> mustBeErasable
         Contract.Assume(mustBeErasable || proofContext == null); // (this is really a precondition) !mustBeErasable ==> proofContext == null 
 
-        if (stmt is AssertStmt || stmt is AssumeStmt || stmt is ProofStmt) {
+        if (stmt is AssertStmt || stmt is AssumeStmt) {
           stmt.IsGhost = true;
           var assertStmt = stmt as AssertStmt;
           if (assertStmt != null && assertStmt.Proof != null) {

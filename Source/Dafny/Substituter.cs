@@ -676,7 +676,7 @@ namespace Microsoft.Dafny {
         r = new AssumeStmt(s.Tok, s.EndTok, Substitute(s.Expr), SubstAttributes(s.Attributes));
       } else if (stmt is ProofStmt) {
         var s = (ProofStmt)stmt;
-        r = new ProofStmt(s.Tok, s.EndTok, Substitute(s.Expr));
+        r = new ProofStmt(s.Tok, s.EndTok, Substitute(s.Expr), SubstAttributes(s.Attributes));
       } else if (stmt is BreakStmt) {
         var s = (BreakStmt)stmt;
         BreakStmt rr;
