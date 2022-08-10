@@ -1,5 +1,4 @@
-﻿// SPDX-License-Identifier: MIT
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Dafny.Plugins;
@@ -7,12 +6,11 @@ namespace Microsoft.Dafny.Plugins;
 /// <summary>
 /// Plugins should define a class that extends PluginConfiguration,
 /// in order to receive plugin-specific command-line arguments by overwriting the method `ParseArguments`
-/// It is also used to provide to Dafny a list of Rewriter instances using the method `GetRewriters`, and Compiler
-/// instances using `GetCompilers`
+/// It is also used to provide to Dafny a list of Rewriter using the method `GetRewriters`
 ///
 /// If the plugin defines no PluginConfiguration, then Dafny will instantiate every sub-class
-/// of Rewriter and Compiler from the plugin (providing rewriters with an ErrorReporter in the constructor
-/// as the first and only argument, and compilers with no arguments).
+/// of Rewriter from the plugin, providing them with an ErrorReporter in the constructor
+/// as the first and only argument.
 /// </summary>
 public abstract class PluginConfiguration {
   /// <summary>
@@ -24,18 +22,10 @@ public abstract class PluginConfiguration {
   }
 
   /// <summary>
-  /// Override this method to provide rewriters
+  /// Override this method to provide specific rewriters to Dafny
   /// </summary>
   /// <returns>a list of Rewriter that are going to be used in the resolution pipeline</returns>
   public virtual Rewriter[] GetRewriters(ErrorReporter errorReporter) {
     return Array.Empty<Rewriter>();
-  }
-
-  /// <summary>
-  /// Override this method to provide compilers
-  /// </summary>
-  /// <returns>A list of compilers implemented by this plugin</returns>
-  public virtual Compiler[] GetCompilers() {
-    return Array.Empty<Compiler>();
   }
 }

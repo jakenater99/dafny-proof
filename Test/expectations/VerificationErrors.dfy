@@ -1,4 +1,4 @@
-// RUN: %dafny_0 "%s" /rprint:"%t.rprint" > "%t"
+// RUN: %dafny "%s" /rprint:"%t.rprint" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 datatype Option<T> = None | Some(get: T)

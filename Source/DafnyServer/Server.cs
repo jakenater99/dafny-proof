@@ -13,7 +13,7 @@ namespace Microsoft.Dafny {
     private readonly ExecutionEngine engine;
 
     static void Main(string[] args) {
-      var options = DafnyOptions.Create();
+      var options = new DafnyOptions();
       ServerUtils.ApplyArgs(args, options);
       var engine = ExecutionEngine.CreateWithoutSharedCache(options);
       Server server = new Server(engine);
@@ -71,6 +71,7 @@ namespace Microsoft.Dafny {
     public Server(ExecutionEngine engine) {
       this.engine = engine;
       this.running = true;
+      ExecutionEngine.printer = new DafnyConsolePrinter(engine.Options);
       SetupConsole();
     }
 

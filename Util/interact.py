@@ -48,10 +48,10 @@ class Task:
                 "source" :       self.file_name}
 
 class DafnyServer:
-    def __init__(self, server_path, no_color, dfyp_args, dfyp_file_name, hide_info):
+    def __init__(self, server_path, no_color, dfy_args, dfy_file_name, hide_info):
         self.no_color = no_color
-        self.dfyp_args = dfyp_args
-        self.dfyp_file_name = dfyp_file_name
+        self.dfy_args = dfy_args
+        self.dfy_file_name = dfy_file_name
         self.hide_info = hide_info
 
         self.encoding = 'utf-8'
@@ -189,19 +189,19 @@ def in_bounds(n, lbound=None, ubound=None):
     return (lbound is None or lbound <= int(n)) and (ubound is None or int(n) < ubound)
 
 def do_file(session, server):
-    task = Task(server.dfyp_args, server.dfyp_file_name, True, server.dfyp_file_name)
+    task = Task(server.dfy_args, server.dfy_file_name, True, server.dfy_file_name)
     print(server.do_verification(task))
 
 def verify_function_method(server, name):
-    args = server.dfyp_args + ["/proc:*%s*" % name.replace('_', "__")]
-    task = Task(args, server.dfyp_file_name, True, server.dfyp_file_name)
+    args = server.dfy_args + ["/proc:*%s*" % name.replace('_', "__")]
+    task = Task(args, server.dfy_file_name, True, server.dfy_file_name)
     print(server.do_verification(task))
 
 prev_function_method = None
 
 def do_function_method(session, server):
     global prev_function_method
-    task = Task(server.dfyp_args, server.dfyp_file_name, True, server.dfyp_file_name)
+    task = Task(server.dfy_args, server.dfy_file_name, True, server.dfy_file_name)
     names = server.get_functions_methods(task)
     print("\nFound:")
     for name in names:
@@ -291,10 +291,10 @@ def event_loop(server):
 #############################################
 
 def main():
-    default_arg_file_name = 'dfyp.args'
+    default_arg_file_name = 'dfy.args'
     default_server_path = './Binaries/dafny-server'
     parser = argparse.ArgumentParser(description="Interact with the Dafny server")
-    parser.add_argument('-d', '--dfyp', action='store', help="Dafny file to verify", required=True)
+    parser.add_argument('-d', '--dfy', action='store', help="Dafny file to verify", required=True)
     parser.add_argument('-a', '--args', action='store', help="Dafny arguments.  Overrides --arg_file", required=False)
     arg_file_help  = "File to read Dafny arguments from."
     arg_file_help += "Should consist of one line with all of the desired command-line arguments."
@@ -310,13 +310,13 @@ def main():
 
     args = parser.parse_args()
 
-    dfyp_args = []
+    dfy_args = []
     if not args.args is None:
-        dfyp_args = parse_args(args.args)
+        dfy_args = parse_args(args.args)
     elif os.path.isfile(args.arg_file):
-        dfyp_args = read_arg_file(args.arg_file)
+        dfy_args = read_arg_file(args.arg_file)
 
-    server = DafnyServer(args.server, args.no_color, dfyp_args, args.dfyp, not args.show_tooltips)
+    server = DafnyServer(args.server, args.no_color, dfy_args, args.dfy, not args.show_tooltips)
 
     event_loop(server)
 

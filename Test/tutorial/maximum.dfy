@@ -1,4 +1,4 @@
-// RUN: %dafny /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
+// RUN: %dafny /compile:0 /print:"%t.print" /dprint:"%t.dprint" /printTooltips "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 // This file shows how to specify and implement a function to compute the
@@ -11,13 +11,16 @@ method Maximum(values: seq<int>) returns (max: int)
   ensures forall i | 0 <= i < |values| :: values[i] <= max
 {
   max := values[0];
-  for idx := 0 to |values|
+  var idx := 0;
+  while (idx < |values|)
     invariant max in values
+    invariant idx <= |values|
     invariant forall j | 0 <= j < idx :: values[j] <= max
   {
-    if max < values[idx] {
+    if (values[idx] > max) {
       max := values[idx];
     }
+    idx := idx + 1;
   }
 }
 

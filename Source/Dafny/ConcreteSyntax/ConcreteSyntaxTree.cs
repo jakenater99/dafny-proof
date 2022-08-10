@@ -32,12 +32,6 @@ namespace Microsoft.Dafny {
       return result;
     }
 
-    public void Clear() {
-      while (_nodes.Any()) {
-        _nodes.RemoveAt(0);
-      }
-    }
-
     public T Prepend<T>(T node)
       where T : ICanRender {
       _nodes.Insert(0, node);
@@ -178,9 +172,10 @@ namespace Microsoft.Dafny {
       return sw.ToString();
     }
 
-    public void Render(TextWriter writer, int indentation, WriterState writerState, Queue<FileSyntax> files, int indentSize = 2) {
+    public void Render(TextWriter writer, int indentation, WriterState writerState,
+      Queue<FileSyntax> files) {
       foreach (var node in _nodes) {
-        node.Render(writer, indentation + RelativeIndentLevel * indentSize, writerState, files, indentSize);
+        node.Render(writer, indentation + RelativeIndentLevel * 2, writerState, files);
       }
     }
   }

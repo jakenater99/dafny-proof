@@ -3,7 +3,6 @@
 // RUN: %dafny /noVerify /compile:4 /compileTarget:java "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /compileTarget:js "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /compileTarget:go "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:py "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t"
 
 function method F(x: int, y: bool): int {
@@ -119,9 +118,6 @@ module VariableCapture {
       r := [];
       return;
     }
-    // Most target languages have no immediate match for the expressions in the following
-    // lines so the compilation strategies will be informed by the constraints imposed by
-    // the target language.
     var x :| x in S;
     g := x;  // In C#, "g" will be a formal out-parameter
     // C# does not allow formal out-parameters to be captured in a lambda, so "g" is saved
@@ -143,9 +139,6 @@ module VariableCapture {
       r := [];
       return;
     }
-    // Most target languages have no immediate match for the expressions in the following
-    // lines so the compilation strategies will be informed by the constraints imposed by
-    // the target language.
     var x :| x in M.Keys;
     g := x;  // In C#, "g" will be a formal out-parameter
     // C# does not allow formal out-parameters to be captured in a lambda, so "g" is saved

@@ -1,7 +1,5 @@
 
 Dafny program verifier finished with 8 verified, 0 errors
-
-Dafny program verifier did not attempt verification
 hello, M2
 hello, M2
 hello, M3
@@ -13,7 +11,7 @@ hello, M3
 hello, N0
 hello, N1
 
-Dafny program verifier did not attempt verification
+Dafny program verifier finished with 8 verified, 0 errors
 hello, M2
 hello, M2
 hello, M3
@@ -25,7 +23,7 @@ hello, M3
 hello, N0
 hello, N1
 
-Dafny program verifier did not attempt verification
+Dafny program verifier finished with 8 verified, 0 errors
 hello, M2
 hello, M2
 hello, M3
@@ -37,19 +35,7 @@ hello, M3
 hello, N0
 hello, N1
 
-Dafny program verifier did not attempt verification
-hello, M2
-hello, M2
-hello, M3
-hello, M1
-hello, M1
-hello, M1
-hello, M2
-hello, M3
-hello, N0
-hello, N1
-
-Dafny program verifier did not attempt verification
+Dafny program verifier finished with 8 verified, 0 errors
 hello, M2
 hello, M2
 hello, M3

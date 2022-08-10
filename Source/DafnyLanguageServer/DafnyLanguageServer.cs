@@ -12,14 +12,12 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 using OmniSharp.Extensions.LanguageServer.Server;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Boogie.SMTLib;
 using Microsoft.Extensions.Options;
-using OmniSharp.Extensions.LanguageServer.Protocol.Window;
 
 namespace Microsoft.Dafny.LanguageServer {
   public static class DafnyLanguageServer {
-    private static readonly List<string> pluginLoadErrors = new();
-    public static IReadOnlyList<string> PluginLoadErrors => pluginLoadErrors;
+    private static List<string> loadErrors = new List<string>();
+    public static IReadOnlyList<string> LoadErrors => loadErrors;
     private static string DafnyVersion {
       get {
         var version = typeof(DafnyLanguageServer).Assembly.GetName().Version!;
@@ -29,10 +27,6 @@ namespace Microsoft.Dafny.LanguageServer {
 
     public static LanguageServerOptions WithDafnyLanguageServer(this LanguageServerOptions options,
         IConfiguration configuration, Action killLanguageServer) {
-      options.ServerInfo = new ServerInfo {
-        Name = "Dafny",
-        Version = DafnyVersion
-      };
       return options
         .WithDafnyLanguage(configuration)
         .WithDafnyWorkspace(configuration)
@@ -50,23 +44,7 @@ namespace Microsoft.Dafny.LanguageServer {
 
       KillLanguageServerIfParentDies(logger, request, killLanguageServer);
 
-      PublishSolverPath(server);
-
       return Task.CompletedTask;
-    }
-
-    private static void PublishSolverPath(ILanguageServer server) {
-      var telemetryPublisher = server.GetRequiredService<ITelemetryPublisher>();
-      string solverPath;
-      try {
-        var proverOptions = new SMTLibSolverOptions(DafnyOptions.O);
-        proverOptions.Parse(DafnyOptions.O.ProverOptions);
-        solverPath = proverOptions.ExecutablePath();
-      } catch (Exception e) {
-        solverPath = $"Error while determining solver path: {e}";
-      }
-
-      telemetryPublisher.PublishSolverPath(solverPath);
     }
 
     /// <summary>
@@ -82,7 +60,7 @@ namespace Microsoft.Dafny.LanguageServer {
         }
       } catch (Exception e) {
         logger.LogError(e, $"Error while instantiating plugin {lastPlugin}");
-        pluginLoadErrors.Add($"Error while instantiating plugin {lastPlugin}. Please restart the server.\n" + e);
+        loadErrors.Add($"Error while instantiating plugin {lastPlugin}. Please restart the server.\n" + e);
       }
     }
 

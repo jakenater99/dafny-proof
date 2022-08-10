@@ -10,8 +10,7 @@ namespace Microsoft.Dafny.LanguageServer.Workspace {
   public interface ITelemetryPublisher {
     protected enum TelemetryEventKind {
       UpdateComplete,
-      UnhandledException,
-      SolverPath
+      UnhandledException
     }
 
     /// <summary>
@@ -33,10 +32,6 @@ namespace Microsoft.Dafny.LanguageServer.Workspace {
     /// </summary>
     public void PublishUnhandledException(Exception e) {
       PublishTelemetry(TelemetryEventKind.UnhandledException, e.ToString());
-    }
-
-    public void PublishSolverPath(string solverPath) {
-      PublishTelemetry(TelemetryEventKind.SolverPath, solverPath);
     }
   }
 }

@@ -1,4 +1,4 @@
-// RUN: %dafny_0 "%s" > "%t"
+// RUN: %dafny "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 module Actuals {

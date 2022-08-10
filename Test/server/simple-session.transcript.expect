@@ -1,26 +1,37 @@
 # Reading from simple-session.transcript
 
-Verifying A (correctness) ...
+Verifying Impl$$_module.__default.A ...
   [1 proof obligation]  error
 transcript(3,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 
-Verifying A (correctness) ...
+Verifying Impl$$_module.__default.A ...
+Retrieving cached verification result for implementation Impl$$_module.__default.A...
   [0 proof obligations]  error
 transcript(3,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 
-Verifying A (correctness) ...
+Verifying Impl$$_module.__default.A ...
+Retrieving cached verification result for implementation Impl$$_module.__default.A...
   [0 proof obligations]  error
 transcript(3,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 
-Verifying A (correctness) ...
+Verifying Impl$$_module.__default.A ...
+Retrieving cached verification result for implementation Impl$$_module.__default.A...
   [0 proof obligations]  error
 transcript(3,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 Verification completed successfully!
@@ -119,21 +130,27 @@ Verification completed successfully!
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
 transcript(10,9): Info: Selected triggers: {x' * x'}
 
-Verifying M' (correctness) ...
+Verifying Impl$$_module.__default.M_k ...
   [1 proof obligation]  error
 transcript(10,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
+    (0,0): anon3_Then
+    (0,0): anon2
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
 transcript(10,9): Info: Selected triggers: {x' * x'}
 
-Verifying M' (correctness) ...
+Verifying Impl$$_module.__default.M_k ...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
 transcript(10,9): Info: Selected triggers: {x' * x'}
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -144,13 +161,15 @@ Verification completed successfully!
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
 transcript(10,9): Info: Selected triggers: {x' * x'}
 
-Verifying M' (correctness) ...
+Verifying Impl$$_module.__default.M_k ...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
 transcript(10,9): Info: Selected triggers: {x' * x'}
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -215,16 +234,18 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Info: Selected triggers: {x' * x'}
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
 
-Verifying M0 (correctness) ...
+Verifying Impl$$_module.__default.M0 ...
   [2 proof obligations]  verified
 
-Verifying M1 (correctness) ...
+Verifying Impl$$_module.__default.M1 ...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
+Verifying Impl$$_module.__default.M2 ...
   [2 proof obligations]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -236,13 +257,21 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Info: Selected triggers: {x' * x'}
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
   [2 proof obligations]  verified
-Retrieving cached verification result for implementation M2 (correctness)...
+
+Verifying Impl$$_module.__default.M2 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M2...
   [2 proof obligations]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -254,16 +283,26 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M2 ...
   [2 proof obligations]  error
 transcript(38,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
+    (0,0): anon3_Then
+    (0,0): anon2
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
@@ -281,16 +320,26 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M2 ...
   [2 proof obligations]  error
 transcript(38,9): Error: assertion might not hold
+Execution trace:
+    (0,0): anon0
+    (0,0): anon3_Then
+    (0,0): anon2
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
 transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
@@ -301,72 +350,92 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
-  [2 proof obligations]  verified
-Verification completed successfully!
-[SUCCESS] [[DAFNY-SERVER: EOM]]
-transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(10,9): Info: Selected triggers: {x' * x'}
-transcript(20,9): Info: Selected triggers: {x' * x'}
-transcript(29,9): Info: Selected triggers: {x' * x'}
-transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
-  [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M2 (correctness)...
-  [2 proof obligations]  verified
-Verification completed successfully!
-[SUCCESS] [[DAFNY-SERVER: EOM]]
-transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(40,2): Error: invalid UpdateStmt
-Verification completed successfully!
-[SUCCESS] [[DAFNY-SERVER: EOM]]
-transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(40,2): Error: invalid UpdateStmt
-Verification completed successfully!
-[SUCCESS] [[DAFNY-SERVER: EOM]]
-transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(40,2): Error: invalid UpdateStmt
-Verification completed successfully!
-[SUCCESS] [[DAFNY-SERVER: EOM]]
-transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
-transcript(10,9): Info: Selected triggers: {x' * x'}
-transcript(20,9): Info: Selected triggers: {x' * x'}
-transcript(29,9): Info: Selected triggers: {x' * x'}
-transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
-  [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
+Verifying Impl$$_module.__default.M2 ...
+  [2 proof obligations]  verified
+Verification completed successfully!
+[SUCCESS] [[DAFNY-SERVER: EOM]]
+transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(10,9): Info: Selected triggers: {x' * x'}
+transcript(20,9): Info: Selected triggers: {x' * x'}
+transcript(29,9): Info: Selected triggers: {x' * x'}
+transcript(38,9): Warning: /!\ No terms found to trigger on.
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
+  [1 proof obligation]  verified
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M2 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M2...
+  [2 proof obligations]  verified
+Verification completed successfully!
+[SUCCESS] [[DAFNY-SERVER: EOM]]
+transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(40,2): Error: invalid UpdateStmt
+Verification completed successfully!
+[SUCCESS] [[DAFNY-SERVER: EOM]]
+transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(40,2): Error: invalid UpdateStmt
+Verification completed successfully!
+[SUCCESS] [[DAFNY-SERVER: EOM]]
+transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(40,2): Error: invalid UpdateStmt
+Verification completed successfully!
+[SUCCESS] [[DAFNY-SERVER: EOM]]
+transcript(5,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(15,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(24,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(33,0): Warning: module-level methods are always non-instance, so the 'static' keyword is not allowed here
+transcript(10,9): Info: Selected triggers: {x' * x'}
+transcript(20,9): Info: Selected triggers: {x' * x'}
+transcript(29,9): Info: Selected triggers: {x' * x'}
+transcript(38,9): Warning: /!\ No terms found to trigger on.
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
+  [1 proof obligation]  verified
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M2 ...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -399,14 +468,20 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
-  [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
 
-Verifying M2 (correctness) ...
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
+  [2 proof obligations]  verified
+
+Verifying Impl$$_module.__default.M2 ...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]
@@ -418,13 +493,21 @@ transcript(10,9): Info: Selected triggers: {x' * x'}
 transcript(20,9): Info: Selected triggers: {x' * x'}
 transcript(29,9): Info: Selected triggers: {x' * x'}
 transcript(38,9): Warning: /!\ No terms found to trigger on.
-Retrieving cached verification result for implementation M' (correctness)...
+
+Verifying Impl$$_module.__default.M_k ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M_k...
   [1 proof obligation]  verified
-Retrieving cached verification result for implementation M0 (correctness)...
+
+Verifying Impl$$_module.__default.M0 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M0...
   [2 proof obligations]  verified
-Retrieving cached verification result for implementation M1 (correctness)...
+
+Verifying Impl$$_module.__default.M1 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M1...
   [2 proof obligations]  verified
-Retrieving cached verification result for implementation M2 (correctness)...
+
+Verifying Impl$$_module.__default.M2 ...
+Retrieving cached verification result for implementation Impl$$_module.__default.M2...
   [1 proof obligation]  verified
 Verification completed successfully!
 [SUCCESS] [[DAFNY-SERVER: EOM]]

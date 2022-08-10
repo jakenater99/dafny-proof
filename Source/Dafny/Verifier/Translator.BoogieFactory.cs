@@ -817,7 +817,8 @@ namespace Microsoft.Dafny {
     }
 
     static Bpl.Expr BplLocalVar(string name, Bpl.Type ty, List<Bpl.Variable> lvars) {
-      lvars.Add(BplLocalVar(name, ty, out var v));
+      Bpl.Expr v;
+      lvars.Add(BplLocalVar(name, ty, out v));
       return v;
     }
 
@@ -845,49 +846,31 @@ namespace Microsoft.Dafny {
     }
 
     static Bpl.Expr BplBoundVar(string name, Bpl.Type ty, List<Bpl.Variable> bvars) {
-      bvars.Add(BplBoundVar(name, ty, out var e));
+      Bpl.Expr e;
+      bvars.Add(BplBoundVar(name, ty, out e));
       return e;
     }
 
     // Makes a formal variable
     static Bpl.Formal BplFormalVar(string/*?*/ name, Bpl.Type ty, bool incoming) {
-      return BplFormalVar(name, ty, incoming, out _);
+      Bpl.Expr _scratch;
+      return BplFormalVar(name, ty, incoming, out _scratch);
     }
 
-    static Bpl.Formal BplFormalVar(string/*?*/ name, Bpl.Type ty, bool incoming, out Bpl.Expr e, Bpl.Expr whereClause = null) {
+    static Bpl.Formal BplFormalVar(string/*?*/ name, Bpl.Type ty, bool incoming, out Bpl.Expr e) {
+      Bpl.Formal res;
       if (name == null) {
         name = Bpl.TypedIdent.NoName;
       }
-      var res = new Bpl.Formal(ty.tok, new Bpl.TypedIdent(ty.tok, name, ty, whereClause), incoming);
+      res = new Bpl.Formal(ty.tok, new Bpl.TypedIdent(ty.tok, name, ty), incoming);
       e = new Bpl.IdentifierExpr(ty.tok, res);
       return res;
     }
 
     static Bpl.Expr BplFormalVar(string name, Bpl.Type ty, bool incoming, List<Bpl.Variable> fvars) {
-      fvars.Add(BplFormalVar(name, ty, incoming, out var e));
+      Bpl.Expr e;
+      fvars.Add(BplFormalVar(name, ty, incoming, out e));
       return e;
-    }
-
-    public static IToken ToDafnyToken(Bpl.IToken exprTok) {
-      if (exprTok == null) {
-        return null;
-      } else if (exprTok is IToken t) {
-        return t;
-      } else if (exprTok == Boogie.Token.NoToken) {
-        return Token.NoToken;
-      } else {
-        // This is defensive programming but we aren't expecting to hit this case
-        return new Token {
-          col = exprTok.col,
-          Filename = exprTok.filename,
-          kind = exprTok.kind,
-          LeadingTrivia = "",
-          line = exprTok.line,
-          pos = exprTok.pos,
-          TrailingTrivia = "",
-          val = exprTok.val
-        };
-      }
     }
   }
 }

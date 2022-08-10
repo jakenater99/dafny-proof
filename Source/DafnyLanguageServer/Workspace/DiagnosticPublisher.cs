@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Dafny.LanguageServer.Util;
+﻿using Microsoft.Dafny.LanguageServer.Util;
 using Microsoft.Dafny.LanguageServer.Workspace.Notifications;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;

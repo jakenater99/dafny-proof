@@ -7,7 +7,6 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestPlatform.Extensions.TrxLogger;
@@ -44,7 +43,7 @@ namespace Microsoft.Dafny {
           foreach (string s in parametersList.Split(",")) {
             var equalsIndex = s.IndexOf("=");
             parameters.Add(s[..equalsIndex], s[(equalsIndex + 1)..]);
-          }
+          };
         } else {
           loggerName = loggerConfig;
         }
@@ -55,13 +54,6 @@ namespace Microsoft.Dafny {
         } else if (loggerName == "csv") {
           var csvLogger = new CSVTestLogger();
           csvLogger.Initialize(events, parameters);
-        } else if (loggerName == "text") {
-          // This doesn't actually use the XML converter. It instead uses a collection of VerificationResult
-          // objects. Ultimately, the other loggers should be converted to use those objects, as well,
-          // and then it would make sense to rename this class.
-          var textLogger = new TextLogger();
-          textLogger.Initialize(parameters);
-          textLogger.LogResults((DafnyOptions.O.Printer as DafnyConsolePrinter).VerificationResults.ToList());
         } else {
           throw new ArgumentException("Unsupported verification logger config: {loggerConfig}");
         }
@@ -144,14 +136,13 @@ namespace Microsoft.Dafny {
     private static TestResult TestResultForBatch(string currentFileFragment, XElement methodNode, XElement batchNode) {
       var methodName = methodNode.Attribute("name")!.Value;
       var batchNumber = batchNode.Attribute("number")!.Value;
-      var name = $"{methodName} (assertion batch {batchNumber})";
+      var name = $"{methodName}$${batchNumber}";
 
       var startTime = batchNode.Attribute("startTime")!.Value;
       var conclusionNode = batchNode.Nodes()
                                             .OfType<XElement>()
                                             .Single(n => n.Name.LocalName == "conclusion");
       var duration = float.Parse(conclusionNode.Attribute("duration")!.Value);
-      var resourceCount = conclusionNode.Attribute("resourceCount")?.Value;
       var outcome = conclusionNode.Attribute("outcome")!.Value;
 
       var testCase = TestCaseForEntry(currentFileFragment, name);
@@ -159,10 +150,6 @@ namespace Microsoft.Dafny {
         StartTime = DateTimeOffset.Parse(startTime),
         Duration = TimeSpan.FromMilliseconds((long)(duration * 1000))
       };
-
-      if (resourceCount != null) {
-        testResult.SetPropertyValue(ResourceCountProperty, int.Parse(resourceCount));
-      }
 
       if (outcome == "valid") {
         testResult.Outcome = TestOutcome.Passed;

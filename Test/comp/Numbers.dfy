@@ -3,7 +3,6 @@
 // RUN: %dafny /noVerify /compile:4 /compileTarget:js "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /compileTarget:go "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /compileTarget:java "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:py "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t"
 
 method Main() {
@@ -13,7 +12,6 @@ method Main() {
   SimpleReality();
   BitVectorTests();
   MoreBvTests();
-  NativeTypeTest();
   NewTypeTest();
   OrdinalTests();
   ZeroComparisonTests();
@@ -408,9 +406,9 @@ method MoreBvTests() {
   print u, "\n";  // as 0 as ever
 }
 
-newtype {:nativeType "number", "long"} NativeType = x | -100 <= x < 0x10_0000_0000
+newtype {:nativeType "number", "long"} MyNumber = x | -100 <= x < 0x10_0000_0000
 
-method NativeTypeTest() {
+method NewTypeTest() {
   var a, b := 200, 300;
   var r0 := M(a, b);
   var r1 := M(b, a);
@@ -419,7 +417,7 @@ method NativeTypeTest() {
   print r0, " ", r1, " ", r2, "\n";
 }
 
-method M(m: NativeType, n: NativeType) returns (r: NativeType) {
+method M(m: MyNumber, n: MyNumber) returns (r: MyNumber) {
   if m < 0 || n < 0 {
     r := 18;
   } else if m < n {
@@ -427,15 +425,6 @@ method M(m: NativeType, n: NativeType) returns (r: NativeType) {
   } else {
     r := m - n;
   }
-}
-
-newtype NewType = x: int | true
-
-method NewTypeTest() {
-  print var n: NewType := (-4) / (-2); n, "\n";
-  print var n: NewType := ( 4) / (-2); n, "\n";
-  print var n: NewType := (-4) / ( 2); n, "\n";
-  print var n: NewType := ( 4) / ( 2); n, "\n";
 }
 
 method OrdinalTests() {
@@ -459,11 +448,11 @@ method ZeroComparisonTests() {
   ZCIntTests(-0);
   ZCIntTests(23);
 
-  print "NativeType:\n";
-  ZCNativeTypeTests(-42);
-  ZCNativeTypeTests(0);
-  ZCNativeTypeTests(-0);
-  ZCNativeTypeTests(23);
+  print "MyNumber:\n";
+  ZCMyNumberTests(-42);
+  ZCMyNumberTests(0);
+  ZCMyNumberTests(-0);
+  ZCMyNumberTests(23);
 }
 
 function method YN(b : bool) : string {
@@ -481,7 +470,7 @@ method ZCIntTests(n : int) {
     "\n";
 }
 
-method ZCNativeTypeTests(n : NativeType) {
+method ZCMyNumberTests(n : MyNumber) {
   print n, "\t",
     " <0 ",  YN(n < 0),  " <=0 ", YN(n <= 0),
     " ==0 ", YN(n == 0), " !=0 ", YN(n != 0),

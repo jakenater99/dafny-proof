@@ -1,4 +1,7 @@
-// RUN: %testDafnyForEachCompiler "%s"
+// RUN: %dafny /compile:3 /spillTargetCode:2 /compileTarget:cs "%s" > "%t"
+// RUN: %dafny /compile:3 /spillTargetCode:2 /compileTarget:js "%s" >> "%t"
+// RUN: %dafny /compile:3 /spillTargetCode:2 /compileTarget:go "%s" >> "%t"
+// RUN: %diff "%s.expect" "%t"
 
 class C {
   var x: int
@@ -7,7 +10,6 @@ class C {
     print "hello, instance\n";
     print "x is ", x, "\n";
     Client();
-    RegressionClient();
   }
 }
 
@@ -58,20 +60,4 @@ method Client()
     print iter.x, " ";
   }
   print "\n";
-}
-
-method RegressionClient() {
-  var c := new C;
-  var d := new C;
-  var iter := new RegressionDefaultVsPlaceboInitialization(c, d);
-  var more := iter.MoveNext();
-  if more {
-    print iter.eq, "\n"; // false
-  }
-}
-
-// The following iterator needs to initialize its .x and .y fields with placebos, not default values.
-// In the past, default values had been used, which causes malformed code that refers to a non-existing type descriptor.
-iterator RegressionDefaultVsPlaceboInitialization<X(==)>(x: X, y: X) yields (eq: bool) {
-  yield x == y;
 }

@@ -1,13 +1,8 @@
-// RUN: %dafny_0 /verificationLogger:csv";"LogFileName="%t.csv" "%s"
+// RUN: %dafny /verificationLogger:csv;LogFileName="%t.csv" "%s"
 // RUN: %OutputCheck --file-to-check "%t.csv" "%s"
 
 // CHECK: TestResult\.DisplayName,TestResult\.Outcome,TestResult\.Duration,TestResult\.ResourceCount
-// The CHECK-NOT directives are a regression test: previously the BoogieXmlConvertor
-// wasn't populating the resource count test result property, and the CSV logger was
-// defaulting to 0 for that column.
-// CHECK-NOT: ExampleWithSplits.*,Passed,.*,0
-// CHECK: ExampleWithSplits.*,Passed,.*,.*
-// CHECK-NOT: ExampleWithSplits.*,Passed,.*,0
+// CHECK-NEXT: Impl\$\$_module.__default\.ExampleWithSplits\$\$1,Passed,.*,.*
 
 method ExampleWithSplits() returns (y: int)
   ensures y >= 0

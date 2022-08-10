@@ -11,8 +11,6 @@ namespace DafnyServer.CounterexampleGeneration {
     public readonly string Name;
     public readonly List<DafnyModelType> TypeArgs;
 
-    private static readonly Regex boogieToDafnyTypeRegex = new("(?<=[^_](__)*)_m");
-
     public DafnyModelType(string name, IEnumerable<DafnyModelType> typeArgs) {
       Name = name;
       TypeArgs = new List<DafnyModelType>(typeArgs);
@@ -37,11 +35,11 @@ namespace DafnyServer.CounterexampleGeneration {
     /// </summary>
     public DafnyModelType InDafnyFormat() {
       // The line below converts "_m" used in boogie to separate modules to ".":
-      var tmp = boogieToDafnyTypeRegex.Replace(Name, ".");
+      var tmp = Regex.Replace(Name, "(?<=[^_](__)*)_m", ".");
       // The code below converts every "__" to "_":
-      bool removeNextUnderscore = false;
+      var removeNextUnderscore = false;
       var newName = "";
-      foreach (char c in tmp) {
+      foreach (var c in tmp) {
         if (c == '_') {
           if (!removeNextUnderscore) {
             newName += c;
@@ -68,11 +66,11 @@ namespace DafnyServer.CounterexampleGeneration {
         return new DafnyModelType(type);
       }
       List<DafnyModelType> typeArgs = new();
-      int id = type.IndexOf("<", StringComparison.Ordinal);
+      var id = type.IndexOf("<", StringComparison.Ordinal);
       var name = type[..id];
       id++; // skip the first '<' since it opens the argument list
-      int lastId = id;
-      int openBrackets = 0;
+      var lastId = id;
+      var openBrackets = 0;
       while (id < type.Length) {
         switch (type[id]) {
           case '<':
