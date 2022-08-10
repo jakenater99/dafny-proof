@@ -785,6 +785,7 @@ TOKENS
   semicolon = ';'.
   darrow = "=>".
   assume = "assume".
+  proof = "proof"
   assert = "assert".
   calc = "calc".
   case = "case".
@@ -2693,12 +2694,12 @@ UpdateStmt<out Statement/*!*/ s>
       }
     | ":|"                         (. x = t; .)
       [ IF(la.kind == _assume)     /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
-        "assume"                   (. suchThatAssume = t; .)
+        ("assume"|"proof")                   (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
     | ":-"                         (. x = t; .)
       [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-        ("expect"|"assert"|"assume")    (. keywordToken = t; .)
+        ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
       ]
       Expression<out exceptionExpr, false, false>
       { "," Rhs<out r>             (. rhss.Add(r); .)
@@ -2709,7 +2710,7 @@ UpdateStmt<out Statement/*!*/ s>
   )
 | ":-"                             (. x = t; .)
    [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-      ("expect"|"assert"|"assume")    (. keywordToken = t; .)
+      ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
    ]
    Expression<out exceptionExpr, false, false>
    { "," Rhs<out r>                (. rhss.Add(r); .)
@@ -2838,12 +2839,12 @@ VarDeclStatement<.out Statement/*!*/ s.>
     | { Attribute<ref attrs> }
       ":|"                           (. assignTok = t; .)
       [ IF(la.kind == _assume)       /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
-        "assume"                     (. suchThatAssume = t; .)
+        ("assume"|"proof")                     (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
     | ":-"                           (. assignTok = t; .)
       [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-        ("expect"|"assert"|"assume")    (. keywordToken = t; .)
+        ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
       ]
       Expression<out exceptionExpr, false, false>
       { "," Rhs<out r>               (. rhss.Add(r); .)
@@ -3263,7 +3264,7 @@ ProofStmt<out Statement/*!*/ s>
      Expression e = dummyExpr; Attributes attrs = null;
      IToken dotdotdot = null;
   .)
-  "proof"                                     (. x = t; .)
+  "wpp"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( Expression<out e, false, true>
   | ellipsis                                   (. dotdotdot = t; .)
@@ -3304,7 +3305,7 @@ AssumeStmt<out Statement/*!*/ s>
      Expression e = dummyExpr; Attributes attrs = null;
      IToken dotdotdot = null;
   .)
-  "assume"                                     (. x = t; .)
+  "proof"                                     (. x = t; .)
   { Attribute<ref attrs> }
   ( Expression<out e, false, true>
   | ellipsis                                   (. dotdotdot = t; .)
