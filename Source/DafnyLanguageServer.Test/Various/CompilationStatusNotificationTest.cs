@@ -55,7 +55,7 @@ method Abs(x: int) returns (y: int)
       Assert.AreEqual(CompilationStatus.ParsingFailed, started.Status);
 
       // We re-send the same erroneous document again to check that we don't have a CompilationSucceeded event queued.
-      client.OpenDocument(CreateTestDocument(source, "Test2.dfy"));
+      client.OpenDocument(CreateTestDocument(source, "Test2.dfyp"));
       var queueRemainder = await notificationReceiver.AwaitNextNotificationAsync(CancellationToken);
       Assert.AreEqual(CompilationStatus.ParsingFailed, queueRemainder.Status);
     }
@@ -77,7 +77,7 @@ method Abs(x: int) returns (y: int)
       Assert.AreEqual(CompilationStatus.ResolutionFailed, started.Status);
 
       // We re-send the same erroneous document again to check that we don't have a CompilationSucceeded event queued.
-      client.OpenDocument(CreateTestDocument(source, "Test2.dfy"));
+      client.OpenDocument(CreateTestDocument(source, "Test2.dfyp"));
       var queueRemainder = await notificationReceiver.AwaitNextNotificationAsync(CancellationToken);
       Assert.AreEqual(CompilationStatus.ResolutionFailed, queueRemainder.Status);
     }
@@ -209,9 +209,9 @@ method Abs(x: int) returns (y: int)
 
       // We load two documents. If no verification is executed, we should receive each
       // compilation status twice without any verification status inbetween.
-      var documentItem1 = CreateTestDocument(source, "test_1.dfy");
+      var documentItem1 = CreateTestDocument(source, "test_1.dfyp");
       await client.OpenDocumentAndWaitAsync(documentItem1, CancellationToken);
-      var documentItem2 = CreateTestDocument(source, "test_2dfy");
+      var documentItem2 = CreateTestDocument(source, "test_2dfyp");
       await client.OpenDocumentAndWaitAsync(documentItem2, CancellationToken);
 
       var compilation1 = await notificationReceiver.AwaitNextNotificationAsync(CancellationToken);
@@ -238,7 +238,7 @@ method Abs(x: int) returns (y: int)
         { $"{DocumentOptions.Section}:{nameof(DocumentOptions.Verify)}", nameof(AutoVerification.OnSave) }
       });
 
-      var documentItem = CreateTestDocument(source, "test_1.dfy");
+      var documentItem = CreateTestDocument(source, "test_1.dfyp");
       await client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       await client.SaveDocumentAndWaitAsync(documentItem, CancellationToken);
 
@@ -268,10 +268,10 @@ method Abs(x: int) returns (y: int)
 
       // We load two and save two documents. If no verification is executed, we should receive each
       // compilation status twice without any verification status inbetween.
-      var documentItem1 = CreateTestDocument(source, "test_1.dfy");
+      var documentItem1 = CreateTestDocument(source, "test_1.dfyp");
       await client.OpenDocumentAndWaitAsync(documentItem1, CancellationToken);
       await client.SaveDocumentAndWaitAsync(documentItem1, CancellationToken);
-      var documentItem2 = CreateTestDocument(source, "test_2dfy");
+      var documentItem2 = CreateTestDocument(source, "test_2dfyp");
       await client.OpenDocumentAndWaitAsync(documentItem2, CancellationToken);
       await client.SaveDocumentAndWaitAsync(documentItem2, CancellationToken);
 

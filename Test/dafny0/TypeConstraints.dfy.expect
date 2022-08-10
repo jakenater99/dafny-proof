@@ -1,26 +1,26 @@
-TypeConstraints.dfy(42,6): Error: RHS (of type int) not assignable to LHS (of type bool)
-TypeConstraints.dfy(49,6): Error: RHS (of type int) not assignable to LHS (of type bool)
-TypeConstraints.dfy(56,9): Error: RHS (of type int) not assignable to LHS (of type bool)
-TypeConstraints.dfy(65,6): Error: RHS (of type bool) not assignable to LHS (of type int)
-TypeConstraints.dfy(80,6): Error: RHS (of type MyInt) not assignable to LHS (of type int)
-TypeConstraints.dfy(81,6): Error: RHS (of type int) not assignable to LHS (of type MyInt)
-TypeConstraints.dfy(77,6): Error: RHS (of type int) not assignable to LHS (of type MyInt)
-TypeConstraints.dfy(94,8): Error: the type of this local variable is underspecified
-TypeConstraints.dfy(94,11): Error: the type of this local variable is underspecified
-TypeConstraints.dfy(102,11): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got bool)
-TypeConstraints.dfy(136,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got bool)
-TypeConstraints.dfy(147,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got C?)
-TypeConstraints.dfy(149,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got C)
-TypeConstraints.dfy(176,6): Error: RHS (of type C) not assignable to LHS (of type R)
-TypeConstraints.dfy(424,8): Error: type array<nat> is not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
-TypeConstraints.dfy(426,8): Error: type array<int> is not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
-TypeConstraints.dfy(429,8): Error: RHS (of type array<int>) not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
-TypeConstraints.dfy(431,8): Error: RHS (of type array<nat>) not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
-TypeConstraints.dfy(450,8): Error: type array<nat> is not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
-TypeConstraints.dfy(452,8): Error: type array<int> is not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
-TypeConstraints.dfy(455,8): Error: RHS (of type array<int>) not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
-TypeConstraints.dfy(457,8): Error: RHS (of type array<nat>) not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
-// TypeConstraints.dfy
+TypeConstraints.dfyp(42,6): Error: RHS (of type int) not assignable to LHS (of type bool)
+TypeConstraints.dfyp(49,6): Error: RHS (of type int) not assignable to LHS (of type bool)
+TypeConstraints.dfyp(56,9): Error: RHS (of type int) not assignable to LHS (of type bool)
+TypeConstraints.dfyp(65,6): Error: RHS (of type bool) not assignable to LHS (of type int)
+TypeConstraints.dfyp(80,6): Error: RHS (of type MyInt) not assignable to LHS (of type int)
+TypeConstraints.dfyp(81,6): Error: RHS (of type int) not assignable to LHS (of type MyInt)
+TypeConstraints.dfyp(77,6): Error: RHS (of type int) not assignable to LHS (of type MyInt)
+TypeConstraints.dfyp(94,8): Error: the type of this local variable is underspecified
+TypeConstraints.dfyp(94,11): Error: the type of this local variable is underspecified
+TypeConstraints.dfyp(102,11): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got bool)
+TypeConstraints.dfyp(136,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got bool)
+TypeConstraints.dfyp(147,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got C?)
+TypeConstraints.dfyp(149,16): Error: type of + must be of a numeric type, a bitvector type, ORDINAL, char, a sequence type, or a set-like or map-like type (instead got C)
+TypeConstraints.dfyp(176,6): Error: RHS (of type C) not assignable to LHS (of type R)
+TypeConstraints.dfyp(424,8): Error: type array<nat> is not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
+TypeConstraints.dfyp(426,8): Error: type array<int> is not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
+TypeConstraints.dfyp(429,8): Error: RHS (of type array<int>) not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
+TypeConstraints.dfyp(431,8): Error: RHS (of type array<nat>) not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
+TypeConstraints.dfyp(450,8): Error: type array<nat> is not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
+TypeConstraints.dfyp(452,8): Error: type array<int> is not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
+TypeConstraints.dfyp(455,8): Error: RHS (of type array<int>) not assignable to LHS (of type array<nat>) (nonvariance for type parameter expects nat = int)
+TypeConstraints.dfyp(457,8): Error: RHS (of type array<nat>) not assignable to LHS (of type array<int>) (nonvariance for type parameter expects int = nat)
+// TypeConstraints.dfyp
 
 /*
 module _System {
@@ -952,4 +952,4 @@ module SameSCC {
 
   codatatype G6 = G6(array<G0>)
 }
-22 resolution/type errors detected in TypeConstraints.dfy
+22 resolution/type errors detected in TypeConstraints.dfyp

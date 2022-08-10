@@ -2,7 +2,7 @@ DafnyDriver = ../../../Source/DafnyDriver/DafnyDriver
 deps := Main.cs Compiler.cs Simple.g4
 dll := bin/Debug/net6.0/SimpleCompiler.dll
 input := example_input.calc
-compiler := Compiler.dfy
+compiler := Compiler.dfyp
 
 default: run
 

@@ -6,8 +6,8 @@
 // RUN: %dafny /noVerify /compile:4 /compileTarget:py   /runAllTests:1 "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t" 
 
-include "../exceptions/VoidOutcomeDt.dfy"
-include "../exceptions/NatOutcomeDt.dfy"
+include "../exceptions/VoidOutcomeDt.dfyp"
+include "../exceptions/NatOutcomeDt.dfyp"
 
 method {:test} Passing1() {
   expect 2 == 2;

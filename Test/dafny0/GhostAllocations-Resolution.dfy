@@ -219,7 +219,7 @@ module GhostConstructors1 {
       this.g := g;
     }
 
-    constructor B() { // definite-assignment rules are not satisfied, but that's check during verification (see GhostAllocations.dfy)
+    constructor B() { // definite-assignment rules are not satisfied, but that's check during verification (see GhostAllocations.dfyp)
     }
 
     ghost constructor C(g: GGG) {

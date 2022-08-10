@@ -91,7 +91,7 @@ method M(heap: object)
   }
   var y := 200;
 }";
-      var tempPath = Path.GetTempFileName() + ".dfy";
+      var tempPath = Path.GetTempFileName() + ".dfyp";
       var beforeBoogie = GetBoogie(beforeChange, tempPath);
       var afterBoogie = GetBoogie(afterChange, tempPath);
       var diff = GetDiff(beforeBoogie, afterBoogie);
@@ -187,7 +187,7 @@ method M(heap: object)
     private static string DefaultDafnyArgs => $"run --no-build --project {DafnyDriverProjectFile} -- -useBaseNameForFileName -countVerificationErrors:0 -compileVerbose:0 /errorTrace:0";
 
     string GetBoogie(string dafnyProgram, string optionalFileName = null) {
-      string fileName = optionalFileName ?? Path.GetTempFileName() + ".dfy";
+      string fileName = optionalFileName ?? Path.GetTempFileName() + ".dfyp";
       File.WriteAllText(fileName, dafnyProgram);
       var processStartInfo = new ProcessStartInfo {
         FileName = "dotnet",

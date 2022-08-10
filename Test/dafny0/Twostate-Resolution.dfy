@@ -270,7 +270,7 @@ module TraitsAndOldParameters {
   }
 }
 
-// Print test for /dprint. Note, this same class is tested with /rprint in Test/dafny2/CalcDefaultMainOperator.dfy.
+// Print test for /dprint. Note, this same class is tested with /rprint in Test/dafny2/CalcDefaultMainOperator.dfyp.
 module PrintTest {
   function method Five(): int { 5 }
   function Six(): int { 6 }

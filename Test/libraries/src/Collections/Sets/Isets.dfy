@@ -14,7 +14,7 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-include "../../Functions.dfy"
+include "../../Functions.dfyp"
 
 module Isets {
 

@@ -3634,7 +3634,7 @@ namespace Microsoft.Dafny {
 
     public void InsertUniqueIdForImplementation(Bpl.Declaration decl) {
       var impl = decl as Bpl.Implementation;
-      var prefix = UniqueIdPrefix ?? (decl.tok.filename == null ? "" : System.Text.RegularExpressions.Regex.Replace(decl.tok.filename, @".v\d+.dfy", ".dfy"));
+      var prefix = UniqueIdPrefix ?? (decl.tok.filename == null ? "" : System.Text.RegularExpressions.Regex.Replace(decl.tok.filename, @".v\d+.dfyp", ".dfyp"));
       if (impl != null && !string.IsNullOrEmpty(prefix)) {
         decl.AddAttribute("id", prefix + ":" + impl.Name + ":0");
       }
@@ -11394,7 +11394,7 @@ namespace Microsoft.Dafny {
 
           if (!CanSafelyInline(fexp, f)) {
             // Skip inlining, as it would cause arbitrary expressions to pop up in the trigger
-            // TODO this should appear at the outmost call site, not at the innermost. See SnapshotableTrees.dfy
+            // TODO this should appear at the outmost call site, not at the innermost. See SnapshotableTrees.dfyp
             reporter.Info(MessageSource.Translator, fexp.tok, "Some instances of this call are not inlined.");
             // F#canCall(args) ==> F(args)
             var p = Bpl.Expr.Binary(fargs.tok, BinaryOperator.Opcode.Imp, canCall, fargs);
@@ -11644,9 +11644,9 @@ namespace Microsoft.Dafny {
           foundHeap = true;
         }
         ThisExpr thisExpr = expr as ThisExpr;
-        if (thisExpr != null && thisExpr.Type == null) { // this shouldn't happen, but there appears to be a bug in trait resolution (see TraitCompile.dfy); it causes ComputeFreeVariables to blow up
+        if (thisExpr != null && thisExpr.Type == null) { // this shouldn't happen, but there appears to be a bug in trait resolution (see TraitCompile.dfyp); it causes ComputeFreeVariables to blow up
           foundHeap = true;
-        } else if (thisExpr != null && usesThis != null && !thisExpr.Type.Equals(usesThis)) { // also causes ComputeFreeVariables to blow up (see TraitExample.dfy)
+        } else if (thisExpr != null && usesThis != null && !thisExpr.Type.Equals(usesThis)) { // also causes ComputeFreeVariables to blow up (see TraitExample.dfyp)
           foundHeap = true;
         } else if (thisExpr != null) {
           usesThis = thisExpr.Type;

@@ -397,7 +397,7 @@ namespace Microsoft.Dafny.Triggers {
       // when the second round of resolving is done after modules are duplicated.
       // Thus first we annotate expr and create a trigger candidate, and then we remove the
       // candidate matching its direct subexpression if needed. Note that function calls are not the
-      // only possible child here; there can be DatatypeValue nodes, for example (see vstte2012/Combinators.dfy).
+      // only possible child here; there can be DatatypeValue nodes, for example (see vstte2012/Combinators.dfyp).
       var annotation = AnnotatePotentialCandidate(expr);
       // Comparing by reference is fine here. Using sets could yield a small speedup
       annotation.ExportedTerms.RemoveAll(term => expr.SubExpressions.Contains(term.Expr));

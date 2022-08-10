@@ -10,7 +10,7 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-include "../../Wrappers.dfy"
+include "../../Wrappers.dfyp"
 
 module Maps {
   import opened Wrappers

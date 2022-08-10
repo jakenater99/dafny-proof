@@ -174,7 +174,7 @@ module StaticMembers {
   trait Tr {
     static const Cnst: object  // error: the type of this static const requires an initializing expression
 
-    // the following static members must also be given bodies, but that's checked by the compiler (see TraitCompileErrors.dfy)
+    // the following static members must also be given bodies, but that's checked by the compiler (see TraitCompileErrors.dfyp)
     static function method Func(): int
     static method Method()
     static twostate function TwoF(): int

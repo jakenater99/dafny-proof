@@ -865,7 +865,7 @@ namespace Microsoft.Dafny {
 
     protected override string HelpBody =>
       $@"
-All the .dfy files supplied on the command line along with files recursively
+All the .dfyp files supplied on the command line along with files recursively
 included by 'include' directives are considered a single Dafny program;
 however only those files listed on the command line are verified.
 
@@ -877,7 +877,7 @@ Exit code: 0 -- success; 1 -- invalid command-line; 2 -- parse or type errors;
 /dprelude:<file>
     choose Dafny prelude file
 /stdin
-    Read standard input and treat it as an input .dfy file.
+    Read standard input and treat it as an input .dfyp file.
 
 ---- Plugins ---------------------------------------------------------------
 

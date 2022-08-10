@@ -168,10 +168,10 @@ namespace Microsoft.Dafny {
           if (string.IsNullOrEmpty(extension) && file.Length > 0 && (file[0] == '/' || file[0] == '-')) {
             options.Printer.ErrorWriteLine(Console.Out,
               "*** Error: Command-line argument '{0}' is neither a recognized option nor a filename with a supported extension ({1}).",
-              file, string.Join(", ", Enumerable.Repeat(".dfy", 1).Concat(supportedExtensions)));
+              file, string.Join(", ", Enumerable.Repeat(".dfyp", 1).Concat(supportedExtensions)));
           } else {
             options.Printer.ErrorWriteLine(Console.Out,
-              "*** Error: '{0}': Filename extension '{1}' is not supported. Input files must be Dafny programs (.dfy) or supported auxiliary files ({2})",
+              "*** Error: '{0}': Filename extension '{1}' is not supported. Input files must be Dafny programs (.dfyp) or supported auxiliary files ({2})",
               file, extension, string.Join(", ", supportedExtensions));
           }
           return CommandLineArgumentsResult.PREPROCESSING_ERROR;
@@ -179,14 +179,14 @@ namespace Microsoft.Dafny {
       }
 
       if (dafnyFiles.Count == 0) {
-        options.Printer.ErrorWriteLine(Console.Out, "*** Error: The command-line contains no .dfy files");
+        options.Printer.ErrorWriteLine(Console.Out, "*** Error: The command-line contains no .dfyp files");
         return CommandLineArgumentsResult.PREPROCESSING_ERROR;
       }
 
       if (dafnyFiles.Count > 1 &&
           options.TestGenOptions.Mode != TestGenerationOptions.Modes.None) {
         options.Printer.ErrorWriteLine(Console.Out,
-          "*** Error: Only one .dfy file can be specified for testing");
+          "*** Error: Only one .dfyp file can be specified for testing");
         return CommandLineArgumentsResult.PREPROCESSING_ERROR;
       }
 
@@ -472,7 +472,7 @@ namespace Microsoft.Dafny {
       string targetBaseDir = DafnyOptions.O.Compiler.TargetBaseDir(dafnyProgramName);
       string targetExtension = DafnyOptions.O.Compiler.TargetExtension;
 
-      // Note that using Path.ChangeExtension here does the wrong thing when dafnyProgramName has multiple periods (e.g., a.b.dfy)
+      // Note that using Path.ChangeExtension here does the wrong thing when dafnyProgramName has multiple periods (e.g., a.b.dfyp)
       string targetBaseName = DafnyOptions.O.Compiler.TargetBasename(dafnyProgramName) + "." + targetExtension;
       string targetDir = Path.Combine(Path.GetDirectoryName(dafnyProgramName), targetBaseDir);
 

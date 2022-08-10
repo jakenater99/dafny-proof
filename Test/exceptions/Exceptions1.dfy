@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:3 "%s" /rprint:"%t.rprint" > "%t"
 // RUN: %diff "%s.expect" "%t"
-include "./NatOutcome.dfy"
-include "./VoidOutcome.dfy"
+include "./NatOutcome.dfyp"
+include "./VoidOutcome.dfyp"
 
 method Switch(b: bool, v: nat) returns (res: NatOutcome) {
     if b {

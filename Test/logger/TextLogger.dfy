@@ -6,11 +6,11 @@
 // CHECK: Outcome: Valid
 // CHECK: Duration: .*
 // CHECK: Resource count: .*
-// CHECK: TextLogger.dfy\(18,14\): divisor is always non-zero
+// CHECK: TextLogger.dfyp\(18,14\): divisor is always non-zero
 // CHECK: Outcome: Invalid
 // CHECK: Duration: .*
 // CHECK: Resource count: .*
-// CHECK: TextLogger.dfy\(19,9\): assertion always holds
+// CHECK: TextLogger.dfyp\(19,9\): assertion always holds
 method M(x: int, y: int)
   requires y > 0
   requires x > 0

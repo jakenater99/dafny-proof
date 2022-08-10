@@ -91,7 +91,7 @@ module Q0 {
     }
     method M()
       modifies this
-      ensures forall c: C :: c.P()  // this is the only line that's different from Test/dafn0/Predicates.dfy
+      ensures forall c: C :: c.P()  // this is the only line that's different from Test/dafn0/Predicates.dfyp
     {
     }
     predicate Q()

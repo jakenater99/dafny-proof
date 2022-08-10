@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:0  "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-// See comments in Bug125.dfy
+// See comments in Bug125.dfyp
 
 module LibA {
   function g(): int { 0 }

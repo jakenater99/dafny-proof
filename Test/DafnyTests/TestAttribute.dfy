@@ -13,8 +13,8 @@
 // CHECK: .*_module.__default.FailingTestUsingAssignOrHalt.*
 // CHECK-NOT: .*PassingTest.*
 
-include "../exceptions/VoidOutcomeDt.dfy"
-include "../exceptions/NatOutcomeDt.dfy"
+include "../exceptions/VoidOutcomeDt.dfyp"
+include "../exceptions/NatOutcomeDt.dfyp"
 
 function method SafeDivide(a: nat, b: nat): NatOutcome {
   if b == 0 then

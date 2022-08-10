@@ -966,7 +966,7 @@ axiom (forall<T> :: { Seq#Empty(): Seq T } Seq#Length(Seq#Empty(): Seq T) == 0);
 axiom (forall<T> s: Seq T :: { Seq#Length(s) }
   (Seq#Length(s) == 0 ==> s == Seq#Empty())
 // The following would be a nice fact to include, because it would enable verifying the
-// GenericPick.SeqPick* methods in Test/dafny0/SmallTests.dfy.  However, it substantially
+// GenericPick.SeqPick* methods in Test/dafny0/SmallTests.dfyp.  However, it substantially
 // slows down performance on some other tests, including running seemingly forever on
 // some.
 //  && (Seq#Length(s) != 0 ==> (exists x: T :: Seq#Contains(s, x)))
@@ -1038,7 +1038,7 @@ axiom (forall<T> s0: Seq T, s1: Seq T, x: T ::
   Seq#Contains(Seq#Append(s0, s1), x) <==>
     Seq#Contains(s0, x) || Seq#Contains(s1, x));
 
-axiom (forall<T> s: Seq T, v: T, x: T ::  // needed to prove things like '4 in [2,3,4]', see method TestSequences0 in SmallTests.dfy
+axiom (forall<T> s: Seq T, v: T, x: T ::  // needed to prove things like '4 in [2,3,4]', see method TestSequences0 in SmallTests.dfyp
   { Seq#Contains(Seq#Build(s, v), x) }
     Seq#Contains(Seq#Build(s, v), x) <==> (v == x || Seq#Contains(s, x)));
 

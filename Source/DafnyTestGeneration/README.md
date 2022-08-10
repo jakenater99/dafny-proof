@@ -77,7 +77,7 @@ public static Object[] mockParameters(Method method) {
 
 ## Example
 
-Suppose you have a file called `object.dfy` with the following code:
+Suppose you have a file called `object.dfyp` with the following code:
 ```dafny
 module M {
   class Value {
@@ -95,11 +95,11 @@ module M {
 ```
 The tests can be run like this (in this particular case, `/definiteAssignment:3` adds proof obligations that cause the Dafny to Boogie translator to emit an implementation for the target method):
 
-```dafny /definiteAssignment:3 /generateTestMode:Block object.dfy ```
+```dafny /definiteAssignment:3 /generateTestMode:Block object.dfyp ```
 
 Dafny will give the following list of tests as output (tabulation added manually):
 ```dafny
-include "object.dfy"
+include "object.dfyp"
 module objectUnitTests {
   import M
   method test0(v0:M.Value) returns (r0:int)  modifies v0 {
@@ -117,7 +117,7 @@ module objectUnitTests {
 }
 ```
 
-Saving these tests in a file `test.dfy` and compiling the code to Java using `dafny /compileTarget:java test.dfy` produces directory `test-java`. The tests are located in `test-java/objectUnitTests_Compile/__default.java`. To run the tests, it is first necessary to add the code shown [above](#how-to-run-tests) to the file with the tests. The code can then be compiled to bytecode using:
+Saving these tests in a file `test.dfyp` and compiling the code to Java using `dafny /compileTarget:java test.dfyp` produces directory `test-java`. The tests are located in `test-java/objectUnitTests_Compile/__default.java`. To run the tests, it is first necessary to add the code shown [above](#how-to-run-tests) to the file with the tests. The code can then be compiled to bytecode using:
 
 ```
 javac -cp PATH_TO_DafnyRuntime.jar:test-java test-java/objectUnitTests_Compile/__default.java
@@ -133,7 +133,7 @@ test2 0
 
 ## Dead Code Identification Example
 
-Suppose you have a file called "Sample.dfy" with the following code:
+Suppose you have a file called "Sample.dfyp" with the following code:
 
 ```dafny
 method m(a:int) returns (b:int)
@@ -148,12 +148,12 @@ method m(a:int) returns (b:int)
 
 Running dead code identification like this:
 
-`dafny /warnDeadCode /definiteAssignment:3 ../examples/Sample.dfy`
+`dafny /warnDeadCode /definiteAssignment:3 ../examples/Sample.dfyp`
 
 Will give the following information:
 
 ```
-Code at ../examples/Sample.dfy(5,12) is potentially unreachable.
+Code at ../examples/Sample.dfyp(5,12) is potentially unreachable.
 Out of 5 basic blocks (3 capturedStates), 4 (2) are reachable.
 There might be false negatives if you are not unrolling loops.
 False positives are always possible.

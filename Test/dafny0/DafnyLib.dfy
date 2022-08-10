@@ -1,5 +1,5 @@
 // RUN: echo Compiled elsewhere
-// This file is part of the test suite. It is compiled by DafnyLibClient.dfy,
+// This file is part of the test suite. It is compiled by DafnyLibClient.dfyp,
 // since the DLL from this file is a dependency of DafnyLibClient.
 
 // Regression test for the way the compiler used to disambiguate modules with the same

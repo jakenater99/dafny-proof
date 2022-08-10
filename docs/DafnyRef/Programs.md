@@ -2,7 +2,7 @@
 ````grammar
 Dafny = { IncludeDirective_ } { TopDecl } EOF
 ````
-At the top level, a Dafny program (stored as files with extension `.dfy`)
+At the top level, a Dafny program (stored as files with extension `.dfyp`)
 is a set of declarations. The declarations introduce (module-level)
 constants, methods, functions, lemmas, types (classes, traits, inductive and
 co-inductive datatypes, newtypes, type synonyms, opaque types, and

@@ -1,4 +1,4 @@
-// AmbiguousGhost.dfy
+// AmbiguousGhost.dfyp
 
 function method F(x: int): ()
 {

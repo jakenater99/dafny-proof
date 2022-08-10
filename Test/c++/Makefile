@@ -1,8 +1,8 @@
 
-DAFNYS=$(wildcard *.dfy)
-CPPS=$(subst .dfy,.cpp,$(DAFNYS))
-DOT_H_S=$(subst .dfy,.h,$(DAFNYS))
-EXECS=$(subst .dfy,,$(DAFNYS))
+DAFNYS=$(wildcard *.dfyp)
+CPPS=$(subst .dfyp,.cpp,$(DAFNYS))
+DOT_H_S=$(subst .dfyp,.h,$(DAFNYS))
+EXECS=$(subst .dfyp,,$(DAFNYS))
 DAFNY_DIR=../..
 DAFNY=$(DAFNY_DIR)/Binaries/dafny
 DAFNY_RUNTIME_DIR=$(DAFNY_DIR)/Binaries
@@ -21,10 +21,10 @@ vars:
 	echo $(CPPS)
 	echo $(EXECS)
 
-%.cpp: %.dfy $(DAFNY) $(DAFNY_DEPS)
+%.cpp: %.dfyp $(DAFNY) $(DAFNY_DEPS)
 	$(DAFNY) /timeLimit:10 /compile:0 /spillTargetCode:3 /compileTarget:cpp ExternDefs.h $<
 
-%.cs: %.dfy $(DAFNY) $(DAFNY_DEPS)
+%.cs: %.dfyp $(DAFNY) $(DAFNY_DEPS)
 	$(DAFNY) /noVerify /compile:0 /spillTargetCode:3 /compileTarget:cs $<
 
 $(EXECS): % : %.cpp $(DAFNY_RUNTIME_CPP)

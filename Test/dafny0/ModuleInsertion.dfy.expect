@@ -1,4 +1,4 @@
-// ModuleInsertion.dfy
+// ModuleInsertion.dfyp
 
 
 module Outer {
@@ -104,7 +104,7 @@ module U.V {
 module U.V.W {
   const x1 := 12 * X.x0
 }
-// ModuleInsertion.dfy
+// ModuleInsertion.dfyp
 
 /*
 module _System {

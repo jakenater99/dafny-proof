@@ -1,8 +1,8 @@
-// RUN: %dafny /compile:0 "%s" %S/git-issue-633A.dfy > "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:cs /spillTargetCode:3 "%s" %S/git-issue-633A.dfy >> "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:js /spillTargetCode:3 "%s" %S/git-issue-633A.dfy >> "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:go /spillTargetCode:3 "%s" %S/git-issue-633A.dfy >> "%t"
-// RUN: %dafny /noVerify /compile:4 /compileTarget:java /spillTargetCode:3 "%s" %S/git-issue-633A.dfy  >> "%t"
+// RUN: %dafny /compile:0 "%s" %S/git-issue-633A.dfyp > "%t"
+// RUN: %dafny /noVerify /compile:4 /compileTarget:cs /spillTargetCode:3 "%s" %S/git-issue-633A.dfyp >> "%t"
+// RUN: %dafny /noVerify /compile:4 /compileTarget:js /spillTargetCode:3 "%s" %S/git-issue-633A.dfyp >> "%t"
+// RUN: %dafny /noVerify /compile:4 /compileTarget:go /spillTargetCode:3 "%s" %S/git-issue-633A.dfyp >> "%t"
+// RUN: %dafny /noVerify /compile:4 /compileTarget:java /spillTargetCode:3 "%s" %S/git-issue-633A.dfyp  >> "%t"
 // RUN: %diff "%s.expect" "%t"
 
 method m() {

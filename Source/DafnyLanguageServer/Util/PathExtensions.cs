@@ -11,7 +11,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
   public static class PathExtensions {
     /// <summary>
     /// Gets the path of the file represented by the given dafny document. The path returned is
-    /// in the standard system format. E.g. C:\data\test.dfy for windows or /home/test.dfy for linux.
+    /// in the standard system format. E.g. C:\data\test.dfyp for windows or /home/test.dfyp for linux.
     /// </summary>
     /// <param name="document">The document to get the file path of.</param>
     /// <returns>The file path.</returns>
@@ -21,7 +21,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
 
     /// <summary>
     /// Gets the path of the file represented by the given text document. The path returned is
-    /// in the standard system format. E.g. C:\data\test.dfy for windows or /home/test.dfy for linux.
+    /// in the standard system format. E.g. C:\data\test.dfyp for windows or /home/test.dfyp for linux.
     /// </summary>
     /// <param name="document">The document to get the file path of.</param>
     /// <returns>The file path.</returns>
@@ -31,7 +31,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
 
     private static string GetFilePath(DocumentUri uri) {
       // GetFileSystemPath() is used since Path resolves to a non-Windows path format on Windows, e.g.:
-      // /d:/data/file.dfy
+      // /d:/data/file.dfyp
       return uri.GetFileSystemPath();
     }
 

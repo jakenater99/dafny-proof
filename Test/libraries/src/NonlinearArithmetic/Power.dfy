@@ -13,10 +13,10 @@
 former takes arguments and may be more stable and less reliant on Z3
 heuristics. The latter includes automation and its use requires less effort */
 
-include "DivMod.dfy"
-include "Internals/GeneralInternals.dfy"
-include "Mul.dfy"
-include "Internals/MulInternals.dfy"
+include "DivMod.dfyp"
+include "Internals/GeneralInternals.dfyp"
+include "Mul.dfyp"
+include "Internals/MulInternals.dfyp"
 
 module Power {
   import opened DivMod

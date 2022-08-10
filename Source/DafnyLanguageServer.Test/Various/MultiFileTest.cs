@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Microsoft.Dafny.LanguageServer.IntegrationTest.Various {
   [TestClass]
   public class MultiFileTest : DafnyLanguageServerTestBase {
-    private static readonly string TestFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Various", "TestFiles", "testFile.dfy");
+    private static readonly string TestFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Various", "TestFiles", "testFile.dfyp");
 
     private ILanguageClient client;
 
@@ -20,8 +20,8 @@ namespace Microsoft.Dafny.LanguageServer.IntegrationTest.Various {
     [TestMethod]
     public async Task ImplicitlyIncludingTheSameModuleTwiceDoesNotResultInDuplicateError() {
       var source = @"
-include ""multi1.dfy""
-include ""multi2.dfy""
+include ""multi1.dfyp""
+include ""multi2.dfyp""
 
 method Test() {
   assert true;
@@ -37,8 +37,8 @@ method Test() {
     [TestMethod]
     public async Task ImplicitlyIncludingTheSameModuleTwiceDoesNotOverrideActualError() {
       var source = @"
-include ""multi1.dfy""
-include ""multi2.dfy""
+include ""multi1.dfyp""
+include ""multi2.dfyp""
 
 method Test() {
   assert false;

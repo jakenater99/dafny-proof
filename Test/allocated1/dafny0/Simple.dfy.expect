@@ -1,4 +1,4 @@
-// Simple.dfy
+// Simple.dfyp
 
 lemma M(x: int)
   ensures x < 8

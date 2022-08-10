@@ -314,6 +314,6 @@ only have to write `{:extern}`, not `{:extern "<name>"}`.
 Ask these questions before designing / implementing a program in Dafny.
 * Is this variable name / function name `X` a good name?
 * Does it make sense that this method `M` is in module `X`? Shouldn't it be in module `Y` instead?
-* Does the definition `X` belong to the file `Y.dfy`?
-* Is `X.dfy` a good filename?
+* Does the definition `X` belong to the file `Y.dfyp`?
+* Is `X.dfyp` a good filename?
 

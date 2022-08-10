@@ -336,7 +336,7 @@ Constant literals of bit-vector types are given by integer literals converted au
 to the designated type, either by an implicit or explicit conversion operation or by initialization in a declaration.
 Dafny checks that the constant literal is in the correct range. For example,
 ```dafny
-{% include_relative examples/Example-BV.dfy %}
+{% include_relative examples/Example-BV.dfyp %}
 ```
 
 Bit-vector values can be converted to and from `int` and other bit-vector types, as long as
@@ -377,17 +377,17 @@ non-negative integers.
 
 Here are examples of the various operations (all the assertions are true except where indicated):
 ```dafny
-{% include_relative examples/Example-BV2.dfy %}
+{% include_relative examples/Example-BV2.dfyp %}
 ```
 The following are incorrectly formed:
 ```dafny
-{% include_relative examples/Example-BV3.dfy %}
-{% include_relative examples/Example-BV3a.dfy %}
+{% include_relative examples/Example-BV3.dfyp %}
+{% include_relative examples/Example-BV3a.dfyp %}
 ```
 These produce assertion errors:
 ```dafny
-{% include_relative examples/Example-BV4.dfy %}
-{% include_relative examples/Example-BV4a.dfy %}
+{% include_relative examples/Example-BV4.dfyp %}
+{% include_relative examples/Example-BV4a.dfyp %}
 ```
 
 [^binding]: The binding power of shift and bit-wise operations is different than in C-like languages.
@@ -605,7 +605,7 @@ Also, opaque types at the topmost scope are always implicitly `(!new)`.
 
 Here are some examples:
 ```dafny
-{% include_relative examples/Example-TP.dfy %}
+{% include_relative examples/Example-TP.dfyp %}
 ```
 
 ## 8.2. Type parameter variance
@@ -890,7 +890,7 @@ that is, its length is `|s|` minus the sum of the given length
 designators.  For example, the following equalities hold, for any
 sequence `s` of length at least `10`:
 ```dafny
-{% include_relative examples/Example-Seq.dfy %}
+{% include_relative examples/Example-Seq.dfyp %}
 ```
 
 The operation `multiset(s)` yields the multiset of elements of
@@ -1996,7 +1996,7 @@ representing a "current" heap and an "old" heap.
 
 For example, the predicate
 ```dafny
-{% include_relative examples/Example-TwoState-Increasing.dfy %}
+{% include_relative examples/Example-TwoState-Increasing.dfyp %}
 ```
 returns `true` if the value of `c.data` has not been reduced from the old state to the
 current. Dereferences in the current heap are written as usual (e.g., `c.data`) and
@@ -2019,7 +2019,7 @@ this is done with the built-in `old` function.
 
 For example, the following assertions all hold:
 ```dafny
-{% include_relative examples/Example-TwoState-Caller.dfy %}
+{% include_relative examples/Example-TwoState-Caller.dfyp %}
 ```
 The first call to `Increasing` uses `Caller`'s initial state as the old-heap parameter,
 and so does the second call. The third call instead uses as the old-heap parameter
@@ -2040,14 +2040,14 @@ Any parameter (including the receiver parameter, if any) passed to a two-state f
 must have been allocated already in the old state. For example, the second call to
 `Diff` in method `M` is illegal, since `d` was not allocated on entry to `M`:
 ```dafny
-{% include_relative examples/Example-TwoState-Diff.dfy %}
+{% include_relative examples/Example-TwoState-Diff.dfyp %}
 ```
 
 A two-state function can declare that it only assumes a parameter to be allocated
 in the current heap. This is done by preceding the parameter with the `new` modifier,
 as illustrated in the following example, where the first call to `DiffAgain` is legal:
 ```dafny
-{% include_relative examples/Example-TwoState-DiffAgain.dfy %}
+{% include_relative examples/Example-TwoState-DiffAgain.dfyp %}
 ```
 
 A _two-state lemma_ works in an analogous way. It is a lemma with both a current-heap
@@ -2058,7 +2058,7 @@ the caller's old heap, which can be changed by using an `@`-parameter.
 
 Here is an example of something useful that can be done with a two-state lemma:
 ```dafny
-{% include_relative examples/Example-TwoState-SeqSum.dfy %}
+{% include_relative examples/Example-TwoState-SeqSum.dfyp %}
 ```
 
 A two-state function can be used as a first-class function value, where the receiver
@@ -2071,7 +2071,7 @@ around this restriction by using (fancy-word alert!) eta-expansion, meaning
 wrapping a lambda expression around the call, as in `x => p.F<int>@L(x)`.
 The following example illustrates using such an eta-expansion:
 ```dafny
-{% include_relative examples/Example-TwoState-EtaExample.dfy %}
+{% include_relative examples/Example-TwoState-EtaExample.dfyp %}
 ```
 
 TO BE WRITTEN - unchanged predicate

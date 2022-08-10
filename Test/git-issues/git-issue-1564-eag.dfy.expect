@@ -1,4 +1,4 @@
-// git-issue-1564-eag.dfy
+// git-issue-1564-eag.dfyp
 
 ghost function F0(): int
 

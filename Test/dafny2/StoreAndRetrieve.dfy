@@ -8,7 +8,7 @@
 // This file shows an example program that uses both refinement and :autocontracts
 // specify a class that stores a set of things that can be retrieved using a query.
 //
-// (For another example that uses these features, see Test/dafny3/CachedContainer.dfy.)
+// (For another example that uses these features, see Test/dafny3/CachedContainer.dfyp.)
 
 abstract module AbstractInterface {
   class {:autocontracts} StoreAndRetrieve<Thing(==)> {

@@ -30,7 +30,7 @@ or `refines` clauses.
 A Dafny program consists of all the modules needed so that all module
 references are resolved.
 
-Dafny files (`.dfy`) in the operating system each hold
+Dafny files (`.dfyp`) in the operating system each hold
 some number of top-level declarations. Thus a full program may be
 distributed among multiple files.
 To apply the `dafny` tool to a Dafny program, the `dafny` tool must be
@@ -195,8 +195,8 @@ command-line tools in Windows and Unix-like systems.
 - The format of a command-line is determined by the shell program that is executing the command-line (.e.g. bash, the windows shell, COMMAND, etc.). The command-line typically consists of file names and options, in any order, separated by spaces.
 - Files are designated by absolute paths or paths relative to the current
 working directory. A command-line argument not matching a known option is considered a filepath.
-- Files containing dafny code must have a `.dfy` suffix.
-- There must be at least one `.dfy` file.
+- Files containing dafny code must have a `.dfyp` suffix.
+- There must be at least one `.dfyp` file.
 - The command-line may contain other kinds of files appropriate to
 the language that the dafny files are being compiled to.
 
@@ -211,7 +211,7 @@ intervening white space; if the argument itself contains white space, the argume
 
 The dafny tool performs several tasks:
 
-- Checking the form of the text in a `.dfy` file. This step is always performed, unless the tool is simply asked for
+- Checking the form of the text in a `.dfyp` file. This step is always performed, unless the tool is simply asked for
 help information or version number.
 - Running the verification engine to check all implicit and explicit specifications. This step is performed by
 default, but can be skipped by using the `-noVerify` or `-dafnyVerify:0` option
@@ -815,13 +815,13 @@ TO BE WRITTEN
 
 ### 24.9.4. Java
 
-The Dafny-to-Java compiler writes out the translated files of a file _A_`.dfy`
+The Dafny-to-Java compiler writes out the translated files of a file _A_`.dfyp`
 to a directory _A_-java. The `-out` option can be used to choose a
-different output directory. The file _A_`.dfy` is translated to _A_`.java`,
+different output directory. The file _A_`.dfyp` is translated to _A_`.java`,
 which is placed in the output directory along with helper files.
-If more than one `.dfy` file is listed on the command-line, then the output
+If more than one `.dfyp` file is listed on the command-line, then the output
 directory name is taken from the first file, and `.java` files are written
-for each of the `.dfy` files.
+for each of the `.dfyp` files.
 
 TO BE WRITTEN
 
@@ -846,10 +846,10 @@ implementation.
 - We do not support more advanced Dafny features like traits or co-inductive
   types.
 - Very limited support for higher order functions even for array init.  Use
-  extern definitions like newArrayFill (see [extern.dfy]
-  (https://github.com/dafny-lang/dafny/blob/master/Test/c++/extern.dfy)) or
-  similar.  See also the example in [`functions.dfy`]
-  (https://github.com/dafny-lang/dafny/blob/master/Test/c++/functions.dfy).
+  extern definitions like newArrayFill (see [extern.dfyp]
+  (https://github.com/dafny-lang/dafny/blob/master/Test/c++/extern.dfyp)) or
+  similar.  See also the example in [`functions.dfyp`]
+  (https://github.com/dafny-lang/dafny/blob/master/Test/c++/functions.dfyp).
 - The current backend also assumes the use of C++17 in order to cleanly and
   performantly implement datatypes.
 
@@ -1072,12 +1072,12 @@ and what information it produces about the verification process.
 * `-verifyAllModules` - verify modules that come from include directives.
 
   By default, Dafny only verifies files explicitly listed on the command
-  line: if `a.dfy` includes `b.dfy`, a call to `Dafny a.dfy` will detect
-  and report verification errors from `a.dfy` but not from `b.dfy`.
+  line: if `a.dfyp` includes `b.dfyp`, a call to `Dafny a.dfyp` will detect
+  and report verification errors from `a.dfyp` but not from `b.dfyp`.
 
   With this flag, Dafny will instead verify everything: all input
-  modules and all their transitive dependencies. This way `Dafny a.dfy`
-  will verify `a.dfy` and all files that it includes (here `b.dfy`), as
+  modules and all their transitive dependencies. This way `Dafny a.dfyp`
+  will verify `a.dfyp` and all files that it includes (here `b.dfyp`), as
   well all files that these files include, etc.
 
   Running Dafny with `-verifyAllModules` on the file containing your

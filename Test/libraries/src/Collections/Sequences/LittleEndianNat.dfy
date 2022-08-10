@@ -13,10 +13,10 @@
 first element of a sequence is the least significant position; the last
 element is the most significant position. */
 
-include "../../NonlinearArithmetic/DivMod.dfy"
-include "../../NonlinearArithmetic/Mul.dfy"
-include "../../NonlinearArithmetic/Power.dfy"
-include "Seq.dfy"
+include "../../NonlinearArithmetic/DivMod.dfyp"
+include "../../NonlinearArithmetic/Mul.dfyp"
+include "../../NonlinearArithmetic/Power.dfyp"
+include "Seq.dfyp"
 
 abstract module LittleEndianNat {
 

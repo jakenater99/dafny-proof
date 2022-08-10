@@ -1,4 +1,4 @@
-// AllowedGhost.dfy
+// AllowedGhost.dfyp
 
 method Test()
 {

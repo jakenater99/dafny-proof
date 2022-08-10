@@ -1,7 +1,7 @@
 // RUN: %dafny "%s" /dprint:"%t.dprint" > "%t"
 // RUN: %diff "%s.expect" "%t"
-include "./NatOutcome.dfy"
-include "./VoidOutcome.dfy"
+include "./NatOutcome.dfyp"
+include "./VoidOutcome.dfyp"
 
 method TestTypecheckingInDesugaredTerm_Nat() returns (res: NatOutcome) {
     var a0 := MakeNatSuccess("not a nat");

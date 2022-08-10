@@ -11489,7 +11489,7 @@ namespace Microsoft.Dafny {
               var method = call.Method;
               // if the called method is not in the same module as the ForallCall stmt
               // don't convert it to ForallExpression since the inlined called method's
-              // ensure clause might not be resolved correctly(test\dafny3\GenericSort.dfy)
+              // ensure clause might not be resolved correctly(test\dafny3\GenericSort.dfyp)
               if (method.EnclosingClass.EnclosingModuleDefinition != codeContext.EnclosingModule) {
                 s.CanConvert = false;
               }

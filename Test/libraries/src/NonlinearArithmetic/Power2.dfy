@@ -13,9 +13,9 @@
 former takes arguments and may be more stable and less reliant on Z3
 heuristics. The latter includes automation and its use requires less effort */
 
-include "Internals/GeneralInternals.dfy"
-include "Internals/MulInternals.dfy"
-include "Power.dfy"
+include "Internals/GeneralInternals.dfyp"
+include "Internals/MulInternals.dfyp"
+include "Power.dfyp"
 
 module Power2 {
   import opened GeneralInternals

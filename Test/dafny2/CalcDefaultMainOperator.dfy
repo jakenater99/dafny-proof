@@ -56,7 +56,7 @@ lemma TestMultiset(Empty: multiset<int>, Nonempty: multiset<int>)
   }
 }
 
-// Print test for /rprint. Note, this same class is tested with /dprint in Test/dafny0/Twostate-Resolution.dfy.
+// Print test for /rprint. Note, this same class is tested with /dprint in Test/dafny0/Twostate-Resolution.dfyp.
 module PrintTest {
   function method Five(): int { 5 }
   function Six(): int { 6 }

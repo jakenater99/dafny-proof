@@ -5,8 +5,8 @@
 // RUN: %diff "%s.expect" "%t"
 // TODO-RS: Need to fix the inconsistent handling of verbatimString() in Java
 
-include "../exceptions/NatOutcomeDt.dfy"
-include "../exceptions/GenericOutcomeDt.dfy"
+include "../exceptions/NatOutcomeDt.dfyp"
+include "../exceptions/GenericOutcomeDt.dfyp"
 
 method TestAssignOrHalt() {
     var stmt1: nat :- expect NatSuccess(42);

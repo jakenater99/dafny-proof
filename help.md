@@ -38,4 +38,4 @@ dafny-proof-vscode
 (Change version in src/constants.ts and package.json)
 > vsce package
 2. Install by going to ... in top right of extension tab and selecting install from vsix and select dafny-proof-vscode-1.0.0
-3. Open a .dfyp file and dafny-proof will install
+3. Open a .dfypp file and dafny-proof will install

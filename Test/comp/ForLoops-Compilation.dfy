@@ -396,7 +396,7 @@ method LabelRegressions() {
   // The cases of if-case, while-case, and match statements are List<Statement>'s, which are essentially
   // a BlockStmt but without the curly braces. Each Statement in such a List can have labels, so
   // it's important to call TrStmtList on these in the Verifier, not just call TrStmt on every Statement
-  // in the List. (See also LabelRegressions() in Test/dafny0/ResolutionErrors.dfy.)
+  // in the List. (See also LabelRegressions() in Test/dafny0/ResolutionErrors.dfyp.)
   if {
     case true =>
       label Loop:

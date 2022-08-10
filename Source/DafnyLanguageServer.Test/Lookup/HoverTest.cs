@@ -71,13 +71,13 @@ method DoIt() {
     public async Task HoveringFunctionInvocationOfFunctionDeclaredInForeignDocumentReturnsSignature() {
       // TODO Actually, the invoked function is a compiled function.
       var source = @"
-include ""foreign.dfy""
+include ""foreign.dfyp""
 
 method DoIt() returns (x: int) {
   var a := new A();
   return a.GetX();
 }".TrimStart();
-      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfy"));
+      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfyp"));
       await client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       var hover = await RequestHover(documentItem, (4, 13));
       Assert.IsNotNull(hover);

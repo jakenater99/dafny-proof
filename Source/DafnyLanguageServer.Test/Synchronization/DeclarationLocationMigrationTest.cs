@@ -300,7 +300,7 @@ class A {
       Assert.IsTrue(TryFindSymbolDeclarationByName(document, "Y", out var _));
 
       // Next try a change that breaks resolution.
-      // In this case symbols are relocated.  Since the change range is `null` all symbols for "test.dfy" are lost.
+      // In this case symbols are relocated.  Since the change range is `null` all symbols for "test.dfyp" are lost.
       await ApplyChangeAndWaitCompletionAsync(document.Text, null, "; class Y {}");
       document = await Documents.GetDocumentAsync(document.Text.Uri);
       Assert.IsNotNull(document);
@@ -312,21 +312,21 @@ class A {
 
     [TestMethod]
     public async Task PassingANullChangeRangePreservesForeignSymbols() {
-      var source = "include \"foreign.dfy\"\nclass X {}";
-      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfy"));
+      var source = "include \"foreign.dfyp\"\nclass X {}";
+      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfyp"));
 
       await Client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       var document = await Documents.GetDocumentAsync(documentItem.Uri);
       Assert.IsNotNull(document);
       Assert.IsTrue(TryFindSymbolDeclarationByName(document, "A", out var _));
 
-      // Try a change that breaks resolution.  Symbols for `foreign.dfy` are kept.
-      await ApplyChangeAndWaitCompletionAsync(document.Text, null, "; include \"foreign.dfy\"\nclass Y {}");
+      // Try a change that breaks resolution.  Symbols for `foreign.dfyp` are kept.
+      await ApplyChangeAndWaitCompletionAsync(document.Text, null, "; include \"foreign.dfyp\"\nclass Y {}");
       document = await Documents.GetDocumentAsync(document.Text.Uri);
       Assert.IsNotNull(document);
       Assert.IsTrue(TryFindSymbolDeclarationByName(document, "A", out var _));
 
-      // Finally we drop the reference to `foreign.dfy` and confirm that `A` is not accessible any more.
+      // Finally we drop the reference to `foreign.dfyp` and confirm that `A` is not accessible any more.
       await ApplyChangeAndWaitCompletionAsync(document.Text, null, "class Y {}");
       document = await Documents.GetDocumentAsync(document.Text.Uri);
       Assert.IsNotNull(document);

@@ -1,7 +1,7 @@
 // RUN: %dafny "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-include "../exceptions/VoidOutcomeDt.dfy"
+include "../exceptions/VoidOutcomeDt.dfyp"
 
 function {:test} PassingTest(): VoidOutcome { // compile error: function must be compiled to use the {:test} attribute
     VoidSuccess

@@ -1,4 +1,4 @@
-// MatchBraces.dfy
+// MatchBraces.dfyp
 
 datatype Color = Red | Green | Blue
 

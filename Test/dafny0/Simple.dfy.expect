@@ -1,4 +1,4 @@
-// Simple.dfy
+// Simple.dfyp
 
 class MyClass<T, U> {
   var x: int

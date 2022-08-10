@@ -1,9 +1,9 @@
 // Generating tests:
-// RUN: cp %S/TestGeneration.dfy %t.dfy
-// RUN: %dafny /definiteAssignment:3 /generateTestMode:Block %t.dfy > %t-tests.dfy
+// RUN: cp %S/TestGeneration.dfyp %t.dfyp
+// RUN: %dafny /definiteAssignment:3 /generateTestMode:Block %t.dfyp > %t-tests.dfyp
 
 // Compiling test to java:
-// RUN: %dafny /compileTarget:java /out:%t-tests.dfy %t-tests.dfy
+// RUN: %dafny /compileTarget:java /out:%t-tests.dfyp %t-tests.dfyp
 
 // Adding reflection code that allows running the tests:
 // RUN: perl -pe 's|import M_Compile.*;|`cat %S/import.txt`|ge' -i %t-tests-java/TestGenerationUnitTests_Compile/__default.java

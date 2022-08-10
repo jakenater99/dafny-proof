@@ -1,4 +1,4 @@
-// AutoContracts.dfy
+// AutoContracts.dfyp
 
 /*
 module _System {
@@ -550,30 +550,30 @@ module N2 refines N1 {
   type {:axiom} C(==) = c: C? | c != null /*special witness*/
   */
 }
-AutoContracts.dfy(17,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(17,4): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(12,14): Related location
-AutoContracts.dfy(17,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(17,4): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(17,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(17,4): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(12,14): Related location
-AutoContracts.dfy(17,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(17,4): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(12,14): Related location
-AutoContracts.dfy(17,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(17,4): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(12,14): Related location
-AutoContracts.dfy(5,25): Related location
-AutoContracts.dfy(50,4): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(49,24): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy(79,21): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(60,16): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy[N1](65,14): Related location
-AutoContracts.dfy(79,21): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(60,16): Related location: This is the postcondition that might not hold.
-AutoContracts.dfy[N1](65,14): Related location
-AutoContracts.dfy(79,21): Error: A postcondition might not hold on this return path.
-AutoContracts.dfy(60,16): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(17,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(17,4): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(12,14): Related location
+AutoContracts.dfyp(17,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(17,4): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(17,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(17,4): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(12,14): Related location
+AutoContracts.dfyp(17,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(17,4): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(12,14): Related location
+AutoContracts.dfyp(17,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(17,4): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(12,14): Related location
+AutoContracts.dfyp(5,25): Related location
+AutoContracts.dfyp(50,4): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(49,24): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp(79,21): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(60,16): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp[N1](65,14): Related location
+AutoContracts.dfyp(79,21): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(60,16): Related location: This is the postcondition that might not hold.
+AutoContracts.dfyp[N1](65,14): Related location
+AutoContracts.dfyp(79,21): Error: A postcondition might not hold on this return path.
+AutoContracts.dfyp(60,16): Related location: This is the postcondition that might not hold.
 
 Dafny program verifier finished with 37 verified, 9 errors

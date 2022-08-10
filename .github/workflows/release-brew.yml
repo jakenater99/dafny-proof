@@ -19,8 +19,8 @@ jobs:
         brew link --overwrite dotnet
     - name: Make test program
       run: |
-        echo "method Main() { assert true; print 42, '\n'; }" > a.dfy
-        echo "method m() { assert false; }" > b.dfy
+        echo "method Main() { assert true; print 42, '\n'; }" > a.dfyp
+        echo "method m() { assert false; }" > b.dfyp
         echo "42" > expect.txt
     - name: Versions
       run: |
@@ -33,27 +33,27 @@ jobs:
         node --version
         java -version
     - name: Check
-      run: dafny /compile:0 a.dfy
+      run: dafny /compile:0 a.dfyp
     - name: Check bad
-      run: dafny /compile:0 b.dfy || echo EXPECTED FAILURE
+      run: dafny /compile:0 b.dfyp || echo EXPECTED FAILURE
     ## Check that a simple program compiles and runs on each supported platform
     - name: Check C# compile
       run: |
-        dafny /compileVerbose:0 /compile:3 /compileTarget:cs /spillTargetCode:3 a.dfy
+        dafny /compileVerbose:0 /compile:3 /compileTarget:cs /spillTargetCode:3 a.dfyp
     - name: Check Go compile
       run: |
-        dafny /compile:3 /spillTargetCode:3 /compileTarget:go a.dfy
+        dafny /compile:3 /spillTargetCode:3 /compileTarget:go a.dfyp
         env GO111MODULE=auto GOPATH=$PWD/a-go go run a-go/src/a.go > actual.txt
         diff expect.txt actual.txt
     - name: Check Javascript compile
       run: |
         npm install bignumber.js
-        dafny /compile:3 /spillTargetCode:3 /compileTarget:js a.dfy
+        dafny /compile:3 /spillTargetCode:3 /compileTarget:js a.dfyp
         node a.js dafny/DafnyRuntime.js > actual.txt
         diff expect.txt actual.txt
     - name: Check Java compile
       run: |
         (ls dafny/DafnyRuntime.jar || echo NO DafnyRuntime.jar )
-        #dafny /compile:3 /spillTargetCode:3 /compileTarget:java a.dfy
+        #dafny /compile:3 /spillTargetCode:3 /compileTarget:java a.dfyp
         #java -cp a:dafny/DafnyRuntime.jar a > actual.txt
         #diff expect.txt actual.txt

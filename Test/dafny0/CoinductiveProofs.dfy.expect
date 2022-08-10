@@ -1,33 +1,33 @@
-CoinductiveProofs.dfy(30,11): Error: assertion might not hold
-CoinductiveProofs.dfy(15,36): Related location
-CoinductiveProofs.dfy(13,16): Related location
-CoinductiveProofs.dfy(44,11): Error: assertion might not hold
-CoinductiveProofs.dfy(48,11): Error: assertion might not hold
-CoinductiveProofs.dfy(13,16): Related location
-CoinductiveProofs.dfy(78,0): Error: A postcondition might not hold on this return path.
-CoinductiveProofs.dfy(77,10): Related location: This is the postcondition that might not hold.
-CoinductiveProofs.dfy(73,2): Related location
-CoinductiveProofs.dfy(94,11): Error: assertion might not hold
-CoinductiveProofs.dfy(87,29): Related location
-CoinductiveProofs.dfy(73,2): Related location
-CoinductiveProofs.dfy(127,0): Error: A postcondition might not hold on this return path.
-CoinductiveProofs.dfy(126,10): Related location: This is the postcondition that might not hold.
-CoinductiveProofs.dfy(115,2): Related location
-CoinductiveProofs.dfy(136,11): Error: assertion might not hold
-CoinductiveProofs.dfy(117,29): Related location
-CoinductiveProofs.dfy(115,2): Related location
-CoinductiveProofs.dfy(149,11): Error: assertion might not hold
-CoinductiveProofs.dfy(115,2): Related location
-CoinductiveProofs.dfy(153,11): Error: assertion might not hold
-CoinductiveProofs.dfy(115,2): Related location
-CoinductiveProofs.dfy(164,0): Error: A postcondition might not hold on this return path.
-CoinductiveProofs.dfy(163,10): Related location: This is the postcondition that might not hold.
-CoinductiveProofs.dfy(159,2): Related location
-CoinductiveProofs.dfy(203,0): Error: A postcondition might not hold on this return path.
-CoinductiveProofs.dfy(202,21): Related location: This is the postcondition that might not hold.
-CoinductiveProofs.dfy(4,23): Related location
-CoinductiveProofs.dfy(209,0): Error: A postcondition might not hold on this return path.
-CoinductiveProofs.dfy(208,21): Related location: This is the postcondition that might not hold.
-CoinductiveProofs.dfy(4,23): Related location
+CoinductiveProofs.dfyp(30,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(15,36): Related location
+CoinductiveProofs.dfyp(13,16): Related location
+CoinductiveProofs.dfyp(44,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(48,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(13,16): Related location
+CoinductiveProofs.dfyp(78,0): Error: A postcondition might not hold on this return path.
+CoinductiveProofs.dfyp(77,10): Related location: This is the postcondition that might not hold.
+CoinductiveProofs.dfyp(73,2): Related location
+CoinductiveProofs.dfyp(94,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(87,29): Related location
+CoinductiveProofs.dfyp(73,2): Related location
+CoinductiveProofs.dfyp(127,0): Error: A postcondition might not hold on this return path.
+CoinductiveProofs.dfyp(126,10): Related location: This is the postcondition that might not hold.
+CoinductiveProofs.dfyp(115,2): Related location
+CoinductiveProofs.dfyp(136,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(117,29): Related location
+CoinductiveProofs.dfyp(115,2): Related location
+CoinductiveProofs.dfyp(149,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(115,2): Related location
+CoinductiveProofs.dfyp(153,11): Error: assertion might not hold
+CoinductiveProofs.dfyp(115,2): Related location
+CoinductiveProofs.dfyp(164,0): Error: A postcondition might not hold on this return path.
+CoinductiveProofs.dfyp(163,10): Related location: This is the postcondition that might not hold.
+CoinductiveProofs.dfyp(159,2): Related location
+CoinductiveProofs.dfyp(203,0): Error: A postcondition might not hold on this return path.
+CoinductiveProofs.dfyp(202,21): Related location: This is the postcondition that might not hold.
+CoinductiveProofs.dfyp(4,23): Related location
+CoinductiveProofs.dfyp(209,0): Error: A postcondition might not hold on this return path.
+CoinductiveProofs.dfyp(208,21): Related location: This is the postcondition that might not hold.
+CoinductiveProofs.dfyp(4,23): Related location
 
 Dafny program verifier finished with 34 verified, 12 errors

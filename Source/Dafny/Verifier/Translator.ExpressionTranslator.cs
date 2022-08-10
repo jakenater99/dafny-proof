@@ -1660,7 +1660,7 @@ BplBoundVar(varNameGen.FreshId(string.Format("#{0}#", bv.Name)), predef.BoxType,
           args.Add(HeapExpr);
           // If the function doesn't use the heap, but global settings say to use it,
           // then we want to quantify over the heap so that heap in the trigger can match over
-          // heap modifying operations. (see Test/dafny4/Bug144.dfy)
+          // heap modifying operations. (see Test/dafny4/Bug144.dfyp)
           bool usesHeap = e.Function.ReadsHeap || e.Function.Formals.Any(f => f.Type.IsRefType);
           if (!usesHeap) {
             Statistics_HeapAsQuantifierCount++;

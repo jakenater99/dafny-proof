@@ -26,31 +26,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
-    <None Update="Lookup\TestFiles\foreign.dfy">
+    <None Update="Lookup\TestFiles\foreign.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\semanticError.dfy">
+    <None Update="Synchronization\TestFiles\semanticError.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\empty.dfy">
+    <None Update="Synchronization\TestFiles\empty.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\syntaxError.dfy">
+    <None Update="Synchronization\TestFiles\syntaxError.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Various\TestFiles\multi1.dfy">
+    <None Update="Various\TestFiles\multi1.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Various\TestFiles\multi2.dfy">
+    <None Update="Various\TestFiles\multi2.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\Test\dafny3\GenericSort.dfy" Link="Various\TestFiles\GenericSort.dfy">
+    <None Include="..\..\Test\dafny3\GenericSort.dfyp" Link="Various\TestFiles\GenericSort.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Test\dafny4\GHC-MergeSort.dfy" Link="Various\TestFiles\GHC-MergeSort.dfy">
+    <None Include="..\..\Test\dafny4\GHC-MergeSort.dfyp" Link="Various\TestFiles\GHC-MergeSort.dfyp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

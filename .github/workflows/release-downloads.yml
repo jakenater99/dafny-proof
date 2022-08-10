@@ -59,8 +59,8 @@ jobs:
     ## Create a simple smoke test program
     - name: Make test program
       run: |
-        echo "method Main() { assert true; print 42, '\n'; }" > a.dfy
-        echo "method m() { assert false; }" > b.dfy
+        echo "method Main() { assert true; print 42, '\n'; }" > a.dfyp
+        echo "method m() { assert false; }" > b.dfyp
         echo "42" > expect.txt
     ## Check that dafny and z3 run and that a simple program verifies or fails
     - name: Versions
@@ -68,29 +68,29 @@ jobs:
         dafny/z3/bin/z3 -version
         dafny/dafny -version
     - name: Check
-      run: dafny/dafny /compileVerbose:0 /compile:0 a.dfy
+      run: dafny/dafny /compileVerbose:0 /compile:0 a.dfyp
     - name: Check - non Windows
       if: runner.os != 'Windows'
       run: |
-        dafny/dafny /compileVerbose:0 /compile:0 a.dfy
+        dafny/dafny /compileVerbose:0 /compile:0 a.dfyp
     - name: Check - Windows
       if: runner.os == 'Windows'
-      run: dafny/dafny /compileVerbose:0 /compile:0 a.dfy
+      run: dafny/dafny /compileVerbose:0 /compile:0 a.dfyp
     - name: Check bad
-      run: dafny/dafny /compile:0 b.dfy || echo "EXPECTED FAILURE" ; exit 0
+      run: dafny/dafny /compile:0 b.dfyp || echo "EXPECTED FAILURE" ; exit 0
     - name: Check bad - non Windows
       if: runner.os != 'Windows'
-      run: dafny/dafny /compile:0 b.dfy || echo "EXPECTED FAILURE"
+      run: dafny/dafny /compile:0 b.dfyp || echo "EXPECTED FAILURE"
     - name: Check bad - Windows
       if: runner.os == 'Windows'
-      run: (dafny/Dafny.exe /compile:0 b.dfy || echo "EXPECTED FAILURE") ; exit 0
+      run: (dafny/Dafny.exe /compile:0 b.dfyp || echo "EXPECTED FAILURE") ; exit 0
     ## Check that a simple program compiles and runs on each supported platform
     - name: Check C# compile
       run: |
-        dafny/dafny /compileVerbose:0 /compile:3 /compileTarget:cs /spillTargetCode:3 a.dfy
+        dafny/dafny /compileVerbose:0 /compile:3 /compileTarget:cs /spillTargetCode:3 a.dfyp
     - name: Check Go compile
       run: |
-        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:go a.dfy
+        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:go a.dfyp
     - name: Running Go artifacts
       if: runner.os != 'Windows'
       run: |
@@ -106,13 +106,13 @@ jobs:
     - name: Check Javascript compile
       run: |
         npm install bignumber.js
-        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:js a.dfy
+        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:js a.dfyp
         node a.js dafny/DafnyRuntime.js > actual.txt
         diff expect.txt actual.txt
     - name: Check Java compile
       run: |
         (ls dafny/DafnyRuntime.jar || echo NO DafnyRuntime.jar )
-        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:java a.dfy
+        dafny/dafny /compile:3 /spillTargetCode:3 /compileTarget:java a.dfyp
     - name: Check Java artifacts
       if: runner.os != 'Windows'
       run: |

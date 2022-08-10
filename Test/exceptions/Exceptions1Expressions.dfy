@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:3 "%s" /rprint:"%t.rprint" > "%t"
 // RUN: %diff "%s.expect" "%t"
-include "./NatOutcomeDt.dfy"
-include "./VoidOutcomeDt.dfy"
+include "./NatOutcomeDt.dfyp"
+include "./VoidOutcomeDt.dfyp"
 
 function method Switch(b: bool, v: nat): NatOutcome {
     if b then NatSuccess(v) else NatFailure("bad luck")

@@ -134,8 +134,8 @@ method Recurse(x: int) returns (r: int) {
 
     [TestMethod]
     public async Task EmptyDocumentCanBeIncluded() {
-      var source = "include \"empty.dfy\"";
-      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Synchronization/TestFiles/test.dfy"));
+      var source = "include \"empty.dfyp\"";
+      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Synchronization/TestFiles/test.dfyp"));
       await client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       var document = await Documents.GetDocumentAsync(documentItem.Uri);
       Assert.IsNotNull(document);

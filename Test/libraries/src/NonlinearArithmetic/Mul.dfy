@@ -13,8 +13,8 @@
 former takes arguments and may be more stable and less reliant on Z3
 heuristics. The latter includes automation and its use requires less effort */
 
-include "Internals/MulInternalsNonlinear.dfy"
-include "Internals/MulInternals.dfy"
+include "Internals/MulInternalsNonlinear.dfyp"
+include "Internals/MulInternals.dfyp"
 
 module Mul {
 

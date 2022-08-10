@@ -13,7 +13,7 @@ namespace Microsoft.Dafny.LanguageServer.IntegrationTest.Unit {
 
   [TestClass]
   public class ParserExceptionTest {
-    private static readonly string TestFilePath = "parserException.dfy";
+    private static readonly string TestFilePath = "parserException.dfyp";
     private const string LanguageId = "dafny";
     private const int MaxTestExecutionTimeMs = 10_000;
     private DafnyLangParser parser;

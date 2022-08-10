@@ -9,7 +9,7 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-/* lemmas and functions in this file are used in the proofs in DivMod.dfy
+/* lemmas and functions in this file are used in the proofs in DivMod.dfyp
 
 Specs/implements mathematical div and mod, not the C version.
 (x div n) * n + (x mod n) == x, where 0 <= x mod n < n.
@@ -19,11 +19,11 @@ This may produce "surprising" results for negative values.
 For example, -3 div 5 is -1 and -3 mod 5 is 2.
 Note this is consistent: -3 * -1 + 2 == 5 */
 
-include "GeneralInternals.dfy"
-include "MulInternals.dfy"
-include "../Mul.dfy"
-include "ModInternalsNonlinear.dfy"
-include "DivInternalsNonlinear.dfy"
+include "GeneralInternals.dfyp"
+include "MulInternals.dfyp"
+include "../Mul.dfyp"
+include "ModInternalsNonlinear.dfyp"
+include "DivInternalsNonlinear.dfyp"
 
 module ModInternals {
 

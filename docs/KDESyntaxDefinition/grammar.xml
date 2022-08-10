@@ -7,7 +7,7 @@
      https://docs.kde.org/trunk5/en/applications/katepart/highlight.html
 -->
 
-<language name="grammar" version="3" kateversion="5.0" section="Sources" extensions="*.dfy" author="David Cok" license="MIT">
+<language name="grammar" version="3" kateversion="5.0" section="Sources" extensions="*.dfyp" author="David Cok" license="MIT">
 
   <highlighting>
 

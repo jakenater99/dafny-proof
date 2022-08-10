@@ -16,7 +16,7 @@ method M(sc: set<C>)
 
   // This checks whether loop detection handles `old` expressions properly.
   // In the first one f(c)/old(f(f(c))) is not reported as a loop. See
-  // looping-is-hard-to-decide-modulo-equalities.dfy for an explanation.
+  // looping-is-hard-to-decide-modulo-equalities.dfyp for an explanation.
   ensures forall c | c in sc :: true || f(c) == old(f(f(c)))
   ensures forall c | c in sc :: true || old(f(f(c))) == old(g(f(c))) || old(f(g(c))) == g(f(c)) || f(g(c)) == g(f(c))
 

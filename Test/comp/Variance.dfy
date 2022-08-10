@@ -4,7 +4,7 @@
 // RUN: %dafny /noVerify /compile:4 /compileTarget:go "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /compileTarget:java "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t"
-// The Java compiler lacks support for this (see dafny0/RuntimeTypeTests0.dfy).
+// The Java compiler lacks support for this (see dafny0/RuntimeTypeTests0.dfyp).
 
 datatype Co<+T> = Co(z: T) {
     const x: int;

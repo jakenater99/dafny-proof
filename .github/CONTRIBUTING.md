@@ -17,7 +17,7 @@ All other pull requests and issues can be submitted here.
 
   - Dafny's integration tests are in [`Test`](../Test).  PRs that fix issues reported on GitHub should include a test in [`Test/git-issues/`](../Test/git-issues/).
 
-    Each `.dfy` file in `Test/` a test, with a  [`lit`](https://llvm.org/docs/CommandGuide/lit.html) header describing how to run it and a `.expect` file indicating the expected output.  See [`Test/README.md`](../Test/README.md) for more info on running Dafny' integration tests.
+    Each `.dfyp` file in `Test/` a test, with a  [`lit`](https://llvm.org/docs/CommandGuide/lit.html) header describing how to run it and a `.expect` file indicating the expected output.  See [`Test/README.md`](../Test/README.md) for more info on running Dafny' integration tests.
 
   - Dafny's unit tests are in various `*.Test` directories in [`Source`](../Source).
 

@@ -6,7 +6,7 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-include "../../src/Collections/Sequences/LittleEndianNatConversions.dfy"
+include "../../src/Collections/Sequences/LittleEndianNatConversions.dfyp"
 
 module Uint3_6 refines LittleEndianNatConversions {
 

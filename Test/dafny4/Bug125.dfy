@@ -11,7 +11,7 @@
 // have equal standing.  This means that (the inherited) Foo(t:T) in
 // AbstractModuleC refers to T ambiguously.
 //
-// This file tests resolution errors.  The file Bug125more.dfy tests
+// This file tests resolution errors.  The file Bug125more.dfyp tests
 // verification on similar (bug resolution-correct) examples.
 
 abstract module AbstractModuleA

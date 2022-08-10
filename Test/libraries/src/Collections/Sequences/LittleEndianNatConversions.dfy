@@ -6,11 +6,11 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-include "../../NonlinearArithmetic/DivMod.dfy"
-include "../../NonlinearArithmetic/Mul.dfy"
-include "../../NonlinearArithmetic/Power.dfy"
-include "Seq.dfy"
-include "LittleEndianNat.dfy"
+include "../../NonlinearArithmetic/DivMod.dfyp"
+include "../../NonlinearArithmetic/Mul.dfyp"
+include "../../NonlinearArithmetic/Power.dfyp"
+include "Seq.dfyp"
+include "LittleEndianNat.dfyp"
 
 /* Sequence with smaller base. */
 abstract module SmallSeq refines LittleEndianNat {

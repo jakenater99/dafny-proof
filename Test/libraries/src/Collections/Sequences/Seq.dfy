@@ -14,8 +14,8 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-include "../../Wrappers.dfy"
-include "../../Math.dfy"
+include "../../Wrappers.dfyp"
+include "../../Math.dfyp"
 
 module Seq {
 

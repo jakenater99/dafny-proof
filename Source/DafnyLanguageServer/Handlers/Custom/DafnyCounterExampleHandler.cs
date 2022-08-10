@@ -43,7 +43,7 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
     private class CounterExampleLoader {
       private const string InitialStateName = "<initial>";
       private static readonly Regex StatePositionRegex = new(
-        @".*\.dfy\((?<line>\d+),(?<character>\d+)\)",
+        @".*\.dfyp\((?<line>\d+),(?<character>\d+)\)",
         RegexOptions.IgnoreCase | RegexOptions.Singleline
       );
 

@@ -8,9 +8,9 @@
 // The logic about split quantifiers is that Boogie (and z3) should never realize
 // that there was an unsplit quantifier. The WF check code does not produce a
 // quantifier, at least in it's checking part; thus, it should use original
-// quantifier. This fixes a problem in VerifyThis2015/Problem2.dfy with a null
+// quantifier. This fixes a problem in VerifyThis2015/Problem2.dfyp with a null
 // check, and a problem spotted by Chris, made into a test case saved in
-// triggers/wf-checks-use-the-original-quantifier.dfy.
+// triggers/wf-checks-use-the-original-quantifier.dfyp.
 
 // Of course, the assumption that WF checks produce for a quantifier is a
 // quantifier, so the assumption part that comes after the WF check does use the

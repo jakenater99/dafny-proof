@@ -1,4 +1,4 @@
-// Signature.dfy
+// Signature.dfyp
 
 method Test(ghost c: (int, ghost (int, int)))
 {

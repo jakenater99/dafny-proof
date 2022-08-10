@@ -907,7 +907,7 @@ DeclModifier<ref DeclModifierData dmod>
          "the 'protected' modifier is no longer supported; " +
          "to restrict access from outside the module, use a 'provides' clause in the module's export set; " +
          "if you're trying to add conjuncts to a predicate in a refinement module, see " +
-         "Test/dafny3/CachedContainer.dfy, Test/dafny2/StoreAndRetrieve.dfy, and Test/dafny2/MonotonicHeapstate.dfy " +
+         "Test/dafny3/CachedContainer.dfyp, Test/dafny2/StoreAndRetrieve.dfyp, and Test/dafny2/MonotonicHeapstate.dfyp " +
          "in the Dafny test suite on github");
     .)
   )

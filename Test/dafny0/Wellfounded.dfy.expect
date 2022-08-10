@@ -1,5 +1,5 @@
-Wellfounded.dfy(49,14): Warning: /!\ No terms found to trigger on.
-Wellfounded.dfy(77,5): Warning: /!\ No terms found to trigger on.
+Wellfounded.dfyp(49,14): Warning: /!\ No terms found to trigger on.
+Wellfounded.dfyp(77,5): Warning: /!\ No terms found to trigger on.
 
 Dafny program verifier finished with 3 verified, 0 errors
 M(d, d) = 10

@@ -1,6 +1,6 @@
 // RUN: %dafny /compile:0 /rprint:"%t.rprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
-include "../libraries/src/Wrappers.dfy"
+include "../libraries/src/Wrappers.dfyp"
 import opened Wrappers
 
 datatype Bar = Bar(i: string)

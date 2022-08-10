@@ -9,10 +9,10 @@
 *  SPDX-License-Identifier: MIT 
 *******************************************************************************/
 
-/* lemmas and functions in this file are used in the proofs in Mul.dfy */
+/* lemmas and functions in this file are used in the proofs in Mul.dfyp */
 
-include "GeneralInternals.dfy"
-include "MulInternalsNonlinear.dfy"
+include "GeneralInternals.dfyp"
+include "MulInternalsNonlinear.dfyp"
 
 module MulInternals {
 

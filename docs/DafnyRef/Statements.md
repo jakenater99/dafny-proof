@@ -430,12 +430,12 @@ The following subsections show various uses and alternatives.
 
 A simple failure-compatible type is the following:
 ```dafny
-{% include_relative examples/Example-Fail1.dfy %}
+{% include_relative examples/Example-Fail1.dfyp %}
 ```
 
 A commonly used alternative that carries some value information is something like this generic type:
 ```dafny
-{% include_relative examples/Example-Fail2.dfy %}
+{% include_relative examples/Example-Fail2.dfyp %}
 ```
 
 
@@ -1785,7 +1785,7 @@ class {:autocontracts} SimpleQueue<Data>
 ```
 
 Here is an example of a _call_ `forall` statement and the
-callee. This is contained in the `CloudMake-ConsistentBuilds.dfy`
+callee. This is contained in the `CloudMake-ConsistentBuilds.dfyp`
 test in the Dafny repository.
 
 ```dafny

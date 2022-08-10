@@ -64,7 +64,7 @@ namespace Microsoft.Dafny.Triggers {
       ///
       /// Note that this is trickier than just checking every term for new variables;
       /// indeed, a new term that does bring new variables in can make an existing
-      /// term redundant (see redundancy-detection-does-its-job-properly.dfy).
+      /// term redundant (see redundancy-detection-does-its-job-properly.dfyp).
       /// </summary>
       internal SetOfTerms CopyWithAdd(TriggerTerm term, ISet<BoundVar> relevantVariables) {
         var copy = new SetOfTerms();

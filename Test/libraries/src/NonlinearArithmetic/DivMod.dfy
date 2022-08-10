@@ -13,9 +13,9 @@
 former takes arguments and may be more stable and less reliant on Z3
 heuristics. The latter includes automation and its use requires less effort */
 
-include "Internals/DivInternalsNonlinear.dfy"
-include "Internals/DivInternals.dfy"
-include "Internals/GeneralInternals.dfy"
+include "Internals/DivInternalsNonlinear.dfyp"
+include "Internals/DivInternals.dfyp"
+include "Internals/GeneralInternals.dfyp"
 
 module DivMod {
 

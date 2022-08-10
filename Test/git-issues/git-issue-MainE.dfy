@@ -53,7 +53,7 @@ class Z {
 }
 
 // Of the remaining methods, this file tests only the error cases.
-// The cases that compile are tested in Test/comp/MainMethod.dfy.
+// The cases that compile are tested in Test/comp/MainMethod.dfyp.
 
 trait Tr {
   static method Static() { print "OK-Tr\n"; }

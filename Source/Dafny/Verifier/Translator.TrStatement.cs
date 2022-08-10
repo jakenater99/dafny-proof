@@ -1467,7 +1467,7 @@ namespace Microsoft.Dafny {
       // Without this, Boogie's abstract interpreter may figure out that the loop guard is always false
       // on entry to the loop, and then Boogie wouldn't consider this a loop at all. (See also comment
       // in methods GuardAlwaysHoldsOnEntry_BodyLessLoop and GuardAlwaysHoldsOnEntry_LoopWithBody in
-      // Test/dafny0/DirtyLoops.dfy.)
+      // Test/dafny0/DirtyLoops.dfyp.)
       var isBodyLessLoop = s is OneBodyLoopStmt && ((OneBodyLoopStmt)s).BodySurrogate != null;
       var whereToBuildLoopGuard = isBodyLessLoop ? new BoogieStmtListBuilder(this) : loopBodyBuilder;
       Bpl.Expr guard = null;
@@ -1518,7 +1518,7 @@ namespace Microsoft.Dafny {
         loopBodyBuilder.Add(Bpl.Cmd.SimpleAssign(s.Tok, w, Bpl.Expr.False));
       }
       // Finally, assume the well-formedness of the invariant (which has been checked once and for all above), so that the check
-      // of invariant-maintenance can use the appropriate canCall predicates. Note, it is important (see Test/git-issues/git-issue-1812.dfy)
+      // of invariant-maintenance can use the appropriate canCall predicates. Note, it is important (see Test/git-issues/git-issue-1812.dfyp)
       // that each CanCall assumption uses the preceding invariants as antecedents--this is achieved by treating all "invariant"
       // declarations as one big conjunction, because then CanCallAssumption will add the needed antecedents.
       if (s.Invariants.Any()) {

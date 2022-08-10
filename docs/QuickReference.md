@@ -7,7 +7,7 @@ This page illustrates many of the most common language features in Dafny.  In or
 
 ## Programs
 
-At the top level, a Dafny program (stored as a file with extension .dfy) is a set of declarations.
+At the top level, a Dafny program (stored as a file with extension .dfyp) is a set of declarations.
 The declarations introduce _types_, _methods_, and _functions_, where the order of introduction is irrelevant.
 These user-defined types include _classes_ and _inductive datatypes_.
 The classes themselves also contain a set of declarations, introducing _fields_, methods, and functions.
