@@ -28,7 +28,7 @@ jobs:
       id: boogieVersion
       uses: QwerMike/xpath-action@v1
       with:
-        filename: 'dafny/Source/Directory.Build.props'
+        filename: 'dafny/Source/Dafny/DafnyPipeline.csproj'
         expression: "//PackageReference[@Include='Boogie.ExecutionEngine']/@Version"
 
     - uses: actions-ecosystem/action-regex-match@v2
@@ -123,24 +123,24 @@ jobs:
     - if: runner.os != 'Windows'
       run: |
         unzip dafny/Package/CI.zip -d unzippedRelease
-    - name: Run integration tests
-      if: runner.os == 'Windows'
-      env:
-        XUNIT_SHARD: ${{ matrix.shard }}
-        XUNIT_SHARD_COUNT: 5
-        DAFNY_RELEASE: ${{ github.workspace }}\unzippedRelease\dafny
-      run: |
-        dotnet test -v:n --logger trx dafny/Source/IntegrationTests/IntegrationTests.csproj
-    - name: Run integration tests
-      if: runner.os != 'Windows'
-      env:
-        XUNIT_SHARD: ${{ matrix.shard }}
-        XUNIT_SHARD_COUNT: 5
-        DAFNY_RELEASE: ${{ github.workspace }}/unzippedRelease/dafny
-      run: |
-        dotnet test -v:n --logger trx dafny/Source/IntegrationTests/IntegrationTests.csproj
-    - uses: actions/upload-artifact@v2
-      if: always()
-      with:
-        name: integration-test-results-${{ matrix.os }}
-        path: dafny/Source/IntegrationTests/TestResults/*.trx
+    #- name: Run integration tests
+    #  if: runner.os == 'Windows'
+    #  env:
+    #    XUNIT_SHARD: ${{ matrix.shard }}
+    #    XUNIT_SHARD_COUNT: 5
+    #    DAFNY_RELEASE: ${{ github.workspace }}\unzippedRelease\dafny
+    #  run: |
+    #    dotnet test -v:n --logger trx dafny/Source/IntegrationTests/IntegrationTests.csproj
+    #- name: Run integration tests
+    #  if: runner.os != 'Windows'
+    #  env:
+    #   XUNIT_SHARD: ${{ matrix.shard }}
+    #    XUNIT_SHARD_COUNT: 5
+    #    DAFNY_RELEASE: ${{ github.workspace }}/unzippedRelease/dafny
+    #  run: |
+    #    dotnet test -v:n --logger trx dafny/Source/IntegrationTests/IntegrationTests.csproj
+    #- uses: actions/upload-artifact@v2
+    #  if: always()
+    #  with:
+    #    name: integration-test-results-${{ matrix.os }}
+    #    path: dafny/Source/IntegrationTests/TestResults/*.trx

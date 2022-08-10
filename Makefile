@@ -1,25 +1,22 @@
 DIR=$(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 
-default: parser runtime boogie exe
+default: exe
 
-all: runtime boogie exe refman
+all: exe refman
 
 exe:
 	(cd ${DIR} ; dotnet build Source/Dafny.sln ) ## includes parser
 
-boogie: ${DIR}/Source/boogie/Binaries/Boogie.exe
+boogie: ${DIR}/boogie/Binaries/Boogie.exe
 
-${DIR}/Source/boogie/Binaries/Boogie.exe:
-	(cd ${DIR}/../boogie ; dotnet build Source/boogie/Source/Boogie.sln )
+${DIR}/boogie/Binaries/Boogie.exe:
+	(cd ${DIR}/boogie ; dotnet build -c Release Source/Boogie.sln )
 
-parser:
-	make -C ${DIR}/Source/Dafny -f Makefile.linux all
+#refman:
+#	make -C ${DIR}/docs/DafnyRef
 
-refman:
-	make -C ${DIR}/docs/DafnyRef
-
-refman-release:
-	make -C ${DIR}/docs/DafnyRef release
+#refman-release:
+#	make -C ${DIR}/docs/DafnyRef release
 
 z3-mac:
 	wget https://github.com/Z3Prover/z3/releases/download/Z3-4.8.5/z3-4.8.5-x64-osx-10.14.2.zip

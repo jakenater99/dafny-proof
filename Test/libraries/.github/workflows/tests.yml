@@ -1,0 +1,27 @@
+# This workflow performs static analysis checks.
+name: tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  verification:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dafny
+        uses: dafny-lang/setup-dafny-action@v1
+        with:
+          dafny-version: "3.4.2"
+
+      - uses: actions/setup-python@v1
+
+      - name: Install lit 
+        run: pip install lit OutputCheck
+
+      - name: Verify/Test Dafny code
+        run: lit --time-tests -v .
