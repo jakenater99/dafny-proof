@@ -69,7 +69,7 @@ namespace Microsoft.Dafny {
         this.stripLits = stripLits;
       }
 
-      public ExpressionTranslator(Translator translator, PredefinedDecls predef, IToken heapToken)
+      public ExpressionTranslator(Translator translator, PredefinedDecls predef, Boogie.IToken heapToken)
         : this(translator, predef, new Boogie.IdentifierExpr(heapToken, predef.HeapVarName, predef.HeapType)) {
         Contract.Requires(translator != null);
         Contract.Requires(predef != null);
@@ -548,34 +548,29 @@ namespace Microsoft.Dafny {
 
         } else if (expr is SeqUpdateExpr) {
           SeqUpdateExpr e = (SeqUpdateExpr)expr;
-          if (e.ResolvedUpdateExpr != null) {
-            return TrExpr(e.ResolvedUpdateExpr);
+          Boogie.Expr seq = TrExpr(e.Seq);
+          var seqType = e.Seq.Type.NormalizeExpand();
+          if (seqType is SeqType) {
+            Type elmtType = cce.NonNull((SeqType)seqType).Arg;
+            Boogie.Expr index = TrExpr(e.Index);
+            index = translator.ConvertExpression(GetToken(e.Index), index, e.Index.Type, Type.Int);
+            Boogie.Expr val = BoxIfNecessary(GetToken(expr), TrExpr(e.Value), elmtType);
+            return translator.FunctionCall(GetToken(expr), BuiltinFunction.SeqUpdate, predef.BoxType, seq, index, val);
+          } else if (seqType is MapType) {
+            MapType mt = (MapType)seqType;
+            Boogie.Type maptype = predef.MapType(GetToken(expr), mt.Finite, predef.BoxType, predef.BoxType);
+            Boogie.Expr index = BoxIfNecessary(GetToken(expr), TrExpr(e.Index), mt.Domain);
+            Boogie.Expr val = BoxIfNecessary(GetToken(expr), TrExpr(e.Value), mt.Range);
+            return FunctionCall(GetToken(expr), mt.Finite ? "Map#Build" : "IMap#Build", maptype, seq, index, val);
+          } else if (seqType is MultiSetType) {
+            Type elmtType = cce.NonNull((MultiSetType)seqType).Arg;
+            Boogie.Expr index = BoxIfNecessary(GetToken(expr), TrExpr(e.Index), elmtType);
+            Boogie.Expr val = TrExpr(e.Value);
+            return Boogie.Expr.StoreTok(GetToken(expr), seq, index, val);
           } else {
-            Boogie.Expr seq = TrExpr(e.Seq);
-            var seqType = e.Seq.Type.NormalizeExpand();
-            if (seqType is SeqType) {
-              Type elmtType = cce.NonNull((SeqType)seqType).Arg;
-              Boogie.Expr index = TrExpr(e.Index);
-              index = translator.ConvertExpression(GetToken(e.Index), index, e.Index.Type, Type.Int);
-              Boogie.Expr val = BoxIfNecessary(GetToken(expr), TrExpr(e.Value), elmtType);
-              return translator.FunctionCall(GetToken(expr), BuiltinFunction.SeqUpdate, predef.BoxType, seq, index, val);
-            } else if (seqType is MapType) {
-              MapType mt = (MapType)seqType;
-              Boogie.Type maptype = predef.MapType(GetToken(expr), mt.Finite, predef.BoxType, predef.BoxType);
-              Boogie.Expr index = BoxIfNecessary(GetToken(expr), TrExpr(e.Index), mt.Domain);
-              Boogie.Expr val = BoxIfNecessary(GetToken(expr), TrExpr(e.Value), mt.Range);
-              return FunctionCall(GetToken(expr), mt.Finite ? "Map#Build" : "IMap#Build", maptype, seq, index, val);
-            } else if (seqType is MultiSetType) {
-              Type elmtType = cce.NonNull((MultiSetType)seqType).Arg;
-              Boogie.Expr index = BoxIfNecessary(GetToken(expr), TrExpr(e.Index), elmtType);
-              Boogie.Expr val = TrExpr(e.Value);
-              return Boogie.Expr.StoreTok(GetToken(expr), seq, index, val);
-            } else {
-              Contract.Assert(false);
-              throw new cce.UnreachableException();
-            }
+            Contract.Assert(false);
+            throw new cce.UnreachableException();
           }
-
         } else if (expr is MultiSelectExpr) {
           MultiSelectExpr e = (MultiSelectExpr)expr;
           Type elmtType = UserDefinedType.ArrayElementType(e.Array.Type); ;
@@ -602,7 +597,7 @@ namespace Microsoft.Dafny {
             var mem = recv as MemberSelectExpr;
             var fn = mem == null ? null : mem.Member as Function;
             if (fn != null) {
-              return TrExpr(new FunctionCallExpr(GetToken(e), fn.Name, mem.Obj, GetToken(e), e.Args) {
+              return TrExpr(new FunctionCallExpr(e.tok, fn.Name, mem.Obj, e.tok, e.CloseParen, e.Args) {
                 Function = fn,
                 Type = e.Type,
                 TypeApplication_AtEnclosingClass = mem.TypeApplication_AtEnclosingClass,
@@ -710,35 +705,32 @@ namespace Microsoft.Dafny {
         } else if (expr is UnaryOpExpr) {
           var e = (UnaryOpExpr)expr;
           Boogie.Expr arg = TrExpr(e.E);
-          switch (e.Op) {
-            case UnaryOpExpr.Opcode.Lit:
+          switch (e.ResolvedOp) {
+            case UnaryOpExpr.ResolvedOpcode.Lit:
               return MaybeLit(arg);
-            case UnaryOpExpr.Opcode.Not:
-              if (expr.Type.IsBitVectorType) {
-                var bvWidth = expr.Type.AsBitVectorType.Width;
-                var bvType = translator.BplBvType(bvWidth);
-                Boogie.Expr r = FunctionCall(GetToken(expr), "not_bv" + bvWidth, bvType, arg);
-                if (translator.IsLit(arg)) {
-                  r = MaybeLit(r, bvType);
-                }
-                return r;
-              } else {
-                return Boogie.Expr.Unary(GetToken(expr), UnaryOperator.Opcode.Not, arg);
+            case UnaryOpExpr.ResolvedOpcode.BVNot:
+              var bvWidth = expr.Type.AsBitVectorType.Width;
+              var bvType = translator.BplBvType(bvWidth);
+              Boogie.Expr r = FunctionCall(GetToken(expr), "not_bv" + bvWidth, bvType, arg);
+              if (translator.IsLit(arg)) {
+                r = MaybeLit(r, bvType);
               }
-            case UnaryOpExpr.Opcode.Cardinality:
-              var eType = e.E.Type.NormalizeExpand();
-              if (eType is SeqType) {
-                return translator.FunctionCall(GetToken(expr), BuiltinFunction.SeqLength, null, arg);
-              } else if (eType is SetType && ((SetType)eType).Finite) {
-                return translator.FunctionCall(GetToken(expr), BuiltinFunction.SetCard, null, arg);
-              } else if (eType is MultiSetType) {
-                return translator.FunctionCall(GetToken(expr), BuiltinFunction.MultiSetCard, null, arg);
-              } else if (eType is MapType && ((MapType)eType).Finite) {
-                return translator.FunctionCall(GetToken(expr), BuiltinFunction.MapCard, null, arg);
-              } else {
-                Contract.Assert(false); throw new cce.UnreachableException();  // unexpected sized type
-              }
-            case UnaryOpExpr.Opcode.Fresh:
+              return r;
+            case UnaryOpExpr.ResolvedOpcode.BoolNot:
+              return Boogie.Expr.Unary(GetToken(expr), UnaryOperator.Opcode.Not, arg);
+            case UnaryOpExpr.ResolvedOpcode.SeqLength:
+              Contract.Assert(e.E.Type.NormalizeExpand() is SeqType);
+              return translator.FunctionCall(GetToken(expr), BuiltinFunction.SeqLength, null, arg);
+            case UnaryOpExpr.ResolvedOpcode.SetCard:
+              Contract.Assert(e.E.Type.NormalizeExpand() is SetType { Finite: true });
+              return translator.FunctionCall(GetToken(expr), BuiltinFunction.SetCard, null, arg);
+            case UnaryOpExpr.ResolvedOpcode.MultiSetCard:
+              Contract.Assert(e.E.Type.NormalizeExpand() is MultiSetType);
+              return translator.FunctionCall(GetToken(expr), BuiltinFunction.MultiSetCard, null, arg);
+            case UnaryOpExpr.ResolvedOpcode.MapCard:
+              Contract.Assert(e.E.Type.NormalizeExpand() is MapType { Finite: true });
+              return translator.FunctionCall(GetToken(expr), BuiltinFunction.MapCard, null, arg);
+            case UnaryOpExpr.ResolvedOpcode.Fresh:
               var freshLabel = ((FreshExpr)e).AtLabel;
               var eeType = e.E.Type.NormalizeExpand();
               if (eeType is SetType) {
@@ -775,7 +767,7 @@ namespace Microsoft.Dafny {
                 Boogie.Expr oIsFresh = Boogie.Expr.Not(OldAt(freshLabel).IsAlloced(GetToken(expr), TrExpr(e.E)));
                 return Boogie.Expr.Binary(GetToken(expr), BinaryOperator.Opcode.And, oNull, oIsFresh);
               }
-            case UnaryOpExpr.Opcode.Allocated: {
+            case UnaryOpExpr.ResolvedOpcode.Allocated: {
                 var aType = e.E.Type.NormalizeExpand();
                 return translator.MkIsAlloc(TrExpr(e.E), aType, HeapExpr);
               }
@@ -1448,7 +1440,7 @@ namespace Microsoft.Dafny {
           return new Boogie.NAryExpr(GetToken(expr), new Boogie.FunctionCall(id), args);
         }
       }
-      public Expr TrToFunctionCall(IToken tok, string function, Boogie.Type returnType, Boogie.Expr e0, Boogie.Expr e1, bool liftLit) {
+      public Expr TrToFunctionCall(Boogie.IToken tok, string function, Boogie.Type returnType, Boogie.Expr e0, Boogie.Expr e1, bool liftLit) {
         Boogie.Expr re = FunctionCall(tok, function, returnType, e0, e1);
         if (liftLit) {
           re = MaybeLit(re, returnType);
@@ -1660,7 +1652,7 @@ BplBoundVar(varNameGen.FreshId(string.Format("#{0}#", bv.Name)), predef.BoxType,
           args.Add(HeapExpr);
           // If the function doesn't use the heap, but global settings say to use it,
           // then we want to quantify over the heap so that heap in the trigger can match over
-          // heap modifying operations. (see Test/dafny4/Bug144.dfyp)
+          // heap modifying operations. (see Test/dafny4/Bug144.dfy)
           bool usesHeap = e.Function.ReadsHeap || e.Function.Formals.Any(f => f.Type.IsRefType);
           if (!usesHeap) {
             Statistics_HeapAsQuantifierCount++;

@@ -1,4 +1,4 @@
-// ModuleInsertion.dfyp
+// ModuleInsertion.dfy
 
 
 module Outer {
@@ -104,7 +104,7 @@ module U.V {
 module U.V.W {
   const x1 := 12 * X.x0
 }
-// ModuleInsertion.dfyp
+// ModuleInsertion.dfy
 
 /*
 module _System {
@@ -200,7 +200,7 @@ module _System {
     var Items: iset<(T, U)>  // immutable
   }
 
-  datatype /*_tuple#0*/ () = _#Make0
+  datatype {:compile false} /*_tuple#0*/ () = _#Make0
 }
 // bitvector types in use:
 */

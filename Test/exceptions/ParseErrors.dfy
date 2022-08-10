@@ -1,7 +1,7 @@
-// RUN: %dafny "%s" > "%t"
+// RUN: %dafny_0 "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
-include "./NatOutcome.dfyp"
-include "./VoidOutcome.dfyp"
+include "./NatOutcome.dfy"
+include "./VoidOutcome.dfy"
 
 method MultiAssignment(r1: NatOutcome, r2: NatOutcome) returns (res: NatOutcome) {
     var a0, b0 := r1, r2; // <-- multi-assignment allowed

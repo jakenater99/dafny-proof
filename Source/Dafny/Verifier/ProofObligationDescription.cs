@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using JetBrains.Annotations;
 
 namespace Microsoft.Dafny.ProofObligationDescription;
@@ -235,6 +236,39 @@ public class IsAllocated : ProofObligationDescription {
   }
 }
 
+public class IsOlderProofObligation : ProofObligationDescription {
+  public override string SuccessDescription {
+    get {
+      var successOlder = olderParameterCount == 1 ? " is" : "s are";
+      var successOther = otherParameterCount == 1 ? "the" : "any";
+      return $"the 'older' parameter{successOlder} not newer than {successOther} other parameter when the predicate returns 'true'";
+    }
+  }
+
+  public override string FailureDescription {
+    get {
+      var failureOlder = olderParameterCount == 1 ? "the" : "an";
+      var failureOther =
+        olderParameterCount == 1 && otherParameterCount == 1 ? "the other parameter" :
+        otherParameterCount == 1 ? "the non-'older' parameter" :
+        "all non-'older' parameters";
+      return $"{failureOlder} 'older' parameter might be newer than {failureOther} when the predicate returns 'true'";
+    }
+  }
+
+  public override string ShortDescription => $"older parameter{(2 <= olderParameterCount ? "s" : "")}";
+
+  private readonly int olderParameterCount;
+  private readonly int otherParameterCount;
+
+  public IsOlderProofObligation(int olderParameterCount, int allParameterCount) {
+    Contract.Requires(1 <= olderParameterCount);
+    Contract.Requires(olderParameterCount <= allParameterCount);
+    this.olderParameterCount = olderParameterCount;
+    this.otherParameterCount = allParameterCount - olderParameterCount;
+  }
+}
+
 //// Contract constraints
 
 public class PreconditionSatisfied : ProofObligationDescription {
@@ -269,24 +303,6 @@ public class AssertStatement : ProofObligationDescription {
   private readonly string customErrMsg;
 
   public AssertStatement([CanBeNull] string customErrMsg) {
-    this.customErrMsg = customErrMsg;
-  }
-}
-
-public class ProofStatement : ProofObligationDescription {
-  public override string SuccessDescription =>
-    customErrMsg is null
-      ? "proof always holds"
-      : $"error is impossible: {customErrMsg}";
-
-  public override string FailureDescription =>
-    customErrMsg ?? "proof might not hold";
-
-  public override string ShortDescription => "proof statement";
-
-  private readonly string customErrMsg;
-
-  public ProofStatement([CanBeNull] string customErrMsg) {
     this.customErrMsg = customErrMsg;
   }
 }
@@ -362,20 +378,22 @@ public class YieldEnsures : ProofObligationDescription {
 public class TraitFrame : ProofObligationDescription {
   public override string SuccessDescription =>
     isModify
-      ? "expression abides by trait context's modifies clause"
-      : "expression abides by trait context's reads clause";
+      ? $"{whatKind} abides by trait context's modifies clause"
+      : $"{whatKind} abides by trait context's reads clause";
 
   public override string FailureDescription =>
     isModify
-      ? "expression might read an object not in the parent trait context's reads clause"
-      : "expression might modify an object not in the parent trait context's modifies clause";
+      ? $"{whatKind} might modify an object not in the parent trait context's modifies clause"
+      : $"{whatKind} might read an object not in the parent trait context's reads clause";
 
   public override string ShortDescription =>
     isModify ? "trait modifies" : "trait reads";
 
+  private readonly string whatKind;
   private bool isModify;
 
-  public TraitFrame(bool isModify) {
+  public TraitFrame(string whatKind, bool isModify) {
+    this.whatKind = whatKind;
     this.isModify = isModify;
   }
 }

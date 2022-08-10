@@ -5,7 +5,7 @@
 // Rustan Leino, 18 August 2010.
 //
 // This program employs the standard Valid()/Repr idiom used in the dynamic-frames
-// style of specifications, see for example the comment in Problem3-FindZero.dfyp.
+// style of specifications, see for example the comment in Problem3-FindZero.dfy.
 // Within that idiom, the specification is straightforward (if verbose), and there
 // are no particular wrinkles or annoyances in getting the verifier to prove the
 // correctness.

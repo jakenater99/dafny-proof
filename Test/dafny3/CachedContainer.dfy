@@ -30,7 +30,7 @@
 // going on. Here, too, using the /rprint:- option will be useful, since
 // it shows the automatically generated specifications and code.
 //
-// (For another example that uses these features, see Test/dafny2/StoreAndRetrieve.dfyp.)
+// (For another example that uses these features, see Test/dafny2/StoreAndRetrieve.dfy.)
 
 
 // give the method signatures and specs

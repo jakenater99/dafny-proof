@@ -7,7 +7,7 @@
      https://docs.kde.org/trunk5/en/applications/katepart/highlight.html
 -->
 
-<language name="dafny" version="3" kateversion="5.0" section="Sources" extensions="*.dfyp" author="Robin Salkeld, David Cok" license="MIT">
+<language name="dafny" version="3" kateversion="5.0" section="Sources" extensions="*.dfy" author="Robin Salkeld, David Cok" license="MIT">
 
   <highlighting>
     <list name="keywords">

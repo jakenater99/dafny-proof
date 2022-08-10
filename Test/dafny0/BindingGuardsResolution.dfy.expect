@@ -1,4 +1,4 @@
-// BindingGuardsResolution.dfyp
+// BindingGuardsResolution.dfy
 
 
 module Tests {
@@ -154,15 +154,15 @@ module Ghost {
     b := exists y {:myattribute P(y)} :: 0 <= y < 100;
   }
 }
-BindingGuardsResolution.dfyp(12,10): Error: Duplicate local-variable name: x
-BindingGuardsResolution.dfyp(19,6): Error: LHS of assignment must denote a mutable variable
-BindingGuardsResolution.dfyp(39,8): Error: Duplicate local-variable name: x
-BindingGuardsResolution.dfyp(84,8): Error: LHS of assignment must denote a mutable variable
-BindingGuardsResolution.dfyp(109,7): Error: type of bound variable 'x' could not be determined; please specify the type explicitly
-BindingGuardsResolution.dfyp(130,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
-BindingGuardsResolution.dfyp(132,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
-BindingGuardsResolution.dfyp(140,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
-BindingGuardsResolution.dfyp(142,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
-BindingGuardsResolution.dfyp(146,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
-BindingGuardsResolution.dfyp(149,37): Error: a call to a ghost predicate is allowed only in specification contexts (consider declaring the predicate with 'predicate method')
-11 resolution/type errors detected in BindingGuardsResolution.dfyp
+BindingGuardsResolution.dfy(12,10): Error: Duplicate local-variable name: x
+BindingGuardsResolution.dfy(19,6): Error: LHS of assignment must denote a mutable variable
+BindingGuardsResolution.dfy(39,8): Error: Duplicate local-variable name: x
+BindingGuardsResolution.dfy(84,8): Error: LHS of assignment must denote a mutable variable
+BindingGuardsResolution.dfy(109,7): Error: type of bound variable 'x' could not be determined; please specify the type explicitly
+BindingGuardsResolution.dfy(130,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
+BindingGuardsResolution.dfy(132,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
+BindingGuardsResolution.dfy(140,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
+BindingGuardsResolution.dfy(142,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
+BindingGuardsResolution.dfy(146,8): Error: assignment to non-ghost variable is not allowed in this context, because the statement is in a ghost context; e.g., it may be guarded by a specification-only expression
+BindingGuardsResolution.dfy(149,37): Error: a call to a ghost predicate is allowed only in specification contexts (consider declaring the predicate with 'predicate method')
+11 resolution/type errors detected in BindingGuardsResolution.dfy

@@ -24,9 +24,18 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
 
     public async Task<CounterExampleList> Handle(CounterExampleParams request, CancellationToken cancellationToken) {
       try {
-        var document = await documents.GetVerifiedDocumentAsync(request.TextDocument);
-        if (document != null) {
-          return new CounterExampleLoader(logger, document, request.CounterExampleDepth, cancellationToken)
+        var documentManager = documents.GetDocumentManager(request.TextDocument);
+        if (documentManager != null) {
+          var translatedDocument = await documentManager.CompilationManager.TranslatedDocument;
+          var verificationTasks = translatedDocument.VerificationTasks;
+          if (verificationTasks != null) {
+            foreach (var task in verificationTasks) {
+              documentManager.CompilationManager.Verify(translatedDocument, task);
+            }
+          }
+
+          var documentWithCounterExamples = await documentManager.LastDocumentAsync;
+          return new CounterExampleLoader(logger, documentWithCounterExamples!, request.CounterExampleDepth, cancellationToken)
             .GetCounterExamples();
         }
 
@@ -43,7 +52,7 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
     private class CounterExampleLoader {
       private const string InitialStateName = "<initial>";
       private static readonly Regex StatePositionRegex = new(
-        @".*\.dfyp\((?<line>\d+),(?<character>\d+)\)",
+        @".*\.dfy\((?<line>\d+),(?<character>\d+)\)",
         RegexOptions.IgnoreCase | RegexOptions.Singleline
       );
 
@@ -60,21 +69,19 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
       }
 
       public CounterExampleList GetCounterExamples() {
-        if (document.SerializedCounterExamples == null) {
+        if (!document.Counterexamples!.Any()) {
           logger.LogDebug("got no counter-examples for document {DocumentUri}", document.Uri);
           return new CounterExampleList();
         }
-        var counterExamples = GetLanguageSpecificModels(document.SerializedCounterExamples)
+        var counterExamples = GetLanguageSpecificModels(document.Counterexamples!)
           .SelectMany(GetCounterExamples)
+          .WithCancellation(cancellationToken)
           .ToArray();
         return new CounterExampleList(counterExamples);
       }
 
-      private IEnumerable<DafnyModel> GetLanguageSpecificModels(string serializedCounterExamples) {
-        using var counterExampleReader = new StringReader(serializedCounterExamples);
-        return Model.ParseModels(counterExampleReader)
-          .WithCancellation(cancellationToken)
-          .Select(GetLanguageSpecificModel);
+      private IEnumerable<DafnyModel> GetLanguageSpecificModels(IReadOnlyList<Counterexample> counterExamples) {
+        return counterExamples.Select(c => GetLanguageSpecificModel(c.Model));
       }
 
       private DafnyModel GetLanguageSpecificModel(Model model) {
@@ -83,8 +90,6 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
 
       private IEnumerable<CounterExampleItem> GetCounterExamples(DafnyModel model) {
         return model.States
-          .WithCancellation(cancellationToken)
-          .OfType<DafnyModelState>()
           .Where(state => !state.IsInitialState)
           .Select(GetCounterExample);
       }
@@ -94,7 +99,7 @@ namespace Microsoft.Dafny.LanguageServer.Handlers.Custom {
         return new(
           new Position(state.GetLineId() - 1, state.GetCharId()),
           vars.WithCancellation(cancellationToken).ToDictionary(
-            variable => variable.ShortName + ":" + variable.Type.InDafnyFormat(),
+            variable => variable.ShortName + ":" + DafnyModelTypeUtils.GetInDafnyFormat(variable.Type),
             variable => variable.Value
           )
         );

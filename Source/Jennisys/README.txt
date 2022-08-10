@@ -18,11 +18,11 @@
   Synthesized programs will be generated in "c:\tmp", and their file
   names will follow the following pattern:
 
-    "jennisys-synth_<example-name>.dfyp"
+    "jennisys-synth_<example-name>.dfy"
 
   To verify the correctness of the synthesized programs, run
 
-    $ Dafny /compile:0 jennisys-synth_<example-name>.dfyp
+    $ Dafny /compile:0 jennisys-synth_<example-name>.dfy
 
   Expected outputs (i.e., synthesized Dafny programs) for the examples
   in "examples/oopsla12" can be found in the same folder.

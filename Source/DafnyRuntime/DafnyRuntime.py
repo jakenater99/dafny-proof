@@ -3,13 +3,20 @@ import builtins
 from dataclasses import dataclass
 from contextlib import contextmanager
 from fractions import Fraction
+from collections import Counter
+from functools import reduce
+from types import GeneratorType
+from itertools import chain, combinations
+import copy
 
 class classproperty(property):
     def __get__(self, instance, owner):
         return classmethod(self.fget).__get__(None, owner)()
 
 def print(value):
-    if isinstance(value, bool):
+    if value is None:
+        builtins.print("null", end="")
+    elif isinstance(value, bool):
         builtins.print("true" if value else "false", end="")
     else:
         builtins.print(value, end="")
@@ -18,41 +25,187 @@ def print(value):
 class Break(Exception):
     target: str
 
+class TailCall(Exception):
+    pass
+
 @contextmanager
-def label(name: str):
+def label(name: str = None):
     try:
         yield
     except Break as g:
         if g.target != name:
             raise g
+    except TailCall as g:
+        if name is not None:
+            raise g
 
 def _break(name):
     raise Break(target=name)
 
-class Seq(list):
+def _tail_call():
+    raise TailCall()
+
+class Seq(tuple):
+    def __init__(self, __iterable = None, isStr = False):
+        if __iterable is None:
+            __iterable = []
+        self.isStr = isStr \
+                     or isinstance(__iterable, str) \
+                     or (isinstance(__iterable, Seq) and __iterable.isStr) \
+                     or (not isinstance(__iterable, GeneratorType)
+                         and all(isinstance(e, str) and len(e) == 1 for e in __iterable)
+                         and len(__iterable) > 0)
+
     @property
     def Elements(self):
         return self
 
-class Set(set):
+    @property
+    def UniqueElements(self):
+        return frozenset(self)
+
+    def __str__(self) -> str:
+        if self.isStr:
+            return ''.join(self)
+        return '[' + ', '.join(map(str, self)) + ']'
+
+    def __add__(self, other):
+        return Seq(super().__add__(other), isStr=self.isStr and other.isStr)
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            indices = range(*key.indices(len(self)))
+            return Seq((self[i] for i in indices), isStr=self.isStr)
+        return super().__getitem__(key)
+
+    def set(self, key, value):
+        l = list(self)
+        l[key] = value
+        return Seq(l, isStr=self.isStr)
+
+    def __hash__(self) -> int:
+        return hash(tuple(self))
+
+class Set(frozenset):
     @property
     def Elements(self):
         return self
+
+    @property
+    def AllSubsets(self):
+        # https://docs.python.org/3/library/itertools.html#itertools-recipes
+        s = list(self)
+        return map(Set, chain.from_iterable(combinations(s, r) for r in range(len(s)+1)))
+
+    def __str__(self) -> str:
+        return '{' + ', '.join(map(str, self)) + '}'
 
     def union(self, other):
-        return Set(set.union(self, other))
+        return Set(super().union(self, other))
+
+    def intersection(self, other):
+        return Set(super().intersection(other))
+
+    def ispropersubset(self, other):
+        return self.issubset(other) and self != other
 
     def __or__(self, other):
-        return Set(set.union(self, other))
+        return self.union(other)
+
+    def __sub__(self, other):
+        return Set(super().__sub__(other))
+
+class MultiSet(Counter):
+    def __str__(self) -> str:
+        return 'multiset{' + ', '.join(map(str, self.elements())) + '}'
+
+    def __len__(self):
+        return reduce(lambda acc, key: acc + self[key], self, 0)
+
+    def union(self, other):
+        return MultiSet(self + other)
+
+    def __or__(self, other):
+        return self.union(other)
+
+    def intersection(self, other):
+        return MultiSet(self & other)
+
+    def __sub__(self, other):
+        return MultiSet(super().__sub__(other))
+
+    @property
+    def keys(self):
+        return Set(key for key in self if self[key] > 0)
+
+    def isdisjoint(self, other):
+        return frozenset(self.keys).isdisjoint(frozenset(other.keys))
+
+    def issubset(self, other):
+        return all(self[key] <= other[key] for key in frozenset(self).union(frozenset(other)))
+
+    def ispropersubset(self, other):
+        return self.issubset(other) and len(self) < len(other)
+
+    def set(self, key, value):
+        set = Counter(self)
+        set[key] = value
+        return MultiSet(set)
+
+    def __hash__(self):
+        return hash(frozenset(self.keys))
+
+    def __eq__(self, other):
+        return all(self[key] == other[key] for key in self.keys | other.keys)
+
+    def __setattr__(self, key, value):
+        raise TypeError("'Map' object is immutable")
+
+    def __contains__(self, item):
+        return self[item] > 0
 
 class Map(dict):
+    def __str__(self) -> str:
+        return 'map[' + ', '.join(map(lambda i: f'{i[0]} := {i[1]}', self.items)) + ']'
+
     @property
     def Elements(self):
         return self
 
     @property
     def keys(self):
-        return Seq(dict.keys(self))
+        return Set(super().keys())
+
+    @property
+    def values(self):
+        return Set(super().values())
+
+    @property
+    def items(self):
+        return Set(super().items())
+
+    def set(self, key, value):
+        map = dict(self)
+        map[key] = value
+        return Map(map)
+
+    def __sub__(self, other):
+        map = dict(self)
+        for key in list(other):
+            map.pop(key, None)
+        return Map(map)
+
+    def __or__(self, other):
+        map = dict(self)
+        for k, v in other.items:
+            map[k] = v
+        return Map(map)
+
+    def __hash__(self):
+        return hash(frozenset(self))
+
+    def __setattr__(self, key, value):
+        raise TypeError("'Map' object is immutable")
 
 class BigOrdinal:
     @staticmethod
@@ -143,6 +296,28 @@ def euclidian_modulus(a, b):
     c = (-a) % bp
     return c if c == 0 else bp - c
 
+def newArray(initValue, *dims):
+    b = initValue
+    for i in reversed(list(dims)):
+        b = [copy.deepcopy(b) for _ in range(i)]
+    return b
+
 @dataclass
 class HaltException(Exception):
     message: str
+
+def quantifier(vals, frall, pred):
+    for u in vals:
+        if pred(u) != frall:
+            return not frall
+    return frall
+
+def AllChars():
+    return (chr(i) for i in range(0x10000))
+
+class defaults:
+    bool = staticmethod(lambda: False)
+    int = staticmethod(lambda: 0)
+    real = staticmethod(BigRational)
+    pointer = staticmethod(lambda: None)
+    tuple = staticmethod(lambda *args: lambda: tuple(a() for a in args))

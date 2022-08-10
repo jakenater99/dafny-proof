@@ -1,4 +1,4 @@
-// RUN: %dafny /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
+// RUN: %dafny_0 /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 module Misc {
@@ -2656,13 +2656,13 @@ module Initialization {
   type GW = x | x % 2 == 1 ghost witness 17
   method DefiniteAssignmentViolation() returns (e: Yt<Even>, o: Yt<Odd>, g: Yt<GW>)
   {
-  }  // no resolution errors (but verification errors, see NonZeroInitialization.dfyp)
+  }  // no resolution errors (but verification errors, see NonZeroInitialization.dfy)
   method ArrayElementInitViolation() returns (e: array<Yt<Even>>, o: array<Yt<Odd>>, g: array<Yt<GW>>)
   {
     e := new Yt<Even>[20];
     o := new Yt<Odd>[20];
     g := new Yt<GW>[20];
-  }  // no resolution errors (but verification errors, see NonZeroInitialization.dfyp)
+  }  // no resolution errors (but verification errors, see NonZeroInitialization.dfy)
   method GimmieOne<G(0)>() returns (g: G)
   {
   }
@@ -2960,7 +2960,7 @@ module TypeOfFunctionMember {
 
 module CollectionUpdates {
   // Update operations on collections must have the right types, modulo subset types.
-  // For verification errors, see Maps.dfyp.
+  // For verification errors, see Maps.dfy.
   trait Trait { }
   class Elem extends Trait { }
 
@@ -3624,7 +3624,7 @@ module FrameTypes {
     g: int -> object, h: int -> set<object>, i: int -> iset<object>, j: int -> seq<object>, k: set<object> -> int,
     l: bool -> multiset<object>, m: bool -> map<object, object>)
     reads f // error: wrong argument type for reads
-    reads g
+    reads g // error: a function must be to a collection of references
     reads h
     reads i
     reads j
@@ -3817,7 +3817,7 @@ module LabelRegressions {
   // case (pun intended).
   // There's also something analogous going on in the Verifier, where lists of statements should call
   // TrStmtList, not just call TrStmt on every Statement in the List. (See method LabelRegressions()
-  // in Test/comp/ForLoops-Compilation.dfyp.)
+  // in Test/comp/ForLoops-Compilation.dfy.)
   method IfCaseRegression() {
     if
     case true =>

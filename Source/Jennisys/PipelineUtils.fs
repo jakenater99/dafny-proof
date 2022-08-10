@@ -12,8 +12,8 @@ open Logger
 let dafnyScratchSuffix = "scratch"
 let dafnyVerifySuffix = "verify"
 let dafnyUnifSuffix = "unif"
-let dafnySynthFileNameTemplate = @"c:\tmp\jennisys-synth_###.dfyp"
-let dafnyModularSynthFileNameTemplate = @"c:\tmp\jennisys-synth_###_mod.dfyp"
+let dafnySynthFileNameTemplate = @"c:\tmp\jennisys-synth_###.dfy"
+let dafnyModularSynthFileNameTemplate = @"c:\tmp\jennisys-synth_###_mod.dfy"
 
 let mutable lastDafnyExitCode = 0 //TODO: how to avoid this muttable state?
 
@@ -42,7 +42,7 @@ let RunDafny inputFile modelFile =
 /// Runs Dafny on the given "dafnyCode" and returns models
 //  =======================================================
 let RunDafnyProgram dafnyProgram suffix =
-  let inFileName = @"c:\tmp\jennisys-" + suffix + ".dfyp"
+  let inFileName = @"c:\tmp\jennisys-" + suffix + ".dfy"
   let modelFileName = @"c:\tmp\jennisys-" + suffix + ".bvd"
   use file = System.IO.File.CreateText(inFileName)
   file.AutoFlush <- true

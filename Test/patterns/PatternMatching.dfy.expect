@@ -1,4 +1,4 @@
-PatternMatching.dfyp(102,4): Warning: this branch is redundant
+PatternMatching.dfy(102,4): Warning: this branch is redundant
 
 Dafny program verifier finished with 9 verified, 0 errors
 NestingTest([6]) = 6, should return 6

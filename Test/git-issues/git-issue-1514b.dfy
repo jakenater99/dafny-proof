@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:3 /rprint:"%t.rprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-include "../libraries/src/Wrappers.dfyp"
+include "../libraries/src/Wrappers.dfy"
 import opened Wrappers
 
 trait Foo<C, D> {

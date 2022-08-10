@@ -15,15 +15,7 @@ using Microsoft.Dafny.LanguageServer.Workspace;
 
 namespace Microsoft.Dafny.LanguageServer.IntegrationTest.Lookup {
   [TestClass]
-  public class DefinitionTest : DafnyLanguageServerTestBase {
-    private ILanguageClient client;
-    private DiagnosticsReceiver diagnosticReceiver;
-
-    [TestInitialize]
-    public async Task SetUp() {
-      diagnosticReceiver = new();
-      client = await InitializeClient();
-    }
+  public class DefinitionTest : ClientBasedLanguageServerTest {
 
     private IRequestProgressObservable<IEnumerable<LocationOrLocationLink>, LocationOrLocationLinks> RequestDefinition(TextDocumentItem documentItem, Position position) {
       return client.RequestDefinition(
@@ -56,9 +48,10 @@ method CallDoIt() returns () {
     public async Task DefinitionReturnsBeforeVerificationIsComplete() {
       var documentItem = CreateTestDocument(NeverVerifies);
       client.OpenDocument(documentItem);
-      var verificationTask = diagnosticReceiver.AwaitVerificationDiagnosticsAsync(CancellationToken);
+      var verificationTask = GetLastDiagnostics(documentItem, CancellationToken);
       var definitionTask = RequestDefinition(documentItem, (4, 14)).AsTask();
       var first = await Task.WhenAny(verificationTask, definitionTask);
+      Assert.IsFalse(verificationTask.IsCompleted);
       Assert.AreSame(first, definitionTask);
     }
 
@@ -77,17 +70,17 @@ method DoIt() {
     [TestMethod]
     public async Task DefinitionOfFunctionInvocationOfFunctionDeclaredInForeignDocumentReturnsLocation() {
       var source = @"
-include ""foreign.dfyp""
+include ""foreign.dfy""
 
 method DoIt() returns (x: int) {
   var a := new A();
   return a.GetX();
 }".TrimStart();
-      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfyp"));
+      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfy"));
       await client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       var definition = (await RequestDefinition(documentItem, (4, 13)).AsTask()).Single();
       var location = definition.Location;
-      Assert.AreEqual(DocumentUri.FromFileSystemPath(Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/foreign.dfyp")), location.Uri);
+      Assert.AreEqual(DocumentUri.FromFileSystemPath(Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/foreign.dfy")), location.Uri);
       Assert.AreEqual(new Range((5, 18), (5, 22)), location.Range);
     }
 
@@ -187,17 +180,17 @@ class Test {
     [TestMethod]
     public async Task DefinitionInConstructorInvocationOfUserDefinedTypeOfForeignFileReturnsLinkToForeignFile() {
       var source = @"
-include ""foreign.dfyp""
+include ""foreign.dfy""
 
 method DoIt() returns (x: int) {
   var a := new A();
   return a.GetX();
 }".TrimStart();
-      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfyp"));
+      var documentItem = CreateTestDocument(source, Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/test.dfy"));
       await client.OpenDocumentAndWaitAsync(documentItem, CancellationToken);
       var definition = (await RequestDefinition(documentItem, (3, 15)).AsTask()).Single();
       var location = definition.Location;
-      Assert.AreEqual(DocumentUri.FromFileSystemPath(Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/foreign.dfyp")), location.Uri);
+      Assert.AreEqual(DocumentUri.FromFileSystemPath(Path.Combine(Directory.GetCurrentDirectory(), "Lookup/TestFiles/foreign.dfy")), location.Uri);
       Assert.AreEqual(new Range((0, 6), (0, 7)), location.Range);
     }
   }

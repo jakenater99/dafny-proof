@@ -329,6 +329,8 @@ function $AlwaysAllocated(Ty): bool uses {
       (forall h: Heap, v: Box  :: { $IsAllocBox(v, ty, h) }  $IsBox(v, ty) ==> $IsAllocBox(v, ty, h)));
 }
 
+function $OlderTag(Heap): bool;
+
 // ---------------------------------------------------------------
 // -- Encoding of type names -------------------------------------
 // ---------------------------------------------------------------
@@ -966,7 +968,7 @@ axiom (forall<T> :: { Seq#Empty(): Seq T } Seq#Length(Seq#Empty(): Seq T) == 0);
 axiom (forall<T> s: Seq T :: { Seq#Length(s) }
   (Seq#Length(s) == 0 ==> s == Seq#Empty())
 // The following would be a nice fact to include, because it would enable verifying the
-// GenericPick.SeqPick* methods in Test/dafny0/SmallTests.dfyp.  However, it substantially
+// GenericPick.SeqPick* methods in Test/dafny0/SmallTests.dfy.  However, it substantially
 // slows down performance on some other tests, including running seemingly forever on
 // some.
 //  && (Seq#Length(s) != 0 ==> (exists x: T :: Seq#Contains(s, x)))
@@ -1038,7 +1040,7 @@ axiom (forall<T> s0: Seq T, s1: Seq T, x: T ::
   Seq#Contains(Seq#Append(s0, s1), x) <==>
     Seq#Contains(s0, x) || Seq#Contains(s1, x));
 
-axiom (forall<T> s: Seq T, v: T, x: T ::  // needed to prove things like '4 in [2,3,4]', see method TestSequences0 in SmallTests.dfyp
+axiom (forall<T> s: Seq T, v: T, x: T ::  // needed to prove things like '4 in [2,3,4]', see method TestSequences0 in SmallTests.dfy
   { Seq#Contains(Seq#Build(s, v), x) }
     Seq#Contains(Seq#Build(s, v), x) <==> (v == x || Seq#Contains(s, x)));
 
@@ -1137,7 +1139,7 @@ axiom (forall<T> s: Seq T, i: int, v: T, n: int ::
         0 <= n && n <= i && i < Seq#Length(s) ==> Seq#Drop(Seq#Update(s, i, v), n) == Seq#Update(Seq#Drop(s, n), i-n, v) );
 axiom (forall<T> s: Seq T, i: int, v: T, n: int ::
         { Seq#Drop(Seq#Update(s, i, v), n) }
-        0 <= i && i < n && n < Seq#Length(s) ==> Seq#Drop(Seq#Update(s, i, v), n) == Seq#Drop(s, n));
+        0 <= i && i < n && n <= Seq#Length(s) ==> Seq#Drop(Seq#Update(s, i, v), n) == Seq#Drop(s, n));
 // Extension axiom, triggers only on Takes from arrays.
 axiom (forall h: Heap, a: ref, n0, n1: int ::
         { Seq#Take(Seq#FromArray(h, a), n0), Seq#Take(Seq#FromArray(h, a), n1) }

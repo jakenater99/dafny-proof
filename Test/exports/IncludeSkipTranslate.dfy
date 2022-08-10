@@ -1,7 +1,7 @@
-// RUN: %dafny /env:0 /dprint:"%t.dfyp" /compile:0 "%s" > "%t"
+// RUN: %dafny /env:0 /dprint:"%t.dfy" /compile:0 "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-include "ExportRefinement.dfyp"
+include "ExportRefinement.dfy"
 
 module Z {
   lemma Test()

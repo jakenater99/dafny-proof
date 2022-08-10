@@ -1,19 +1,19 @@
 // RUN: %dafny /compile:0 "%s" > "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:A.Test "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:B.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:A.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:B.Test "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:C.Test "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:D.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:D.Test "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:E.Test "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:G.Test "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:H.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:H.Test "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:I.Test "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:J.Test "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:K.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:J.Test "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:K.Test "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:       "%s" >> "%t"
 // RUN: %dafny /noVerify /compile:4 /Main:-      "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:Tr.Instance "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:Opaque.Static   "%s" >> "%t"
-// RUN: %dafny /noVerify /compile:4 /Main:Opaque.Instance "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:Tr.Instance "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:Opaque.Static   "%s" >> "%t"
+// RUN: %dafny_0 /noVerify /compile:4 /Main:Opaque.Instance "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t"
 
 class A {
@@ -53,7 +53,7 @@ class Z {
 }
 
 // Of the remaining methods, this file tests only the error cases.
-// The cases that compile are tested in Test/comp/MainMethod.dfyp.
+// The cases that compile are tested in Test/comp/MainMethod.dfy.
 
 trait Tr {
   static method Static() { print "OK-Tr\n"; }

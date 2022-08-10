@@ -12,11 +12,11 @@ boogie: ${DIR}/boogie/Binaries/Boogie.exe
 ${DIR}/boogie/Binaries/Boogie.exe:
 	(cd ${DIR}/boogie ; dotnet build -c Release Source/Boogie.sln )
 
-#refman:
-#	make -C ${DIR}/docs/DafnyRef
+refman:
+	make -C ${DIR}/docs/DafnyRef
 
-#refman-release:
-#	make -C ${DIR}/docs/DafnyRef release
+refman-release:
+	make -C ${DIR}/docs/DafnyRef release
 
 z3-mac:
 	wget https://github.com/Z3Prover/z3/releases/download/Z3-4.8.5/z3-4.8.5-x64-osx-10.14.2.zip
@@ -28,10 +28,13 @@ z3-ubuntu:
 	unzip z3-4.8.5-x64-ubuntu-16.04.zip
 	mv z3-4.8.5-x64-ubuntu-16.04 ${DIR}/Binaries/z3
 
+format:
+	dotnet tool run dotnet-format -w -s error Source/Dafny.sln --exclude Dafny/Scanner.cs --exclude Dafny/Parser.cs
+
 clean:
 	(cd ${DIR}; cd Source; rm -rf Dafny/bin Dafny/obj DafnyDriver/bin DafnyDriver/obj DafnyRuntime/obj DafnyRuntime/bin DafnyServer/bin DafnyServer/obj DafnyPipeline/obj DafnyPipeline/bin )
 	(cd ${DIR} ; dotnet build Source/Dafny.sln -v:q --nologo -target:clean )
-	make -C ${DIR}/Source/Dafny -f Makefile.Linux clean
+	make -C ${DIR}/Source/Dafny -f Makefile clean
 	(cd ${DIR}/Source/DafnyRuntime/DafnyRuntimeJava; ./gradlew clean)
 	make -C ${DIR}/docs/DafnyRef clean
 	(cd ${DIR}; cd Source; rm -rf Dafny/bin Dafny/obj DafnyDriver/bin DafnyDriver/obj DafnyRuntime/obj DafnyRuntime/bin DafnyServer/bin DafnyServer/obj DafnyPipeline/obj DafnyPipeline/bin )

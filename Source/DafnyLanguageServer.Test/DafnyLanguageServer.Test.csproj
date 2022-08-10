@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DiffPlex" Version="1.7.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
@@ -26,31 +27,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
-    <None Update="Lookup\TestFiles\foreign.dfyp">
+    <None Update="Lookup\TestFiles\foreign.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\semanticError.dfyp">
+    <None Update="Synchronization\TestFiles\semanticError.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\empty.dfyp">
+    <None Update="Synchronization\TestFiles\empty.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Synchronization\TestFiles\syntaxError.dfyp">
+    <None Update="Synchronization\TestFiles\syntaxError.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Various\TestFiles\multi1.dfyp">
+    <None Update="Various\TestFiles\multi1.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Various\TestFiles\multi2.dfyp">
+    <None Update="Various\TestFiles\multi2.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\Test\dafny3\GenericSort.dfy" Link="Various\TestFiles\GenericSort.dfyp">
+    <None Include="..\..\Test\dafny3\GenericSort.dfy" Link="Various\TestFiles\GenericSort.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Test\dafny4\GHC-MergeSort.dfy" Link="Various\TestFiles\GHC-MergeSort.dfyp">
+    <None Include="..\..\Test\dafny4\GHC-MergeSort.dfy" Link="Various\TestFiles\GHC-MergeSort.dfy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

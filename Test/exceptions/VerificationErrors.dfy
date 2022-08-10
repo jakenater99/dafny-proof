@@ -1,8 +1,8 @@
-// RUN: %dafny "%s" /rprint:"%t.rprint" > "%t"
+// RUN: %dafny_0 "%s" /rprint:"%t.rprint" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-include "./NatOutcome.dfyp"
-include "./VoidOutcome.dfyp"
+include "./NatOutcome.dfy"
+include "./VoidOutcome.dfy"
 
 method CheckThatVerifierRunsInsideDesugaredExprs_Nat(r1: NatOutcome, r2: NatOutcome) returns (res: NatOutcome) {
     var a :- MakeNatSuccess(assert r1 == r2; 12);

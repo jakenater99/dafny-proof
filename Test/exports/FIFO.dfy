@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:3 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-include "Queue.dfypi"
+include "Queue.dfyi"
 
 module FIFO refines Queue {
     type Item = int

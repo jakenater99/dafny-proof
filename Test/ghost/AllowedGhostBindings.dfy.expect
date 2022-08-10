@@ -1,4 +1,4 @@
-// AllowedGhostBindings.dfyp
+// AllowedGhostBindings.dfy
 
 method Test1()
 {

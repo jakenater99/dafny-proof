@@ -8,7 +8,7 @@ namespace DafnyPipeline.Test {
   public class RelativePaths {
     [Fact]
     public void Test() {
-      Assert.Equal(0, DafnyDriver.ThreadMain(new string[] { "/spillTargetCode:3", "warnings-as-errors.dfyp" }));
+      Assert.Equal(0, DafnyDriver.ThreadMain(new string[] { "/spillTargetCode:3", "warnings-as-errors.dfy" }));
     }
   }
 }

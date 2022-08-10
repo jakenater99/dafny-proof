@@ -2,7 +2,7 @@
 
 #Explicitly set here just for sanity.
 *.cs text
-*.dfyp text
+*.dfy text
 *.expect text
 *.bpl text
 *.atg text

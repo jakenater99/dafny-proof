@@ -2,7 +2,7 @@
 // RUN: %dafny /noVerify /compile:4 /compileTarget:py "%s" >> "%t"
 // RUN: %diff "%s.expect" "%t"
 //
-// This fragment of comp/Calls.dfyp serves to facilitate incremental compiler development.
+// This fragment of comp/Calls.dfy serves to facilitate incremental compiler development.
 
 method A0(x: int, y: bool) {
   return;

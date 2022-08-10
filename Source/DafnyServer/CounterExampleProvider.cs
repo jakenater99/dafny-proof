@@ -94,7 +94,7 @@ namespace DafnyServer {
         return;
       }
 
-      var regex = ".*?(dfyp)(\\()(\\d+)(,)(\\d+)(\\))";
+      var regex = ".*?(dfy)(\\()(\\d+)(,)(\\d+)(\\))";
       var r = new Regex(regex, RegexOptions.IgnoreCase | RegexOptions.Singleline);
       var m = r.Match(stateCapturedStateName);
       if (m.Success) {

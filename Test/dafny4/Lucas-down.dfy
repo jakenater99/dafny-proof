@@ -8,7 +8,7 @@
 // Instead of the lemmas doing "up", like:
 //   P(k) == P(2*k)
 //   P(k) == P(2*k + 1)
-// (see Lucas-up.dfyp), the lemmas in this version go "down", like:
+// (see Lucas-up.dfy), the lemmas in this version go "down", like:
 //   P(k%2) == P(k)
 
 // This file defines the ingredients of the Lucas theorem, proves some

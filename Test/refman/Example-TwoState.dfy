@@ -1,2 +1,2 @@
-// RUN: %dafny /verifyAllModules /compile:0 "%refmanexamples/Example-TwoState.dfyp" > "%t"
+// RUN: %dafny_0 /verifyAllModules /compile:0 "%refmanexamples/Example-TwoState.dfy" > "%t"
 // RUN: %diff "%s.expect" "%t"

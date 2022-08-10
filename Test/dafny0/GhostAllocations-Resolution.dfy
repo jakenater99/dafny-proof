@@ -1,4 +1,4 @@
-// RUN: %dafny "%s" > "%t"
+// RUN: %dafny_0 "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 // ------- A constructor-less class can be allocated as either ghost or non-ghost
@@ -219,7 +219,7 @@ module GhostConstructors1 {
       this.g := g;
     }
 
-    constructor B() { // definite-assignment rules are not satisfied, but that's check during verification (see GhostAllocations.dfyp)
+    constructor B() { // definite-assignment rules are not satisfied, but that's check during verification (see GhostAllocations.dfy)
     }
 
     ghost constructor C(g: GGG) {

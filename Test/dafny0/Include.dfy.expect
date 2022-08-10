@@ -1,7 +1,7 @@
-Include.dfyp(19,18): Error: A postcondition might not hold on this return path.
-Includee.dfyp(17,19): Related location: This is the postcondition that might not hold.
-Includee.dfyp[Concrete](22,15): Error: assertion might not hold
-Include.dfyp(27,6): Error: A postcondition might not hold on this return path.
-Includee.dfyp[Concrete](20,14): Related location: This is the postcondition that might not hold.
+Include.dfy(19,18): Error: A postcondition might not hold on this return path.
+Includee.dfy(17,19): Related location: This is the postcondition that might not hold.
+Includee.dfy[Concrete](22,15): Error: assertion might not hold
+Include.dfy(27,6): Error: A postcondition might not hold on this return path.
+Includee.dfy[Concrete](20,14): Related location: This is the postcondition that might not hold.
 
 Dafny program verifier finished with 1 verified, 3 errors

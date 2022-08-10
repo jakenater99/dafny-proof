@@ -1,4 +1,4 @@
-// Queue.dfypi
+// Queue.dfyi
 
 abstract module Queue {
     type Item

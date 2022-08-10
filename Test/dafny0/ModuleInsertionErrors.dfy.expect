@@ -1,4 +1,4 @@
-ModuleInsertionErrors.dfyp(23,11): Error: Duplicate module name: B
-ModuleInsertionErrors.dfyp(24,11): Error: Duplicate module name: N
-ModuleInsertionErrors.dfyp(30,17): Error: Duplicate module name: O
-3 resolution/type errors detected in ModuleInsertionErrors.dfyp
+ModuleInsertionErrors.dfy(23,11): Error: Duplicate module name: B
+ModuleInsertionErrors.dfy(24,11): Error: Duplicate module name: N
+ModuleInsertionErrors.dfy(30,17): Error: Duplicate module name: O
+3 resolution/type errors detected in ModuleInsertionErrors.dfy

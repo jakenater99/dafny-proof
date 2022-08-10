@@ -11,7 +11,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
   public static class PathExtensions {
     /// <summary>
     /// Gets the path of the file represented by the given dafny document. The path returned is
-    /// in the standard system format. E.g. C:\data\test.dfyp for windows or /home/test.dfyp for linux.
+    /// in the standard system format. E.g. C:\data\test.dfy for windows or /home/test.dfy for linux.
     /// </summary>
     /// <param name="document">The document to get the file path of.</param>
     /// <returns>The file path.</returns>
@@ -21,7 +21,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
 
     /// <summary>
     /// Gets the path of the file represented by the given text document. The path returned is
-    /// in the standard system format. E.g. C:\data\test.dfyp for windows or /home/test.dfyp for linux.
+    /// in the standard system format. E.g. C:\data\test.dfy for windows or /home/test.dfy for linux.
     /// </summary>
     /// <param name="document">The document to get the file path of.</param>
     /// <returns>The file path.</returns>
@@ -31,7 +31,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
 
     private static string GetFilePath(DocumentUri uri) {
       // GetFileSystemPath() is used since Path resolves to a non-Windows path format on Windows, e.g.:
-      // /d:/data/file.dfyp
+      // /d:/data/file.dfy
       return uri.GetFileSystemPath();
     }
 
@@ -53,7 +53,7 @@ namespace Microsoft.Dafny.LanguageServer.Util {
     /// <param name="documentUri">The URI to check.</param>
     /// <returns><c>true</c> if the given URI is the entrypoint document of the given program.</returns>
     public static bool IsEntryDocument(this Dafny.Program program, DocumentUri documentUri) {
-      return GetFilePath(documentUri) == program.FullName;
+      return documentUri.ToString() == program.FullName;
     }
 
     /// <summary>
@@ -62,7 +62,10 @@ namespace Microsoft.Dafny.LanguageServer.Util {
     /// <param name="token">The token to get the boogie token from.</param>
     /// <returns>The uri of the document where the token is located.</returns>
     public static DocumentUri GetDocumentUri(this Boogie.IToken token) {
-      return DocumentUri.FromFileSystemPath(token.filename);
+      if (token is IncludeToken includeToken) {
+        return DocumentUri.FromFileSystemPath(includeToken.Include.CanonicalPath);
+      }
+      return DocumentUri.Parse(token.filename);
     }
 
     /// <summary>

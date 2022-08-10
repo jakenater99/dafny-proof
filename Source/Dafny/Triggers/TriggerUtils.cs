@@ -64,7 +64,7 @@ namespace Microsoft.Dafny.Triggers {
       ///
       /// Note that this is trickier than just checking every term for new variables;
       /// indeed, a new term that does bring new variables in can make an existing
-      /// term redundant (see redundancy-detection-does-its-job-properly.dfyp).
+      /// term redundant (see redundancy-detection-does-its-job-properly.dfy).
       /// </summary>
       internal SetOfTerms CopyWithAdd(TriggerTerm term, ISet<BoundVar> relevantVariables) {
         var copy = new SetOfTerms();
@@ -254,7 +254,7 @@ namespace Microsoft.Dafny.Triggers {
               Type = bin.Type
             };
           } else if (bin.ResolvedOp == BinaryExpr.ResolvedOpcode.InMultiSet) {
-            expr = new SeqSelectExpr(bin.tok, true, bin.E1, bin.E0, null) {
+            expr = new SeqSelectExpr(bin.tok, true, bin.E1, bin.E0, null, null) {
               Type = bin.Type
             };
             isKiller = true; // [a in s] becomes [s[a] > 0], which is a trigger killer

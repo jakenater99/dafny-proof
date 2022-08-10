@@ -1,4 +1,4 @@
-// RUN: %dafny /env:0 /rprint:- "%s" > "%t"
+// RUN: %dafny_0 /env:0 /rprint:- "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 lemma TestBool(F: bool, T: bool)
@@ -56,7 +56,7 @@ lemma TestMultiset(Empty: multiset<int>, Nonempty: multiset<int>)
   }
 }
 
-// Print test for /rprint. Note, this same class is tested with /dprint in Test/dafny0/Twostate-Resolution.dfyp.
+// Print test for /rprint. Note, this same class is tested with /dprint in Test/dafny0/Twostate-Resolution.dfy.
 module PrintTest {
   function method Five(): int { 5 }
   function Six(): int { 6 }

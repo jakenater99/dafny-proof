@@ -1,4 +1,4 @@
-// RUN: %dafny /verifyAllModules /allocated:1 /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
+// RUN: %dafny_0 /verifyAllModules /allocated:1 /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 // ------------------------------------------------
@@ -91,7 +91,7 @@ module Q0 {
     }
     method M()
       modifies this
-      ensures forall c: C :: c.P()  // this is the only line that's different from Test/dafn0/Predicates.dfyp
+      ensures forall c: C :: c.P()  // this is the only line that's different from Test/dafn0/Predicates.dfy
     {
     }
     predicate Q()

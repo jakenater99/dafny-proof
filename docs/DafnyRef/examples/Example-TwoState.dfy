@@ -1,12 +1,12 @@
 
 // This file only exists to include these examples as a test case.
 
-include "Example-TwoState-Increasing.dfyp"
-include "Example-TwoState-Caller.dfyp"
-include "Example-TwoState-Diff.dfyp"
-include "Example-TwoState-DiffAgain.dfyp"
-include "Example-TwoState-SeqSum.dfyp"
-include "Example-TwoState-EtaExample.dfyp"
+include "Example-TwoState-Increasing.dfy"
+include "Example-TwoState-Caller.dfy"
+include "Example-TwoState-Diff.dfy"
+include "Example-TwoState-DiffAgain.dfy"
+include "Example-TwoState-SeqSum.dfy"
+include "Example-TwoState-EtaExample.dfy"
 
 class Cell {
   var data: int

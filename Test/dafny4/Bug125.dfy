@@ -1,4 +1,4 @@
-// RUN: %dafny /compile:0  "%s" > "%t"
+// RUN: %dafny_0 /compile:0  "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 // Here is the example reported in issue #125 to cause a crash in Dafny.
@@ -11,7 +11,7 @@
 // have equal standing.  This means that (the inherited) Foo(t:T) in
 // AbstractModuleC refers to T ambiguously.
 //
-// This file tests resolution errors.  The file Bug125more.dfyp tests
+// This file tests resolution errors.  The file Bug125more.dfy tests
 // verification on similar (bug resolution-correct) examples.
 
 abstract module AbstractModuleA

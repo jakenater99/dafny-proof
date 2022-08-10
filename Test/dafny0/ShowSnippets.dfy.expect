@@ -1,17 +1,17 @@
-ShowSnippets.dfyp(13,9): Error: assertion might not hold
+ShowSnippets.dfy(13,9): Error: assertion might not hold
    |
 13 |   assert false;
-   |          ^ here
+   |          ^^^^^
 
-ShowSnippets.dfyp(17,7): Error: A precondition for this call might not hold.
+ShowSnippets.dfy(17,2): Error: A precondition for this call might not hold.
    |
 17 |   Never();
-   |        ^ here
+   |   ^^^^^^^^
 
-ShowSnippets.dfyp(10,32): Related location: This is the precondition that might not hold.
+ShowSnippets.dfy(10,32): Related location: This is the precondition that might not hold.
    |
 10 | method Never() requires true && false {}
-   |                                 ^ here
+   |                                 ^^^^^
 
 
 Dafny program verifier finished with 0 verified, 2 errors

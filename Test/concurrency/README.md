@@ -6,19 +6,19 @@ These programs are the result of various iterations. The number in the file name
 
 | Program                         | Encoding style     | Recursive invariants | Special features                                                       | Timeout issues |
 |---------------------------------|--------------------|----------------------|------------------------------------------------------------------------|----------------|
-| `01-InnerOuter.dfyp`             |                    | unsupported          |                                                                        | no             |
-| `02-DoubleRead.dfyp`             | atomic transitions | unsupported          |                                                                        | no             |
-| `03-SimpleCounter.dfyp `         | atomic transitions | unsupported          |                                                                        | no             |
-| `04-LeastGreatest.dfyp `         |                    |                      |                                                                        | no             |
-| `05-RecInvariantCut.dfyp`        | atomic transitions | supported            |                                                                        | no             |
-| `06-ThreadOwnership.dfyp`        | sequential code    | supported            | ownership                                                              | no             |
-| `07-CounterThreadOwnership.dfyp` | atomic transitions | supported            | ownership, volatile                                                    | no             |
-| `08-CounterNoTermination.dfyp`   | atomic transitions | supported            | ownership, volatile                                                    | no             |
-| `09-CounterNoStateMachine.dfyp`  | sequential code    | supported            | ownership, volatile, preemption                                        | yes            |
-| `10-SequenceInvariant.dfyp`      | sequential code    | supported            | ownership, volatile, preemption, transitivity                          | yes            |
-| `11-MutexGuard2.dfyp`            | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls            | no             |
-| `12-MutexLifetime-long.dfyp`     | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls, lifetimes | yes            |
-| `12-MutexLifetime-short.dfyp`    | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls, lifetimes | no             |
+| `01-InnerOuter.dfy`             |                    | unsupported          |                                                                        | no             |
+| `02-DoubleRead.dfy`             | atomic transitions | unsupported          |                                                                        | no             |
+| `03-SimpleCounter.dfy `         | atomic transitions | unsupported          |                                                                        | no             |
+| `04-LeastGreatest.dfy `         |                    |                      |                                                                        | no             |
+| `05-RecInvariantCut.dfy`        | atomic transitions | supported            |                                                                        | no             |
+| `06-ThreadOwnership.dfy`        | sequential code    | supported            | ownership                                                              | no             |
+| `07-CounterThreadOwnership.dfy` | atomic transitions | supported            | ownership, volatile                                                    | no             |
+| `08-CounterNoTermination.dfy`   | atomic transitions | supported            | ownership, volatile                                                    | no             |
+| `09-CounterNoStateMachine.dfy`  | sequential code    | supported            | ownership, volatile, preemption                                        | yes            |
+| `10-SequenceInvariant.dfy`      | sequential code    | supported            | ownership, volatile, preemption, transitivity                          | yes            |
+| `11-MutexGuard2.dfy`            | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls            | no             |
+| `12-MutexLifetime-long.dfy`     | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls, lifetimes | yes            |
+| `12-MutexLifetime-short.dfy`    | sequential code    | supported            | ownership, volatile, preemption, transitivity, method calls, lifetimes | no             |
 
 Columns:
 - **Encoding style**: A concurrent method is encoded either to a state machine of atomic transitions or to sequential Dafny code. The state machine encoding verifies quickly but requires the user to provide an invariant for each program point. The sequential code encoding requires much less annotations but typically needs more time to verify.

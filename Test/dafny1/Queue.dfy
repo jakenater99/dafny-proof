@@ -1,7 +1,7 @@
 // RUN: %dafny /compile:0 /dprint:"%t.dprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
-// Queue.dfyp
+// Queue.dfy
 // Dafny version of Queue.bpl
 // Rustan Leino, 2008
 

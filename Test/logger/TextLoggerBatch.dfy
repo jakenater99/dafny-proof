@@ -1,4 +1,4 @@
-// RUN: %dafny /compile:0 /verificationLogger:text "%s" > "%t"
+// RUN: %dafny_0 /compile:0 /verificationLogger:text "%s" > "%t"
 // RUN: %OutputCheck --file-to-check "%t" "%s"
 // CHECK: Overall outcome: Errors
 // CHECK: Overall time: .*
@@ -6,8 +6,8 @@
 // CHECK: Outcome: Invalid
 // CHECK: Duration: .*
 // CHECK: Resource count: .*
-// CHECK: TextLoggerBatch.dfyp\(15,14\): divisor is always non-zero
-// CHECK: TextLoggerBatch.dfyp\(16,9\): assertion always holds
+// CHECK: TextLoggerBatch.dfy\(15,14\): divisor is always non-zero
+// CHECK: TextLoggerBatch.dfy\(16,9\): assertion always holds
 method M(x: int, y: int)
   requires y > 0
   requires x > 0

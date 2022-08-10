@@ -19,8 +19,8 @@ Top-Level Structure
 
 Unlike C# and JavaScript, Go imposes strict requirements on modules and file
 structure.  As it is not possible to put a multi-package Go program into one
-file, a whole directory structure is produced alongside the original `.dfyp`
-file.  For a Dafny source file `Example.dfyp` which doesn't define any modules,
+file, a whole directory structure is produced alongside the original `.dfy`
+file.  For a Dafny source file `Example.dfy` which doesn't define any modules,
 the structure will look like so:
 
   - `Example-go`: The top level, to which `GOPATH` is set in order to run the

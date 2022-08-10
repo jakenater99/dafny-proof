@@ -1,7 +1,7 @@
-// RUN: %dafny /env:0 /compile:3 /dprint:"%t.dfyp" "%s" > "%t.result"
-// RUN: %dafny /env:0 /printMode:DllEmbed /dprint:"%t1.dfyp" "%t.dfyp"
-// RUN: %dafny /env:0 /printMode:DllEmbed /dprint:"%t2.dfyp" /compile:3 "%t1.dfyp" > "%t"
-// RUN: %diff "%t1.dfyp" "%t2.dfyp"
+// RUN: %dafny /env:0 /compile:3 /dprint:"%t.dfy" "%s" > "%t.result"
+// RUN: %dafny /env:0 /printMode:DllEmbed /dprint:"%t1.dfy" "%t.dfy"
+// RUN: %dafny /env:0 /printMode:DllEmbed /dprint:"%t2.dfy" /compile:3 "%t1.dfy" > "%t"
+// RUN: %diff "%t1.dfy" "%t2.dfy"
 // RUN: %diff "%s.expect" "%t"
 
 abstract module A {

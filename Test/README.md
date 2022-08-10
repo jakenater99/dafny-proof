@@ -19,7 +19,7 @@ The file path of each test file, relative to the `Test` directory, is used as th
 This means you can use the `--filter` option to run a subset of tests, or even a single file:
 
 ```
-dotnet test -v:n Source/IntegrationTests --filter DisplayName~comp/Hello.dfyp
+dotnet test -v:n Source/IntegrationTests --filter DisplayName~comp/Hello.dfy
 ```
 
 [See here](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test) for more information about

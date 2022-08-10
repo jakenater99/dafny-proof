@@ -43,7 +43,7 @@ namespace Microsoft.Dafny {
         var s = (BreakStmt)stmt;
         AddComment(builder, stmt, $"{s.Kind} statement");
         var lbl = (s.IsContinue ? "continue_" : "after_") + s.TargetStmt.Labels.Data.AssignUniqueId(CurrentIdGenerator);
-        builder.Add(new GotoCmd(s.Tok, new List<String> { lbl }));
+        builder.Add(new GotoCmd(s.Tok, new List<string> { lbl }));
       } else if (stmt is ReturnStmt) {
         var s = (ReturnStmt)stmt;
         AddComment(builder, stmt, "return statement");
@@ -98,10 +98,10 @@ namespace Microsoft.Dafny {
           bool splitHappened;  // actually, we don't care
           var ss = TrSplitExpr(p.E, yeEtran, true, out splitHappened);
           foreach (var split in ss) {
-            if (RefinementToken.IsInherited(split.E.tok, currentModule)) {
+            if (RefinementToken.IsInherited(split.Tok, currentModule)) {
               // this postcondition was inherited into this module, so just ignore it
             } else if (split.IsChecked) {
-              var yieldToken = new NestedToken(s.Tok, split.E.tok);
+              var yieldToken = new NestedToken(s.Tok, split.Tok);
               var desc = new PODesc.YieldEnsures();
               builder.Add(AssertNS(yieldToken, split.E, desc, stmt.Tok, null));
             }
@@ -559,9 +559,9 @@ namespace Microsoft.Dafny {
         } else {
           foreach (var split in ss) {
             if (split.IsChecked) {
-              var tok = enclosingToken == null ? split.E.tok : new NestedToken(enclosingToken, split.E.tok);
+              var tok = enclosingToken == null ? split.E.tok : new NestedToken(enclosingToken, split.Tok);
               var desc = new PODesc.AssertStatement(errorMessage);
-              (proofBuilder ?? b).Add(AssertNS(tok, split.E, desc, stmt.Tok,
+              (proofBuilder ?? b).Add(AssertNS(ToDafnyToken(tok), split.E, desc, stmt.Tok,
                 etran.TrAttributes(stmt.Attributes, null))); // attributes go on every split
             }
           }
@@ -1031,7 +1031,7 @@ namespace Microsoft.Dafny {
           bool splitHappened;  // we actually don't care
           foreach (var split in TrSplitExpr(ens.E, etran, true, out splitHappened)) {
             if (split.IsChecked) {
-              definedness.Add(Assert(split.E.tok, split.E, new PODesc.ForallPostcondition()));
+              definedness.Add(Assert(split.Tok, split.E, new PODesc.ForallPostcondition()));
             }
           }
         }
@@ -1394,7 +1394,7 @@ namespace Microsoft.Dafny {
           foreach (var split in ss) {
             var wInv = Bpl.Expr.Binary(split.E.tok, BinaryOperator.Opcode.Imp, w, split.E);
             if (split.IsChecked) {
-              invariants.Add(Assert(split.E.tok, wInv, new PODesc.LoopInvariant(errorMessage)));  // TODO: it would be fine to have this use {:subsumption 0}
+              invariants.Add(Assert(split.Tok, wInv, new PODesc.LoopInvariant(errorMessage)));  // TODO: it would be fine to have this use {:subsumption 0}
             } else {
               invariants.Add(TrAssumeCmd(split.E.tok, wInv));
             }
@@ -1467,7 +1467,7 @@ namespace Microsoft.Dafny {
       // Without this, Boogie's abstract interpreter may figure out that the loop guard is always false
       // on entry to the loop, and then Boogie wouldn't consider this a loop at all. (See also comment
       // in methods GuardAlwaysHoldsOnEntry_BodyLessLoop and GuardAlwaysHoldsOnEntry_LoopWithBody in
-      // Test/dafny0/DirtyLoops.dfyp.)
+      // Test/dafny0/DirtyLoops.dfy.)
       var isBodyLessLoop = s is OneBodyLoopStmt && ((OneBodyLoopStmt)s).BodySurrogate != null;
       var whereToBuildLoopGuard = isBodyLessLoop ? new BoogieStmtListBuilder(this) : loopBodyBuilder;
       Bpl.Expr guard = null;
@@ -1518,7 +1518,7 @@ namespace Microsoft.Dafny {
         loopBodyBuilder.Add(Bpl.Cmd.SimpleAssign(s.Tok, w, Bpl.Expr.False));
       }
       // Finally, assume the well-formedness of the invariant (which has been checked once and for all above), so that the check
-      // of invariant-maintenance can use the appropriate canCall predicates. Note, it is important (see Test/git-issues/git-issue-1812.dfyp)
+      // of invariant-maintenance can use the appropriate canCall predicates. Note, it is important (see Test/git-issues/git-issue-1812.dfy)
       // that each CanCall assumption uses the preceding invariants as antecedents--this is achieved by treating all "invariant"
       // declarations as one big conjunction, because then CanCallAssumption will add the needed antecedents.
       if (s.Invariants.Any()) {
@@ -1812,7 +1812,7 @@ namespace Microsoft.Dafny {
         }
         Bpl.Cmd cmd = Bpl.Cmd.SimpleAssign(formal.tok, param, bActual);
         builder.Add(cmd);
-        ins.Add(CondApplyBox(param.tok, param, Resolver.SubstType(formal.Type, tySubst), formal.Type));
+        ins.Add(CondApplyBox(ToDafnyToken(param.tok), param, Resolver.SubstType(formal.Type, tySubst), formal.Type));
       }
 
       // Check that every parameter is available in the state in which the method is invoked; this means checking that it has

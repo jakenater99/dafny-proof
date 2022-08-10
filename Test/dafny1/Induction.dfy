@@ -1,4 +1,4 @@
-// RUN: %dafny /compile:0 /induction:3 /dprint:"%t.dprint" "%s" > "%t"
+// RUN: %dafny_0 /compile:0 /induction:3 /dprint:"%t.dprint" "%s" > "%t"
 // RUN: %diff "%s.expect" "%t"
 
 class IntegerInduction {
@@ -172,7 +172,7 @@ class DatatypeInduction<T> {
     assert (forall t: Tree<T> :: 1 <= LeafCount(t));
   }
 
-  // see also Test/dafny0/DTypes.dfyp for more variations of this example
+  // see also Test/dafny0/DTypes.dfy for more variations of this example
 
   function OccurrenceCount<T>(tree: Tree<T>, x: T): int
   {
