@@ -785,7 +785,7 @@ TOKENS
   semicolon = ';'.
   darrow = "=>".
   assume = "assume".
-  proof = "proof"
+  proof = "proof".
   assert = "assert".
   calc = "calc".
   case = "case".
