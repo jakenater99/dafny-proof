@@ -100,7 +100,7 @@ void CheckDeclModifiers(ref DeclModifierData dmod, string declCaption, AllowedDe
 }
 
 bool IsAssumeTypeKeyword(IToken la) {
-  return la.kind == _assume || la.kind == _assert || la.kind == _expect;
+  return la.kind == _assume || la.kind == _assert || la.kind == _expect || la.kind == _proof;
 }
 
 ///<summary>
@@ -784,7 +784,6 @@ TOKENS
   backtick = "`".
   semicolon = ';'.
   darrow = "=>".
-  assume = "assume".
   proof = "proof".
   assert = "assert".
   calc = "calc".
@@ -2586,7 +2585,6 @@ OneStmt<out Statement/*!*/ s>
   | RevealStmt<out s>
   | SkeletonStmt<out s>
   | YieldStmt<out s>
-  | ProofStmt<out s>
   )
   .
 
@@ -2693,13 +2691,13 @@ UpdateStmt<out Statement/*!*/ s>
       { "," Rhs<out r>             (. rhss.Add(r); .)
       }
     | ":|"                         (. x = t; .)
-      [ IF(la.kind == _assume)     /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
-        ("assume"|"proof")                   (. suchThatAssume = t; .)
+      [ IF(la.kind == _assume || la.kind == _proof)     /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
+        ("proof")                   (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
     | ":-"                         (. x = t; .)
       [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-        ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
+        ("expect"|"assert"|"proof")    (. keywordToken = t; .)
       ]
       Expression<out exceptionExpr, false, false>
       { "," Rhs<out r>             (. rhss.Add(r); .)
@@ -2710,7 +2708,7 @@ UpdateStmt<out Statement/*!*/ s>
   )
 | ":-"                             (. x = t; .)
    [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-      ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
+      ("expect"|"assert"|"proof")    (. keywordToken = t; .)
    ]
    Expression<out exceptionExpr, false, false>
    { "," Rhs<out r>                (. rhss.Add(r); .)
@@ -2838,13 +2836,13 @@ VarDeclStatement<.out Statement/*!*/ s.>
       }
     | { Attribute<ref attrs> }
       ":|"                           (. assignTok = t; .)
-      [ IF(la.kind == _assume)       /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
-        ("assume"|"proof")                     (. suchThatAssume = t; .)
+      [ IF(la.kind == _assume || la.kind == _proof)       /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
+        ("proof")                     (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
     | ":-"                           (. assignTok = t; .)
       [ IF(IsAssumeTypeKeyword(la))     /* an Expression can also begin with these keywords, so this says to resolve it to pick up the keyword here */
-        ("expect"|"assert"|"assume"|"proof")    (. keywordToken = t; .)
+        ("expect"|"assert"|"proof")    (. keywordToken = t; .)
       ]
       Expression<out exceptionExpr, false, false>
       { "," Rhs<out r>               (. rhss.Add(r); .)
@@ -3254,26 +3252,6 @@ AssertStmt<out Statement/*!*/ s, bool inExprContext>
        s = new SkeletonStatement(new AssertStmt(x, t, new LiteralExpr(x, true), null, null, attrs), dotdotdot, null);
      } else {
        s = new AssertStmt(x, t, e, proof, lbl == null ? null : new AssertLabel(lbl, lbl.val), attrs);
-     }
-  .)
-  .
-
-/*------------------------------------------------------------------------*/
-ProofStmt<out Statement/*!*/ s>
-= (. Contract.Ensures(Contract.ValueAtReturn(out s) != null); IToken/*!*/ x;
-     Expression e = dummyExpr; Attributes attrs = null;
-     IToken dotdotdot = null;
-  .)
-  "wpp"                                     (. x = t; .)
-  { Attribute<ref attrs> }
-  ( Expression<out e, false, true>
-  | ellipsis                                   (. dotdotdot = t; .)
-  )
-  ";"
-  (. if (dotdotdot != null) {
-       s = new SkeletonStatement(new ProofStmt(x, t, new LiteralExpr(x, true), attrs), dotdotdot, null);
-     } else {
-       s = new ProofStmt(x, t, e, attrs);
      }
   .)
   .
@@ -4234,7 +4212,6 @@ StmtInExpr<out Statement s>
   | AssumeStmt<out s>
   | RevealStmt<out s>
   | CalcStmt<out s>
-  | ProofStmt<out s>
   )
   .
 

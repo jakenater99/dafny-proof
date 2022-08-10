@@ -2746,8 +2746,6 @@ namespace Microsoft.Dafny.Compilers {
           if (s.AssumeToken != null) {
             compiler.Error(stmt.Tok, "an assume statement cannot be compiled", wr);
           }
-        } else if (stmt is ProofStmt) {
-          compiler.Error(stmt.Tok, "a proof statement cannot be compiled", wr);
         } else if (stmt is AssignSuchThatStmt) {
           var s = (AssignSuchThatStmt)stmt;
           if (s.AssumeToken != null) {

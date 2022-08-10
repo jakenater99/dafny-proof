@@ -567,10 +567,6 @@ namespace Microsoft.Dafny {
         var s = (AssumeStmt)stmt;
         r = new AssumeStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), null);
 
-      } else if (stmt is ProofStmt) {
-        var s = (ProofStmt)stmt;
-        r = new ProofStmt(Tok(s.Tok), Tok(s.EndTok), CloneExpr(s.Expr), null);
-
       } else if (stmt is PrintStmt) {
         var s = (PrintStmt)stmt;
         r = new PrintStmt(Tok(s.Tok), Tok(s.EndTok), s.Args.ConvertAll(CloneExpr));

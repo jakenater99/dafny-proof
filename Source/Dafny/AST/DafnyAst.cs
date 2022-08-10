@@ -7082,21 +7082,6 @@ namespace Microsoft.Dafny {
     }
   }
 
-  public class ProofStmt : PredicateStmt {
-    public ProofStmt(IToken tok, IToken endTok, Expression expr, Attributes attrs)
-      : base(tok, endTok, expr, attrs) {
-      Contract.Requires(tok != null);
-      Contract.Requires(endTok != null);
-      Contract.Requires(expr != null);
-    }
-    public override IEnumerable<Expression> SpecificationSubExpressions {
-      get {
-        foreach (var e in base.SpecificationSubExpressions) { yield return e; }
-        yield return Expr;
-      }
-    }
-  }
-
   public class ExpectStmt : PredicateStmt {
     public Expression Message;
     public ExpectStmt(IToken tok, IToken endTok, Expression expr, Expression message, Attributes attrs)

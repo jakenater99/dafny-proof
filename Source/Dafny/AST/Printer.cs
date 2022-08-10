@@ -1161,7 +1161,7 @@ namespace Microsoft.Dafny {
         var expectStmt = stmt as ExpectStmt;
         wr.Write(assertStmt != null ? "assert" :
                  expectStmt != null ? "expect" :
-                 "assume");
+                 "proof");
         if (stmt.Attributes != null) {
           PrintAttributes(stmt.Attributes);
         }
@@ -2701,7 +2701,7 @@ namespace Microsoft.Dafny {
       } else if (expr is StmtExpr) {
         var e = (StmtExpr)expr;
         bool parensNeeded;
-        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is ProofStmt || e.S is CalcStmt) {
+        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is CalcStmt) {
           parensNeeded = !isRightmost;
         } else {
           parensNeeded = !isRightmost || isFollowedBySemicolon;
