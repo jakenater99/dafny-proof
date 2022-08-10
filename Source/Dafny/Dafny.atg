@@ -100,7 +100,7 @@ void CheckDeclModifiers(ref DeclModifierData dmod, string declCaption, AllowedDe
 }
 
 bool IsAssumeTypeKeyword(IToken la) {
-  return la.kind == _assume || la.kind == _assert || la.kind == _expect || la.kind == _proof;
+  return la.kind == _assert || la.kind == _expect || la.kind == _proof;
 }
 
 ///<summary>
@@ -2691,7 +2691,7 @@ UpdateStmt<out Statement/*!*/ s>
       { "," Rhs<out r>             (. rhss.Add(r); .)
       }
     | ":|"                         (. x = t; .)
-      [ IF(la.kind == _assume || la.kind == _proof)     /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
+      [ IF(la.kind == _proof)     /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
         ("proof")                   (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
@@ -2836,7 +2836,7 @@ VarDeclStatement<.out Statement/*!*/ s.>
       }
     | { Attribute<ref attrs> }
       ":|"                           (. assignTok = t; .)
-      [ IF(la.kind == _assume || la.kind == _proof)       /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
+      [ IF(la.kind == _proof)       /* an Expression can also begin with an "assume", so this says to resolve it to pick up any "assume" here */
         ("proof")                     (. suchThatAssume = t; .)
       ]
       Expression<out suchThat, false, true>
