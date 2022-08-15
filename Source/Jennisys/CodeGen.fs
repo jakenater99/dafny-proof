@@ -379,7 +379,7 @@ let PrintHeapCreationCode prog (comp,meth) sol indent genRepr =
   if ghostPre = TrueLiteral then
     PrintHeapCreationCodeOld prog (comp,meth) sol indent genRepr
   else
-    (ghostPre |> SplitIntoConjunts |> PrintSep newline (fun e -> idt + "assume " + (PrintExpr 0 e) + ";")) + newline +
+    (ghostPre |> SplitIntoConjunts |> PrintSep newline (fun e -> idt + "proof " + (PrintExpr 0 e) + ";")) + newline +
     (PrintHeapCreationCodeOld prog (comp,meth) sol indent genRepr)
 
 let GenConstructorCode prog comp mthd decreasesClause body genRepr =
@@ -416,7 +416,7 @@ let PrintImplCode prog solutions genRepr =
                                                               match sol with
                                                               | [] ->
                                                                   let body = "    //unable to synthesize" +
-                                                                             (PrintAssumePostcondition prog m genRepr (newline + "    assume "))
+                                                                             (PrintAssumePostcondition prog m genRepr (newline + "    proof "))
                                                                   let decr = ""
                                                                   body,decr
                                                               | _ ->
