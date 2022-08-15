@@ -1161,7 +1161,7 @@ namespace Microsoft.Dafny {
         var expectStmt = stmt as ExpectStmt;
         wr.Write(assertStmt != null ? "assert" :
                  expectStmt != null ? "expect" :
-                 "assume");
+                 "proof");
         if (stmt.Attributes != null) {
           PrintAttributes(stmt.Attributes);
         }
