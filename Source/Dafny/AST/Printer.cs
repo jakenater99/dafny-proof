@@ -1161,7 +1161,7 @@ namespace Microsoft.Dafny {
         var expectStmt = stmt as ExpectStmt;
         wr.Write(assertStmt != null ? "assert" :
                  expectStmt != null ? "expect" :
-                 "proof");
+                 "assume");
         if (stmt.Attributes != null) {
           PrintAttributes(stmt.Attributes);
         }
@@ -1557,7 +1557,7 @@ namespace Microsoft.Dafny {
           wr.Write("expect ...;");
         } else if (s.S is AssumeStmt) {
           Contract.Assert(s.ConditionOmitted);
-          wr.Write("proof ...;");
+          wr.Write("assume ...;");
         } else if (s.S is IfStmt) {
           PrintIfStatement(indent, (IfStmt)s.S, s.ConditionOmitted);
         } else if (s.S is WhileStmt) {
@@ -1638,7 +1638,7 @@ namespace Microsoft.Dafny {
         var update = (AssignSuchThatStmt)s;
         wr.Write(":| ");
         if (update.AssumeToken != null) {
-          wr.Write("proof ");
+          wr.Write("assume ");
         }
         PrintExpression(update.Expr, true);
       } else if (s is AssignOrReturnStmt) {
