@@ -1118,6 +1118,21 @@ namespace Microsoft.Dafny {
                 i++; j++;
               }
 
+            } else if (S is ProofStmt) {
+              var skel = (ProofStmt)S;
+              Contract.Assert(c.ConditionOmitted);
+              var oldAssume = oldS as ProofStmt;
+              if (oldAssume == null) {
+                Reporter.Error(MessageSource.RefinementTransformer, cur.Tok, "assume template does not match inherited statement");
+                i++;
+              } else {
+                var e = refinementCloner.CloneExpr(oldAssume.Expr);
+                var attrs = refinementCloner.MergeAttributes(oldAssume.Attributes, skel.Attributes);
+                body.Add(new ProofStmt(skel.Tok, skel.EndTok, e, attrs));
+                Reporter.Info(MessageSource.RefinementTransformer, c.ConditionEllipsis, Printer.ExprToString(e));
+                i++; j++;
+              }
+
             } else if (S is IfStmt) {
               var skel = (IfStmt)S;
               Contract.Assert(c.ConditionOmitted);
@@ -1401,6 +1416,8 @@ namespace Microsoft.Dafny {
           return other is ExpectStmt;
         } else if (S is AssumeStmt) {
           return other is AssumeStmt;
+        } else if (S is ProofStmt) {
+          return other is ProofStmt;
         } else if (S is IfStmt) {
           return other is IfStmt;
         } else if (S is WhileStmt) {

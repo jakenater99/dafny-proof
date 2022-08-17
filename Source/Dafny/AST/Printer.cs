@@ -1558,6 +1558,9 @@ namespace Microsoft.Dafny {
         } else if (s.S is AssumeStmt) {
           Contract.Assert(s.ConditionOmitted);
           wr.Write("assume ...;");
+        } else if (s.S is ProofStmt) {
+          Contract.Assert(s.ConditionOmitted);
+          wr.Write("proof ...;");
         } else if (s.S is IfStmt) {
           PrintIfStatement(indent, (IfStmt)s.S, s.ConditionOmitted);
         } else if (s.S is WhileStmt) {
@@ -2701,7 +2704,7 @@ namespace Microsoft.Dafny {
       } else if (expr is StmtExpr) {
         var e = (StmtExpr)expr;
         bool parensNeeded;
-        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is CalcStmt) {
+        if (e.S is AssertStmt || e.S is ExpectStmt || e.S is AssumeStmt || e.S is ProofStmt || e.S is CalcStmt) {
           parensNeeded = !isRightmost;
         } else {
           parensNeeded = !isRightmost || isFollowedBySemicolon;
