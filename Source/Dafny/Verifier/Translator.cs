@@ -3634,7 +3634,7 @@ namespace Microsoft.Dafny {
 
     public void InsertUniqueIdForImplementation(Bpl.Declaration decl) {
       var impl = decl as Bpl.Implementation;
-      var prefix = UniqueIdPrefix ?? (decl.tok.filename == null ? "" : System.Text.RegularExpressions.Regex.Replace(decl.tok.filename, @".v\d+.dfy", ".dfy"));
+      var prefix = UniqueIdPrefix ?? (decl.tok.filename == null ? "" : System.Text.RegularExpressions.Regex.Replace(decl.tok.filename, @".v\d+.dfy", ".dfyp"));
       if (impl != null && !string.IsNullOrEmpty(prefix)) {
         decl.AddAttribute("id", prefix + ":" + impl.Name + ":0");
       }

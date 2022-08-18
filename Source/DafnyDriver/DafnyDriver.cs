@@ -168,7 +168,7 @@ namespace Microsoft.Dafny {
           if (string.IsNullOrEmpty(extension) && file.Length > 0 && (file[0] == '/' || file[0] == '-')) {
             options.Printer.ErrorWriteLine(Console.Out,
               "*** Error: Command-line argument '{0}' is neither a recognized option nor a filename with a supported extension ({1}).",
-              file, string.Join(", ", Enumerable.Repeat(".dfy", 1).Concat(supportedExtensions)));
+              file, string.Join(", ", Enumerable.Repeat(".dfyp", 1).Concat(supportedExtensions)));
           } else {
             options.Printer.ErrorWriteLine(Console.Out,
               "*** Error: '{0}': Filename extension '{1}' is not supported. Input files must be Dafny programs (.dfy) or supported auxiliary files ({2})",

@@ -45,7 +45,7 @@ namespace Microsoft.Dafny {
       FilePath = filePath;
       BaseName = Path.GetFileName(filePath);
 
-      var extension = useStdin ? ".dfy" : Path.GetExtension(filePath);
+      var extension = useStdin ? ".dfyp" : Path.GetExtension(filePath);
       if (extension != null) { extension = extension.ToLower(); }
 
       // Normalizing symbolic links appears to be not
@@ -58,7 +58,7 @@ namespace Microsoft.Dafny {
         filePath = Path.GetFullPath(filePath);
       }
 
-      if (extension == ".dfy" || extension == ".dfyi") {
+      if (extension == ".dfyp" || extension == ".dfyi") {
         isPrecompiled = false;
         SourceFileName = filePath;
       } else if (extension == ".dll") {

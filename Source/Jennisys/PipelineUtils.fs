@@ -42,7 +42,7 @@ let RunDafny inputFile modelFile =
 /// Runs Dafny on the given "dafnyCode" and returns models
 //  =======================================================
 let RunDafnyProgram dafnyProgram suffix =
-  let inFileName = @"c:\tmp\jennisys-" + suffix + ".dfy"
+  let inFileName = @"c:\tmp\jennisys-" + suffix + ".dfyp"
   let modelFileName = @"c:\tmp\jennisys-" + suffix + ".bvd"
   use file = System.IO.File.CreateText(inFileName)
   file.AutoFlush <- true
